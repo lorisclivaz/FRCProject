@@ -5,7 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="C:\Users\loris\.nuget\packages\microsoft.net.compilers\3.4.0\build\..\tools\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="WordTemplate\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Net.Compilers" Version="3.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\DTO\DTO.csproj" />
   </ItemGroup>
 
 

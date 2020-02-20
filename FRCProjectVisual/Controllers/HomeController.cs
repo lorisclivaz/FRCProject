@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FRCProjectVisual.Models;
 using Microsoft.AspNetCore.Http;
+using BLL;
+using DTO;
+
+
 
 namespace FRCProjectVisual.Controllers
 {
@@ -14,13 +18,17 @@ namespace FRCProjectVisual.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+
+
+        public HomeController(ILogger<HomeController> logger
+          )
         {
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+
 
             return View();
         }
