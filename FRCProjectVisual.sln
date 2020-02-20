@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{81EA289B-7E9A-46C9-B6CB-3F36886A1CDB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{6736A3E9-E21E-435D-81A8-B30FC4B3DFC8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{0E1F38D4-9A2F-4E07-AACB-957AD4B36E6D}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FRCproject", "FRCproject\FRCproject.vbproj", "{C54ED806-690A-4450-8CF3-9C124F96D0B6}"
 EndProject
 Global
@@ -17,18 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81EA289B-7E9A-46C9-B6CB-3F36886A1CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81EA289B-7E9A-46C9-B6CB-3F36886A1CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81EA289B-7E9A-46C9-B6CB-3F36886A1CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81EA289B-7E9A-46C9-B6CB-3F36886A1CDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6736A3E9-E21E-435D-81A8-B30FC4B3DFC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6736A3E9-E21E-435D-81A8-B30FC4B3DFC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6736A3E9-E21E-435D-81A8-B30FC4B3DFC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6736A3E9-E21E-435D-81A8-B30FC4B3DFC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E1F38D4-9A2F-4E07-AACB-957AD4B36E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E1F38D4-9A2F-4E07-AACB-957AD4B36E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E1F38D4-9A2F-4E07-AACB-957AD4B36E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E1F38D4-9A2F-4E07-AACB-957AD4B36E6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C54ED806-690A-4450-8CF3-9C124F96D0B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C54ED806-690A-4450-8CF3-9C124F96D0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C54ED806-690A-4450-8CF3-9C124F96D0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
