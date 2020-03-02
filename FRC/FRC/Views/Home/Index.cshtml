@@ -1,75 +1,65 @@
-﻿@{
+﻿@model FRC.ViewModels.CategorieVM
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div>
-    <h3>Selectionner une catégorie</h3>
- </div>
-<select multiple  value="Assurance maladie">
-    <option>Assurance maladie</option>
-    <option>Arnaque</option>
-    <option>Garantie</option>
-    <option>Recouvrement</option>
-    <option>Protection des donées</option>
-    <option>Exécution contrat</option>
-    <option>Poursuites</option>
-    <option>Envoi non-commandé</option>
-    <option>Annulation</option>
-    <option>Démarchage</option>
-    <option>Résiliation</option>
-    <option>Transport aérien</option>
-    <option>Abonnement</option>
-    <option>Facture</option>
-    <option>Contrat de bail</option>
-    <option>Plainte</option>
-    <option>Formulaire</option>
-</select>
 
-<div>
-    <h3>Selectionner un modèle de lettre</h3>
-</div>
-
-<div>
-    <h3>Veillez répondre à toutes les questions ci-dessous</h3>
 
     <div>
-        <h3>Question n°1</h3>
+        <h3>Selectionner une catégorie</h3>
+    </div>
+    <div class="col-md-10">
+        @*ViewBag.CityList is holding all the cities values*@
+        @Html.DropDownListFor(model => model.SelectedValue, new SelectList(Model.categories), new { htmlAttributes = new { @class = "form-control" } })
+
     </div>
 
     <div>
-        <h3>Question n°2</h3>
+        <h3>Selectionner un modèle de lettre</h3>
     </div>
 
     <div>
-        <h3>Question n°3</h3>
-    </div>
-</div>
+        <h3>Veillez répondre à toutes les questions ci-dessous</h3>
 
-<div>
-    <h3>Complétez tous les champs</h3>
+        <div>
+            <h3>Question n°1</h3>
+        </div>
 
-    <div>
-        <h3>Nom</h3>
-    </div>
+        <div>
+            <h3>Question n°2</h3>
+        </div>
 
-    <div>
-        <h3>Prénom</h3>
-    </div>
-
-    <div>
-        <h3>Adresse</h3>
+        <div>
+            <h3>Question n°3</h3>
+        </div>
     </div>
 
     <div>
-        <h3>N° Assuré</h3>
+        <h3>Complétez tous les champs</h3>
+
+        <div>
+            <h3>Nom</h3>
+        </div>
+
+        <div>
+            <h3>Prénom</h3>
+        </div>
+
+        <div>
+            <h3>Adresse</h3>
+        </div>
+
+        <div>
+            <h3>N° Assuré</h3>
+        </div>
+
+        <div>
+            <h3>Nom de l'entreprise</h3>
+        </div>
     </div>
 
     <div>
-        <h3>Nom de l'entreprise</h3>
+        <button> Enregistrer le pdf</button>
     </div>
-</div>
-
-<div>
-    <button> Enregistrer le pdf</button>
-</div>
 

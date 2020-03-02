@@ -8,11 +8,18 @@ namespace BLL
     public class CategorieManager
     {
         /*This method get all the locations listed in Hotel*/
-        public static List<Categorie> GetAllCategorie()
+        public static List<String> GetAllCategorie()
         {
             List<Categorie> categories = CategorieDB.GetAllCategorie();
 
-            return categories;
+            List<String> list = new List<string>();
+
+            foreach(Categorie a in categories)
+            {
+                list.Add(a.nameCategorie);
+            }
+
+            return list;
         }
     }
 }

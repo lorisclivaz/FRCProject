@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FRC.ViewModels;
+using BLL;
+using DTO;
 
 namespace FRC.Controllers
 {
@@ -10,7 +13,10 @@ namespace FRC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            CategorieVM list = new CategorieVM();
+
+            list.categories = CategorieManager.GetAllCategorie();
+            return View(list);
         }
 
         public ActionResult About()

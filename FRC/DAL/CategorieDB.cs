@@ -13,7 +13,7 @@ namespace DAL
         public static List<Categorie> GetAllCategorie()
         {
             List<Categorie> results = null;
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["FRC"].ConnectionString;
 
             try
             {
