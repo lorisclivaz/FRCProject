@@ -35,7 +35,7 @@ namespace DAL
 
                             categorie.idCategorie = (int)dr["Id"];
 
-                            categorie.nameCategorie = (string)dr["Name"];
+                            categorie.nameCategorie = (string)dr["nameCategorie"];
 
                          
 
