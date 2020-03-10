@@ -9,10 +9,23 @@
 <h1>My first PHP page</h1>
 
 <?php
-echo "Hello World! My name is Loris and I'm trop chaud !";
 
-$phpWord = new PhpOffice\PhpWord\PhpWord();
-$section = $phpWord->addSection();
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$template = new \PhpOffice\PhpWord\TemplateProcessor('Template/Assurance.docx');
+
+$template->setValue('rue', 'Chemin des planettes');
+$template->setValue('numero', '20');
+$template->setValue('prenom', 'Loris');
+$template->setValue('nom', 'clivaz');
+$template->setValue('codepostal', '3973 Venthone');
+$template->setValue('nAssure', '223172');
+
+
+
+
+
 
 ?>
 
