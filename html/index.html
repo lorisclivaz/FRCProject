@@ -14,16 +14,19 @@
     <main>
         <h1>Lettres modèles</h1>
 
-        <form action="/action_page.php">
-            <label for="category">Sélectionnez une catégorie:</label><br>
-            <select id = "category">
+        <form method="post" action="../Php/test.php" >
+            <label>Sélectionnez une catégorie:</label><br>
+            <select  name="categorie[]">
                 <option value = "1">one</option>
                 <option value = "2">two</option>
                 <option value = "3">three</option>
                 <option value = "4">four</option>
             </select>
+            <input type="submit" name="submit" value="Valider">
             <br>
+
             <br>
+
 
             <label for="model">Sélectionnez un modéle de lettre:</label><br>
             <select id = "model">
@@ -59,17 +62,19 @@
             <input type="text" id="fname" name="fname" value="Doe"><br>
             <label for="adresse">Adresse:</label><br>
             <input type="text" id="adresse" name="adresse" value="Doe"><br>
+            <label for="codePostal">code postal</label><br>
+            <input type="text" id="codePostal" name="codepostal" value="Doe"><br>
             <label for="nrAssure">Nr. Assuré:</label><br>
             <input type="text" id="nrAssure" name="nrAssure" value="Doe"><br>
             <label for="nameCompany">Nom de la Companie:</label><br>
             <input type="text" id="nameCompany" name="nameCompany" value="Doe"><br>
-            <input type="submit" value="Enregistrer en word">
+            <input type="submit" name="enregistrement" value="Enregistrer en word">
         </form>
 
     </main>
 
     <footer>
-        <p>© 2020 by asdf</p>
+        <p>© 2020 by FRC-Lausanne</p>
     </footer>
 
 </body>
