@@ -14,7 +14,7 @@
     <main>
         <h1>Lettres modèles</h1>
 
-        <form method="post" action="../Php/test.php" >
+        <form method="post" action="test.php" >
             <label>Sélectionnez une catégorie:</label><br>
             <select  name="categorie[]">
                 <option value = "1">one</option>
@@ -70,7 +70,10 @@
             <input type="text" id="nameCompany" name="nameCompany" value="Doe"><br>
             <input type="submit" name="enregistrement" value="Enregistrer en word">
         </form>
-
+        <?php
+        include "connection.php";
+        connection();
+        ?>
     </main>
 
     <footer>
