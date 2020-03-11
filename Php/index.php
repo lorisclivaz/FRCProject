@@ -62,12 +62,18 @@
             <input type="text" id="fname" name="fname" value="Doe"><br>
             <label for="adresse">Adresse:</label><br>
             <input type="text" id="adresse" name="adresse" value="Doe"><br>
-            <label for="codePostal">code postal</label><br>
+            <label for="codePostal">code postal et lieu</label><br>
             <input type="text" id="codePostal" name="codepostal" value="Doe"><br>
             <label for="nrAssure">Nr. Assuré:</label><br>
             <input type="text" id="nrAssure" name="nrAssure" value="Doe"><br>
             <label for="nameCompany">Nom de la Companie:</label><br>
             <input type="text" id="nameCompany" name="nameCompany" value="Doe"><br>
+            <label for="adresseCompany">Adresse Compagnie:</label><br>
+            <input type="text" id="adresseCompany" name="adresseCompany" value="Doe"><br>
+            <label for="codePostalCompany">Code postal compagnie et lieu:</label><br>
+            <input type="text" id="codePostalCompany" name="codePostalCompany" value="Doe"><br>
+            <label for="lieu">Lieu:</label><br>
+            <input type="text" id="lieu" name="lieu" value="Doe"><br>
             <input type="submit" name="enregistrement" value="Enregistrer en word">
         </form>
         <?php
