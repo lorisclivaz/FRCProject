@@ -14,7 +14,7 @@
     <main>
         <h1>Lettres modèles</h1>
 
-        <form method="post" action="test.php" >
+        <form method="post" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie:</label><br>
             <select  name="categorie[]">
                 <option value = "1">one</option>

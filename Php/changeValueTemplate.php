@@ -15,9 +15,7 @@
 
     <?php
 
-    require_once '../vendor/autoload.php';
-
-    use PhpOffice\PhpWord\TemplateProcessor;
+    include "../vendor/autoload.php";
 
     if (isset($_POST['enregistrement']))
     {
@@ -44,7 +42,7 @@
         print "mon lieu  : $lieu";
 
 
-        $templateProcessor = new TemplateProcessor('Template/Assurance.docx');
+        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Assurance.docx');
 
         $templateProcessor->setValue('nom', $nom);
         $templateProcessor->setValue('prenom', $prenom);
@@ -56,7 +54,7 @@
         $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
         $templateProcessor->setValue('lieu', $lieu);
 
-
+        $templateProcessor->saveAs('loris.docx');
 
 
 
