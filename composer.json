@@ -1,0 +1,13 @@
+{
+    "name": "frc/frc-project",
+    "type": "no",
+    "authors": [
+        {
+            "name": "loris clivaz",
+            "email": "lorisclivaz@hotmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpword": "^0.17.0"
+    }
+}
