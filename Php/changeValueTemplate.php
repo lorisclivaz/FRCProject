@@ -39,7 +39,6 @@
         $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
         $templateProcessor->setValue('lieu', $lieu);
 
-        $templateProcessor->saveAs('loris.docx');
 
 
 

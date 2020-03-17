@@ -14,6 +14,8 @@
     <main>
         <h1>Lettres modèles</h1>
 
+        <!-- Mettre les catégories dans la db et faire la liste par rapport à la connection de la db-->
+
         <form method="post" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie:</label><br>
             <select  name="categorie[]">
@@ -27,6 +29,8 @@
 
             <br>
 
+            <!--Faire par rapport aux templates du site FRC.ch-->
+
 
             <label for="model">Sélectionnez un modéle de lettre:</label><br>
             <select id = "model">
@@ -37,6 +41,8 @@
             </select>
             <br>
             <br>
+
+            <!-- Prendre les questions de la db par rapport au template choisi-->
 
             <p>Veuillez répondre à toutes les questions ci-dessous:</p>
             <p>Question1</p>
@@ -53,6 +59,8 @@
             <label for="answer4">Non</label>
             <br>
             <br>
+
+            <!--Les champs de base qui sont repris pour changer le template WORD-->
 
             <p>Complétez tous les champs</p>
 
