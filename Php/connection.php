@@ -95,6 +95,7 @@ function aviation()
         $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
         $templateProcessor->setValue('lieu', $lieu);
 
+        $templateProcessor->saveAs('Aviation-Copie.docx');
     }
 }
 ?>
