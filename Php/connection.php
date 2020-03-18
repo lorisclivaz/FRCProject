@@ -1,77 +1,31 @@
 <?php
 function connection(){
-    $servername = "krmg.myd.infomaniak.com";
+    /*$servername = "krmg.myd.infomaniak.com";
     $username = "krmg_lm2020";
     $password = "JOkFkZdgk3cE";
     $dbname = "krmg_lm2020bd";
 
 // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    //$conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
-    if ($conn->connect_error) {
+    /*if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT id, firstname, lastname FROM testtable";
-    $result = $conn->query($sql);
+    //$sql = "SELECT * FROM categories";
+    //$result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
+    /*if ($result->num_rows > 0) {
         echo "<table><tr><th>ID</th><th>Name</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["id"]."</td><td>".$row["firstname"]." ".$row["lastname"]."</td></tr>";
+            echo "<tr><td>".$row["idcategories"]."</td><td>".$row["categoriename"]."</td></tr>";
         }
         echo "</table>";
     } else {
         echo "0 results";
     }
-    $conn->close();
-}
-?>
-
-<!-- Aviation -->
-<?php
-
-include "../vendor/autoload.php";
-
-if (isset($_POST['enregistrement']))
-{
-    $nom = $_POST['lname'];
-    $prenom = $_POST['fname'];
-    $adresse = $_POST['adresse'];
-    $codePostal = $_POST['codepostal'];
-    $nrAssure = $_POST['nrAssure'];
-    $nameCompanie = $_POST['nameCompany'];
-    $adresseCompagnie = $_POST['adresseCompany'];
-    $codePostalCompagnie = $_POST['codePostalCompany'];
-    $lieu = $_POST['lieu'];
-
-
-
-    print "mon nom : $nom" ;
-    print "mon prenom : $prenom";
-    print "mon adresse : $adresse";
-    print "mon code postal: $codePostal";
-    print "mon nrAssure : $nrAssure";
-    print "mon nom de companie : $nameCompanie";
-    print "mon adresse de companie : $adresseCompagnie";
-    print "mon code postal de companie : $codePostalCompagnie";
-    print "mon lieu  : $lieu";
-
-
-    $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Aviation.docx');
-
-    $templateProcessor->setValue('nom', $nom);
-    $templateProcessor->setValue('prenom', $prenom);
-    $templateProcessor->setValue('rue', $adresse);
-    $templateProcessor->setValue('codepostal', $codePostal);
-    $templateProcessor->setValue('nAssure', $nrAssure);
-    $templateProcessor->setValue('nomSociete', $nameCompanie);
-    $templateProcessor->setValue('adresseSociete', $adresseCompagnie);
-    $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
-    $templateProcessor->setValue('lieu', $lieu);
-
+    $conn->close();*/
+    echo "0 results";
 }
 
-
-?>
