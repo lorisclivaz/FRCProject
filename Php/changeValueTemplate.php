@@ -55,12 +55,6 @@
         $templateProcessor->setValue('lieu', $lieu);
 
         $templateProcessor->saveAs('loris.docx');
-
-
-
-
-
-
     }
 
 
