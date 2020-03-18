@@ -7,6 +7,7 @@
     <title>Lettres modèles</title>
 </head>
 <body>
+<?php include "connection.php"?>
     <header>
         <img src="../images/logo.png" alt="logo">
     </header>
@@ -19,8 +20,7 @@
         <form method="post" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie:</label><br>
             <?php
-            include "connection.php";
-            connection();
+            categorieList();
             ?>
             <input type="submit" name="submit" value="Valider">
             <br>
@@ -31,12 +31,9 @@
 
 
             <label for="model">Sélectionnez un modéle de lettre:</label><br>
-            <select id = "model">
-                <option value = "1">one</option>
-                <option value = "2">two</option>
-                <option value = "3">three</option>
-                <option value = "4">four</option>
-            </select>
+            <?php
+            modelList();
+            ?>
             <br>
             <br>
 

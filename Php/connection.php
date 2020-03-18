@@ -1,4 +1,6 @@
 <?php
+$conn = null;
+
 function connection(){
     $servername = "krmg.myd.infomaniak.com";
     $username = "krmg_lm2020";
@@ -11,7 +13,11 @@ function connection(){
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    return $conn;
+}
 
+function categorieList(){
+    $conn = connection();
     $sql = "SELECT idcategories, categoriename FROM categories";
     $result = $conn->query($sql);
 
@@ -27,6 +33,25 @@ function connection(){
     }
     $conn->close();
 }
+
+function modelList(){
+    $conn = connection();
+    $sql = "SELECT modelname FROM models";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        echo "<select name='models[]'>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option vlaue=".$row[categoriename].">".$row["modelname"]."</option>";
+        }
+        echo "</select>";
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+}
+
 ?>
 
 <!-- Aviation -->
