@@ -82,6 +82,16 @@
             <input type="text" id="codePostalCompany" name="codePostalCompany" value="Doe"><br>
             <label for="lieu">Lieu:</label><br>
             <input type="text" id="lieu" name="lieu" value="Doe"><br>
+            <label for="nrVole">Numero Vole:</label><br>
+            <input type="text" id="nrVole" name="nrVole" value="Doe"><br>
+            <label for="dateAchat">Date Achat:</label><br>
+            <input type="date" id="dateAchat" name="dateAchat" value="Doe"><br>
+            <label for="destination">Destination:</label><br>
+            <input type="text" id="destination" name="destination" value="Doe"><br>
+            <label for="chiffrePerte">Chiffre la perte:</label><br>
+            <input type="text" id="chiffrePerte" name="chiffrePerte" value="Doe"><br>
+            <label for="iban">IBAN:</label><br>
+            <input type="text" id="iban" name="iban" value="Doe"><br>
             <input type="submit" name="enregistrement" value="Enregistrer en word">
         </form>
         <?php
