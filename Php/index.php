@@ -18,12 +18,10 @@
 
         <form method="post" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie:</label><br>
-            <select  name="categorie[]">
-                <option value = "1">one</option>
-                <option value = "2">two</option>
-                <option value = "3">three</option>
-                <option value = "4">four</option>
-            </select>
+            <?php
+            include "connection.php";
+            connection();
+            ?>
             <input type="submit" name="submit" value="Valider">
             <br>
 
@@ -94,10 +92,7 @@
             <input type="text" id="iban" name="iban" value="Doe"><br>
             <input type="submit" name="enregistrement" value="Enregistrer en word">
         </form>
-        <?php
-        include "connection.php";
-        connection();
-        ?>
+
     </main>
 
     <footer>

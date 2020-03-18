@@ -12,16 +12,16 @@ function connection(){
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT id, firstname, lastname FROM testtable";
+    $sql = "SELECT idcategories, categoriename FROM categories";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<table><tr><th>ID</th><th>Name</th></tr>";
+        echo "<select name='categorie[]'>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["id"]."</td><td>".$row["firstname"]." ".$row["lastname"]."</td></tr>";
+            echo "<option vlaue=".$row[categoriename].">".$row["categoriename"]."</option>";
         }
-        echo "</table>";
+        echo "</select>";
     } else {
         echo "0 results";
     }
