@@ -25,7 +25,7 @@ function categorieList(){
         echo "<select name='categorie[]'>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<option vlaue=".$row[categoriename].">".$row["categoriename"]."</option>";
+            echo "<option value=".$row["categoriename"].">".$row["categoriename"]."</option>";
         }
         echo "</select>";
     } else {
@@ -36,14 +36,14 @@ function categorieList(){
 
 function modelList(){
     $conn = connection();
-    $sql = "SELECT modelname FROM models";
+    $sql = "SELECT name FROM models";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         echo "<select name='models[]'>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<option vlaue=".$row[categoriename].">".$row["modelname"]."</option>";
+            echo "<option value=".$row["name"].">".$row["name"]."</option>";
         }
         echo "</select>";
     } else {

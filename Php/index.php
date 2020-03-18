@@ -30,7 +30,7 @@
             <!--Faire par rapport aux templates du site FRC.ch-->
 
 
-            <label for="model">Sélectionnez un modéle de lettre:</label><br>
+            <label for="model">Sélectionnez un modèle de lettre:</label><br>
             <?php
             modelList();
             ?>
