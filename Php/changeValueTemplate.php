@@ -39,16 +39,14 @@
         $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
         $templateProcessor->setValue('lieu', $lieu);
 
-
-
-
-
-
-
     }
 
 
     ?>
+
+
+
+
 
 
 
