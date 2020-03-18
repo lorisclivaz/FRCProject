@@ -40,11 +40,14 @@ if (isset($_POST['enregistrement']))
     $prenom = $_POST['fname'];
     $adresse = $_POST['adresse'];
     $codePostal = $_POST['codepostal'];
-    $nrAssure = $_POST['nrAssure'];
     $nameCompanie = $_POST['nameCompany'];
     $adresseCompagnie = $_POST['adresseCompany'];
     $codePostalCompagnie = $_POST['codePostalCompany'];
     $lieu = $_POST['lieu'];
+    $dateAchat = $_POST['dateAchat'];
+    $destination = $_POST['destination'];
+    $chiffrePerte = $_POST['chiffrePerte'];
+    $iban = $_POST['iban'];
 
 
 
@@ -52,11 +55,14 @@ if (isset($_POST['enregistrement']))
     print "mon prenom : $prenom";
     print "mon adresse : $adresse";
     print "mon code postal: $codePostal";
-    print "mon nrAssure : $nrAssure";
     print "mon nom de companie : $nameCompanie";
     print "mon adresse de companie : $adresseCompagnie";
     print "mon code postal de companie : $codePostalCompagnie";
     print "mon lieu  : $lieu";
+    print "mon date achat: $dateAchat";
+    print "mon destination: $destination";
+    print "mon chiffre la perte: $chiffrePerte";
+    print "mon IBAN: $iban";
 
 
     $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Aviation.docx');
@@ -65,11 +71,14 @@ if (isset($_POST['enregistrement']))
     $templateProcessor->setValue('prenom', $prenom);
     $templateProcessor->setValue('rue', $adresse);
     $templateProcessor->setValue('codepostal', $codePostal);
-    $templateProcessor->setValue('nAssure', $nrAssure);
     $templateProcessor->setValue('nomSociete', $nameCompanie);
     $templateProcessor->setValue('adresseSociete', $adresseCompagnie);
     $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
     $templateProcessor->setValue('lieu', $lieu);
+    $templateProcessor->setValue('dateAchat', $dateAchat);
+    $templateProcessor->setValue('destination', $destination);
+    $templateProcessor->setValue('chiffrePerte', $chiffrePerte);
+    $templateProcessor->setValue('iban', $iban);
 
 }
 
