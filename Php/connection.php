@@ -96,6 +96,35 @@ function getAnswerandQuestionsFromModel($modelName){
     $conn->close();
 }
 
+function getTemplatePathFromCategorie($categorieName){
+    $conn = connection();
+    $sql = "SELECT path FROM template as t, categories as c WHERE t.categories_idcategories = c.idcategories AND c.categoriename = '$categorieName'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        echo "<p>".$row['path']."</p>";
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+}
+
+function getParagraphFromAnswer($answerName){
+    $conn = connection();
+    $number = "SELECT number FROM answers WHERE answer = '$answerName'";
+    $result = $conn->query($number);
+    $rowNumber = $result->fetch_assoc();
+    $num = $rowNumber['number'];
+    $paragraph = "SELECT name FROM paragraphs WHERE number = '$num'";
+    $result = $conn->query($paragraph);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        echo "<p>".$row['name']."</p>";
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+}
 ?>
 
 <!-- Aviation -->

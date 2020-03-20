@@ -22,11 +22,8 @@
             <?php categorieList(); ?>
             <input type="submit" name="submit" value="Valider">
             <br>
-
             <br>
-
             <!--Faire par rapport aux templates du site FRC.ch-->
-
 
             <label for="model">Sélectionnez un modèle de lettre:</label><br>
             <?php modelListFromCategorie('Aviation'); ?>
@@ -36,9 +33,12 @@
             <?php getAnswerandQuestionsFromModel('Bagage : perdu – endommagé - acheminé en retard') ?>
             <br>
             <br>
-
+            <p>Path: <?php getTemplatePathFromCategorie('Aviation') ?></p>
+            <h1>Paragraph</h1>
+            <?php getParagraphFromAnswer('Mon bagage a été endommagé') ?>
+            <br>
+            <br>
             <!--Les champs de base qui sont repris pour changer le template WORD-->
-
             <p>Complétez tous les champs</p>
 
             <label for="lname">Nom:</label><br>
