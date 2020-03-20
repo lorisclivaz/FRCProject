@@ -6,7 +6,6 @@ function connection(){
     $username = "krmg_lm2020";
     $password = "JOkFkZdgk3cE";
     $dbname = "krmg_lm2020bd";
-    //https://h2-phpmyadmin.infomaniak.com/db_structure.php?db=krmg_lm2020bd
 
 // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -23,10 +22,33 @@ function categorieList(){
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<select name='categorie[]'>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<option vlaue=".$row["categoriename"].">".$row["categoriename"]."</option>";
+            echo "<option value=".$row["idcategories"].">".$row["categoriename"]."</option>";
+        }
+    } else {
+        echo "Aucun résultat";
+    }
+    $conn->close();
+}
+
+function showTemplateList(){
+
+   echo "<label for=model>Sélectionnez un modèle de lettre:</label><br>";
+            modelList();
+            echo "<br><br>";
+}
+
+function modelList($idCategorie){
+
+    $conn = connection();
+    $sql = "SELECT name FROM models WHERE categories_idcategories = ".$idCategorie;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["idModel"].">".$row["name"]."</option>";
         }
         echo "</select>";
     } else {
@@ -35,96 +57,6 @@ function categorieList(){
     $conn->close();
 }
 
-function modelListFromCategorie($categorieName){
-    $conn = connection();
-    $sql = "SELECT name FROM models as m, categories as c WHERE m.categories_idcategories = c.idcategories AND c.categoriename = '$categorieName'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        echo "<select name='models[]'>";
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "<option vlaue=".$row["name"].">".$row["name"]."</option>";
-        }
-        echo "</select>";
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-}
-
-function getAnswerandQuestionsFromModel($modelName){
-    $conn = connection();
-    $sqlQuestions = "SELECT question FROM question as q, models as m WHERE q.models_idmodels = m.idmodels AND m.name='$modelName'";
-    $result = $conn->query($sqlQuestions);
-
-    if ($result->num_rows > 0) {
-        if($result->num_rows == 1){
-            $row = $result->fetch_assoc();
-            $question = $row["question"];
-            echo "<p>".$question."</p>";
-            $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
-            $result = $conn->query($sqlAnswers);
-            if($result->num_rows > 0){
-                echo "<select name='answers[]'>";
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option vlaue=".$row["answer"].">".$row["answer"]."</option>";
-                }
-                echo "</select><br>";
-            }
-        }
-        else{
-            while($row = $result->fetch_assoc()) {
-                $question = $row["question"];
-                echo "<p>".$question."</p>";
-                $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
-                $result = $conn->query($sqlAnswers);
-                if($result->num_rows > 0){
-                    echo "<select name='answers[]'>";
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option vlaue=".$row["answer"].">".$row["answer"]."</option>";
-                    }
-                    echo "</select><br>";
-                }
-            }
-        }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-}
-
-function getTemplatePathFromCategorie($categorieName){
-    $conn = connection();
-    $sql = "SELECT path FROM template as t, categories as c WHERE t.categories_idcategories = c.idcategories AND c.categoriename = '$categorieName'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo "<p>".$row['path']."</p>";
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-}
-
-function getParagraphFromAnswer($answerName){
-    $conn = connection();
-    $number = "SELECT number FROM answers WHERE answer = '$answerName'";
-    $result = $conn->query($number);
-    $rowNumber = $result->fetch_assoc();
-    $num = $rowNumber['number'];
-    $paragraph = "SELECT name FROM paragraphs WHERE number = '$num'";
-    $result = $conn->query($paragraph);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo "<p>".$row['name']."</p>";
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-}
 ?>
 
 <!-- Aviation -->
@@ -168,6 +100,7 @@ function aviation()
         $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
         $templateProcessor->setValue('lieu', $lieu);
 
+        $templateProcessor->saveAs('Aviation-Copie.docx');
     }
 }
 ?>

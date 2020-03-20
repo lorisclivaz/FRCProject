@@ -15,30 +15,37 @@
     <main>
         <h1>Lettres modèles</h1>
 
-        <!-- Mettre les catégories dans la db et faire la liste par rapport à la connection de la db-->
-
         <form method="post" action="changeValueTemplate.php" >
-            <label>Sélectionnez une catégorie:</label><br>
-            <?php categorieList(); ?>
-            <input type="submit" name="submit" value="Valider">
-            <br>
-            <br>
-            <!--Faire par rapport aux templates du site FRC.ch-->
+            <label>Sélectionnez une catégorie</label>
+            <br/>
+            <select id="categories" onchange='getValue(this.value)'><option value=" ">Sélectionnez une catégorie</option>
+            <?php
+            categorieList();
+            ?>
+            </select>
 
-            <label for="model">Sélectionnez un modèle de lettre:</label><br>
-            <?php modelListFromCategorie('Aviation'); ?>
+            <div id="test"></div>
+
+            <!-- Prendre les questions de la db par rapport au template choisi-->
+
+            <p>Veuillez répondre à toutes les questions ci-dessous:</p>
+            <p>Question1</p>
+            <input type="radio" id="answer1" name="answer1" value="oui">
+            <label for="answer1">Oui</label>
+            <input type="radio" id="answer2" name="answer2" value="non">
+            <label for="answer2">Non</label>
             <br>
             <br>
-            <h1>Questions</h1>
-            <?php getAnswerandQuestionsFromModel('Bagage : perdu – endommagé - acheminé en retard') ?>
+            <p>Question2</p>
+            <input type="radio" id="answer3" name="answer3" value="oui">
+            <label for="answer3">Oui</label>
+            <input type="radio" id="answer4" name="answer4" value="non">
+            <label for="answer4">Non</label>
             <br>
             <br>
-            <p>Path: <?php getTemplatePathFromCategorie('Aviation') ?></p>
-            <h1>Paragraph</h1>
-            <?php getParagraphFromAnswer('Mon bagage a été endommagé') ?>
-            <br>
-            <br>
+
             <!--Les champs de base qui sont repris pour changer le template WORD-->
+
             <p>Complétez tous les champs</p>
 
             <label for="lname">Nom:</label><br>
@@ -80,3 +87,12 @@
 
 </body>
 </html>
+<script>
+    function getValue() {
+
+        var dropdown = document.getElementById('categories');
+        var str = dropdown.options[dropdown.selectedIndex].value;
+
+
+    }
+</script>
