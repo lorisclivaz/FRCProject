@@ -43,7 +43,7 @@ function modelList(){
         echo "<select name='models[]'>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<option vlaue=".$row[categoriename].">".$row["modelname"]."</option>";
+            echo "<option vlaue=".$row[modelname].">".$row["modelname"]."</option>";
         }
         echo "</select>";
     } else {
