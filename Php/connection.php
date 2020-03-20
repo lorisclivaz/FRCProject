@@ -32,13 +32,6 @@ function categorieList(){
     $conn->close();
 }
 
-function showTemplateList(){
-
-   echo "<label for=model>Sélectionnez un modèle de lettre:</label><br>";
-            modelList();
-            echo "<br><br>";
-}
-
 function modelList($idCategorie){
 
     $conn = connection();

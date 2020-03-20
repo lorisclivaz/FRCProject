@@ -87,12 +87,3 @@
 
 </body>
 </html>
-<script>
-    function getValue() {
-
-        var dropdown = document.getElementById('categories');
-        var str = dropdown.options[dropdown.selectedIndex].value;
-
-
-    }
-</script>
