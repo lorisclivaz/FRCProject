@@ -121,7 +121,7 @@ function getParagraphFromAnswer($answerName){
 
     $paragraph = "SELECT name FROM paragraphs WHERE number = '$num'";
     $result = $conn->query($paragraph);
-    
+
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         echo "<p>".$row['name']."</p>";
