@@ -1,19 +1,4 @@
-
-
-    <?php
-    if (isset($_POST["submit"]))
-    {
-        if (isset($_POST["categorie"]))
-        {
-            foreach ($_POST['categorie'] as $categories)
-            {
-                print "vous avez selectionné $categories";
-            }
-        }
-    }
-    ?>
-
-    <?php
+<?php
 
     include "../vendor/autoload.php";
 
