@@ -155,6 +155,8 @@ function aviation()
         print "mon code postal de companie : $codePostalCompagnie";
         print "mon lieu  : $lieu";
 
+        //salutations
+
 
         $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Aviation.docx');
 
