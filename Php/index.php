@@ -19,9 +19,7 @@
 
         <form method="post" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie:</label><br>
-            <?php
-            categorieList();
-            ?>
+            <?php categorieList(); ?>
             <input type="submit" name="submit" value="Valider">
             <br>
 
@@ -31,27 +29,11 @@
 
 
             <label for="model">Sélectionnez un modèle de lettre:</label><br>
-            <?php
-            modelList();
-            ?>
+            <?php modelListFromCategorie('Aviation'); ?>
             <br>
             <br>
-
-            <!-- Prendre les questions de la db par rapport au template choisi-->
-
-            <p>Veuillez répondre à toutes les questions ci-dessous:</p>
-            <p>Question1</p>
-            <input type="radio" id="answer1" name="answer1" value="oui">
-            <label for="answer1">Oui</label>
-            <input type="radio" id="answer2" name="answer2" value="non">
-            <label for="answer2">Non</label>
-            <br>
-            <br>
-            <p>Question2</p>
-            <input type="radio" id="answer3" name="answer3" value="oui">
-            <label for="answer3">Oui</label>
-            <input type="radio" id="answer4" name="answer4" value="non">
-            <label for="answer4">Non</label>
+            <h1>Questions</h1>
+            <?php getAnswerandQuestionsFromModel('Bagage : perdu – endommagé - acheminé en retard') ?>
             <br>
             <br>
 
