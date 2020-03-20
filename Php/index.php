@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
     <title>Lettres modèles</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript">
+        function getCategorie(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_categorie_models.php",
+                data:'categorie_id='+val,
+                success: function(data){
+                    $("#models").html(data);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <?php include "connection.php"?>
@@ -18,13 +30,17 @@
         <form method="post" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie</label>
             <br/>
-            <select id="categories" onchange='getValue(this.value)'><option value=" ">Sélectionnez une catégorie</option>
+            <select id="categories" onchange="getCategorie(this.value)"><option value=" ">Sélectionnez une catégorie</option>
             <?php
             categorieList();
             ?>
             </select>
-
-            <div id="test"></div>
+            <br/><br/>
+            <label>Sélectionnez un modèle</label>
+            <br/>
+            <select id="models"><option value=" ">Sélectionnez un modèle</option>
+            </select>
+            <br/><br/>
 
             <!-- Prendre les questions de la db par rapport au template choisi-->
 

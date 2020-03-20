@@ -9,6 +9,7 @@ function connection(){
 
 // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -35,7 +36,7 @@ function categorieList(){
 function modelList($idCategorie){
 
     $conn = connection();
-    $sql = "SELECT name FROM models WHERE categories_idcategories = ".$idCategorie;
+    $sql = "SELECT * FROM models WHERE categories_idcategories = ".$idCategorie;
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -50,10 +51,6 @@ function modelList($idCategorie){
     $conn->close();
 }
 
-?>
-
-<!-- Aviation -->
-<?php
 function aviation()
 {
     include "../vendor/autoload.php";
@@ -96,4 +93,3 @@ function aviation()
         $templateProcessor->saveAs('Aviation-Copie.docx');
     }
 }
-?>
