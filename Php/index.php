@@ -44,6 +44,7 @@
 
 
 
+
     <main>
         <h1>Lettres modèles</h1>
         <br/>
@@ -53,7 +54,6 @@
             <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
             <?php include "connection.php";
             categorieList();
-
 
             ?>
             </select>

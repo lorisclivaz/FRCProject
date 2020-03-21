@@ -103,7 +103,7 @@ function getTemplatePathFromCategorie($categorieName){
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "<p>".$row['path']."</p>";
+        return $row['path'];
     } else {
         echo "0 results";
     }
@@ -124,7 +124,7 @@ function getParagraphFromAnswer($answerName){
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        return $row['name'];
+        echo "<p>".$row['name']."</p>";
     } else {
         echo "0 results";
     }
@@ -134,6 +134,8 @@ function getParagraphFromAnswer($answerName){
 function aviation()
 {
     include "../vendor/autoload.php";
+    include "index.php";
+
 
     //Récupération des valaeurs pour le changement du template
 
@@ -151,9 +153,9 @@ function aviation()
 
 
         //récupération
-        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Aviation.docx');
+        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
 
-        //Set des valeurs dans le template
+        //Set des valeurs dans le template champs de base
         $templateProcessor->setValue('nom', $nom);
         $templateProcessor->setValue('prenom', $prenom);
         $templateProcessor->setValue('rue', $rue_n°);
