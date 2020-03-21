@@ -42,7 +42,7 @@ function modelList($idCategorie){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<option value=".$row["idModel"].">".$row["name"]."</option>";
+            echo "<option value=".$row["name"].">".$row["name"]."</option>";
         }
         echo "</select>";
     } else {
@@ -52,7 +52,6 @@ function modelList($idCategorie){
 }
 
 function getAnswerandQuestionsFromModel($modelName){
-    echo "lancement de la methode";
     $conn = connection();
     $sqlQuestions = "SELECT question FROM question as q, models as m WHERE q.models_idmodels = m.idmodels AND m.name='$modelName'";
     $result = $conn->query($sqlQuestions);
@@ -64,14 +63,14 @@ function getAnswerandQuestionsFromModel($modelName){
             echo "<p>".$question."</p>";
             $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
             $result = $conn->query($sqlAnswers);
-            if($result->num_rows > 0){
+
                 echo "<select name='answers[]'>";
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
                     echo "<option value=".$row["answer"].">".$row["answer"]."</option>";
                 }
                 echo "</select><br>";
-            }
+
         }
         else{
             while($row = $result->fetch_assoc()) {

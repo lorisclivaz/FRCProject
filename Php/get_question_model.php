@@ -2,7 +2,7 @@
 include "connection.php";
 
 if (! empty($_POST["model_name"])) {
-    $model_name = $_POST["model_name"];
-    echo "salut";
+    $model = $_POST["model_name"];
+    echo getAnswerandQuestionsFromModel($model);
 
 }

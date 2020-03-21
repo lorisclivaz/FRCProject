@@ -14,21 +14,19 @@
                 data:'categorie_id='+val,
                 success: function(data){
                     $("#models").html(data);
-                    alert(data);
                 }
             });
         }
     </script>
 
     <script>
-        function get_question(val) {
+        function get_question(val){
             $.ajax({
-                type: "POST",
-                url: "get_question_model.php",
-                    data: {model_name:val},
-                success: function(data){
-
-                    alert(data);
+                type: 'POST',
+                url: 'get_question_model.php',
+                data: 'model_name='+val,
+                success: function (data) {
+                    $("#question_label").html(data);
                 }
             });
         }
@@ -60,11 +58,14 @@
             ?>
             </select>
             <br/><br/>
-            <form method="post">
+
             <label>Sélectionnez un modèle</label>
             <br/>
             <select  id="models" onchange="get_question(this.value);" ><option value=" ">Sélectionnez un modèle</option>
             </select>
+
+            <label id="question_label"></label>
+
 
 
 
