@@ -52,6 +52,7 @@ function modelList($idCategorie){
 }
 
 function getAnswerandQuestionsFromModel($modelName){
+    echo "lancement de la methode";
     $conn = connection();
     $sqlQuestions = "SELECT question FROM question as q, models as m WHERE q.models_idmodels = m.idmodels AND m.name='$modelName'";
     $result = $conn->query($sqlQuestions);
@@ -67,7 +68,7 @@ function getAnswerandQuestionsFromModel($modelName){
                 echo "<select name='answers[]'>";
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<option vlaue=".$row["answer"].">".$row["answer"]."</option>";
+                    echo "<option value=".$row["answer"].">".$row["answer"]."</option>";
                 }
                 echo "</select><br>";
             }

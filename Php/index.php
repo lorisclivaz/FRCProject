@@ -14,16 +14,37 @@
                 data:'categorie_id='+val,
                 success: function(data){
                     $("#models").html(data);
+                    alert(data);
                 }
             });
         }
     </script>
+
+    <script>
+        function get_question(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_question_model.php",
+                    data: {model_name:val},
+                success: function(data){
+
+                    alert(data);
+                }
+            });
+        }
+
+
+    </script>
+
 </head>
 <body>
-<?php include "connection.php"?>
+
+
     <header>
         <img src="../images/logo.png" alt="logo">
     </header>
+
+
 
     <main>
         <h1>Lettres modèles</h1>
@@ -32,16 +53,27 @@
             <label>Sélectionnez une catégorie</label>
             <br/>
             <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
-            <?php
+            <?php include "connection.php";
             categorieList();
+
+
             ?>
             </select>
             <br/><br/>
+            <form method="post">
             <label>Sélectionnez un modèle</label>
             <br/>
-            <select id="models"><option value=" ">Sélectionnez un modèle</option>
+            <select  id="models" onchange="get_question(this.value);" ><option value=" ">Sélectionnez un modèle</option>
             </select>
+
+
+
+            </form>
             <br/><br/>
+
+
+
+
     </main>
 
     <footer>
@@ -50,3 +82,14 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
