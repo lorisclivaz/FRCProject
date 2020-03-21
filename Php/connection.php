@@ -124,7 +124,7 @@ function getParagraphFromAnswer($answerName){
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "<p>".$row['name']."</p>";
+        return $row['name'];
     } else {
         echo "0 results";
     }
@@ -135,42 +135,35 @@ function aviation()
 {
     include "../vendor/autoload.php";
 
+    //Récupération des valaeurs pour le changement du template
+
     if (isset($_POST['enregistrement'])) {
         $nom = $_POST['lname'];
         $prenom = $_POST['fname'];
-        $adresse = $_POST['adresse'];
-        $codePostal = $_POST['codepostal'];
-        $nrAssure = $_POST['nrAssure'];
-        $nameCompanie = $_POST['nameCompany'];
-        $adresseCompagnie = $_POST['adresseCompany'];
-        $codePostalCompagnie = $_POST['codePostalCompany'];
-        $lieu = $_POST['lieu'];
+        $rue_n° = $_POST['rue_n°'];
+        $domicile_codePostal = $_POST['domicile_codepostal'];
+
+        $nom_societe = $_POST['nom_societe'];
+        $rue_n°_societe = $_POST['rue_n°_societe'];
+        $domicile_codePostal_societe = $_POST['domicile_codePostal_societe'];
+        $lieu_envoie = $_POST['lieu_envoie'];
 
 
-        print "mon nom : $nom";
-        print "mon prenom : $prenom";
-        print "mon adresse : $adresse";
-        print "mon code postal: $codePostal";
-        print "mon nrAssure : $nrAssure";
-        print "mon nom de companie : $nameCompanie";
-        print "mon adresse de companie : $adresseCompagnie";
-        print "mon code postal de companie : $codePostalCompagnie";
-        print "mon lieu  : $lieu";
 
-        //salutations
-
-
+        //récupération
         $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Aviation.docx');
 
+        //Set des valeurs dans le template
         $templateProcessor->setValue('nom', $nom);
         $templateProcessor->setValue('prenom', $prenom);
-        $templateProcessor->setValue('rue', $adresse);
-        $templateProcessor->setValue('codepostal', $codePostal);
-        $templateProcessor->setValue('nAssure', $nrAssure);
-        $templateProcessor->setValue('nomSociete', $nameCompanie);
-        $templateProcessor->setValue('adresseSociete', $adresseCompagnie);
-        $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
-        $templateProcessor->setValue('lieu', $lieu);
+        $templateProcessor->setValue('rue', $rue_n°);
+        $templateProcessor->setValue('codepostal', $domicile_codePostal);
+
+        $templateProcessor->setValue('nomSociete', $nom_societe);
+        $templateProcessor->setValue('adresseSociete', $rue_n°_societe);
+        $templateProcessor->setValue('codePostalSociete',  $domicile_codePostal_societe);
+        $templateProcessor->setValue('lieu', $lieu_envoie);
+
         $templateProcessor->saveAs('Aviation-Copie.docx');
     }
 }
