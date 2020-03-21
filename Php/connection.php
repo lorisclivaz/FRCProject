@@ -1,4 +1,5 @@
 <?php
+
 $conn = null;
 
 function connection(){
@@ -42,7 +43,7 @@ function modelList($idCategorie){
     if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<option value=".$row["name"].">".$row["name"]."</option>";
+            echo "<option value=".$row["idmodels"].">".$row["name"]."</option>";
         }
         echo "</select>";
     } else {
@@ -51,43 +52,25 @@ function modelList($idCategorie){
     $conn->close();
 }
 
-function getAnswerandQuestionsFromModel($modelName){
+function getFirstAnswerAndQuestion($idModel){
+
     $conn = connection();
-    $sqlQuestions = "SELECT question FROM question as q, models as m WHERE q.models_idmodels = m.idmodels AND m.name='$modelName'";
+    $sqlQuestions = "SELECT * FROM question WHERE models_idmodels ='$idModel' AND priority = 1";
     $result = $conn->query($sqlQuestions);
 
     if ($result->num_rows > 0) {
-        if($result->num_rows == 1){
             $row = $result->fetch_assoc();
-            $question = $row["question"];
-            echo "<p>".$question."</p>";
-            $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
+            $idQuestion = $row["idquestion"];
+            echo "<p>".$row["question"]."</p>";
+            $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
             $result = $conn->query($sqlAnswers);
 
-                echo "<select name='answers[]'>";
+                echo "<select name='answers[]' onChange='get_next_question(this.value);'>";
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row["answer"].">".$row["answer"]."</option>";
+                    echo "<option value=".$row["next_question"].">".$row["answer"]."</option>";
                 }
                 echo "</select><br>";
-
-        }
-        else{
-            while($row = $result->fetch_assoc()) {
-                $question = $row["question"];
-                echo "<p>".$question."</p>";
-                $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
-                $result = $conn->query($sqlAnswers);
-                if($result->num_rows > 0){
-                    echo "<select name='answers[]'>";
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option vlaue=".$row["answer"].">".$row["answer"]."</option>";
-                    }
-                    echo "</select><br>";
-                }
-            }
-        }
     } else {
         echo "0 results";
     }

@@ -10,77 +10,61 @@
         function getCat(val) {
             $.ajax({
                 type: "POST",
-                url: "get_categorie_models.php",
+                url: "getInfosFromUser.php",
                 data:'categorie_id='+val,
                 success: function(data){
                     $("#models").html(data);
                 }
             });
         }
-    </script>
-
-    <script>
         function get_question(val){
             $.ajax({
                 type: 'POST',
-                url: 'get_question_model.php',
-                data: 'model_name='+val,
+                url: 'getInfosFromUser.php',
+                data: 'model_id='+val,
                 success: function (data) {
-                    $("#question_label").html(data);
+                    $("#formular").html(data);
                 }
             });
         }
+        function get_next_question(val){
+            $.ajax({
+                type: 'POST',
+                url: 'getInfosFromUser.php',
+                data: 'next_question='+val,
+                success: function (data) {
 
-
+                }
+            });
+        }
     </script>
-
 </head>
 <body>
-
-
     <header>
         <img src="../images/logo.png" alt="logo">
     </header>
-
-
-
-
     <main>
         <h1>Lettres modèles</h1>
         <br/>
-        <form method="post" action="changeValueTemplate.php" >
+        <form method="post" id="formular" action="changeValueTemplate.php" >
             <label>Sélectionnez une catégorie</label>
             <br/>
             <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
             <?php include "connection.php";
             categorieList();
-
             ?>
             </select>
             <br/><br/>
-
             <label>Sélectionnez un modèle</label>
             <br/>
             <select  id="models" onchange="get_question(this.value);" ><option value=" ">Sélectionnez un modèle</option>
             </select>
-
-            <label id="question_label"></label>
-
-
-
-
-            </form>
             <br/><br/>
-
-
-
-
+        </form>
     </main>
-
     <footer>
         <p>© 2020 by FRC-Lausanne</p>
     </footer>
-
 </body>
 </html>
 
