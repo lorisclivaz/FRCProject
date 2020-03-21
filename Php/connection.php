@@ -2,6 +2,7 @@
 
 $conn = null;
 
+//Doing sql connection
 function connection(){
     $servername = "krmg.myd.infomaniak.com";
     $username = "krmg_lm2020";
@@ -17,6 +18,7 @@ function connection(){
     }
     return $conn;
 }
+
 
 function categorieList(){
     $conn = connection();
@@ -42,6 +44,7 @@ function modelList($idCategorie){
 
     if ($result->num_rows > 0) {
         // output data of each row
+        echo "<option> Selectionnez un champ</option>";
         while($row = $result->fetch_assoc()) {
             echo "<option value=".$row["idmodels"].">".$row["name"]."</option>";
         }
@@ -59,20 +62,45 @@ function getFirstAnswerAndQuestion($idModel){
     $result = $conn->query($sqlQuestions);
 
     if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $idQuestion = $row["idquestion"];
-            echo "<p>".$row["question"]."</p>";
-            $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
-            $result = $conn->query($sqlAnswers);
+        $row = $result->fetch_assoc();
+        $idQuestion = $row["idquestion"];
+        echo "<p>".$row["question"]."</p>";
+        $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
+        $result = $conn->query($sqlAnswers);
 
-                echo "<select name='answers[]' onChange='get_next_question(this.value);'>";
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value=".$row["next_question"].">".$row["answer"]."</option>";
-                }
-                echo "</select><br>";
+        echo "<select name='answers[]' onChange='get_next_question(this.value);'>";
+        echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["next_question"].">".$row["answer"]."</option>";
+        }
+        echo "</select><br>";
     } else {
         echo "0 results";
+    }
+    $conn->close();
+}
+
+function get_next_question_2($id)
+{
+    $conn = connection();
+    $sql = "SELECT * FROM question WHERE idquestion ='$id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $idQuestion = $row["idquestion"];
+        echo "<p>".$row["question"]."</p>";
+        $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion'";
+        $result = $conn->query($sqlAnswers);
+
+        echo "<select name='answers[]' onChange='get_next_question(this.value);'>";
+        echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["next_question"].">".$row["answer"]."</option>";
+        }
+        echo "</select><br>";
     }
     $conn->close();
 }
@@ -94,22 +122,14 @@ function getTemplatePathFromCategorie($categorieName){
     $conn->close();
 }
 
-function getParagraphFromAnswer($answerName){
+function get_Paragraph_From_id($id){
     $conn = connection();
-    $number = "SELECT number FROM answers WHERE answer = '$answerName'";
-    $result = $conn->query($number);
-
-    $rowNumber = $result->fetch_assoc();
-    $num = $rowNumber['number'];
-
-    $paragraph = "SELECT name FROM paragraphs WHERE number = '$num'";
+    $paragraph = "SELECT name FROM paragraphs WHERE number = '$id'";
     $result = $conn->query($paragraph);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         echo "<p>".$row['name']."</p>";
-    } else {
-        echo "0 results";
     }
     $conn->close();
 }

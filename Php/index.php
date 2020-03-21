@@ -23,16 +23,26 @@
                 url: 'getInfosFromUser.php',
                 data: 'model_id='+val,
                 success: function (data) {
-                    $("#formular").html(data);
+
+                    $("#firstQuestion").html(data);
+
                 }
             });
         }
+
         function get_next_question(val){
+            console.log(val);
             $.ajax({
                 type: 'POST',
                 url: 'getInfosFromUser.php',
                 data: 'next_question='+val,
                 success: function (data) {
+                    console.log(data);
+
+                        let elem2 = document.createElement('label');
+                        elem2.innerHTML = data;
+                        document.getElementsByName('formular')[0].appendChild(elem2);
+
 
                 }
             });
@@ -46,7 +56,7 @@
     <main>
         <h1>Lettres modèles</h1>
         <br/>
-        <form method="post" id="formular" action="changeValueTemplate.php" >
+        <form method="post" name="formular" action="changeValueTemplate.php">
             <label>Sélectionnez une catégorie</label>
             <br/>
             <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
@@ -57,9 +67,10 @@
             <br/><br/>
             <label>Sélectionnez un modèle</label>
             <br/>
-            <select  id="models" onchange="get_question(this.value);" ><option value=" ">Sélectionnez un modèle</option>
+            <select  id="models" onchange="get_question(this.value);" ><option value="">Sélectionnez un modèle</option>
             </select>
             <br/><br/>
+            <label id="firstQuestion"></label>
         </form>
     </main>
     <footer>

@@ -13,6 +13,14 @@ if (! empty($_POST["model_id"])) {
 
 if (! empty($_POST["next_question"])) {
     $idQuestion = $_POST["next_question"];
-    echo $idQuestion;
+
+    if (strlen($idQuestion) == 1)
+    {
+        echo get_next_question_2($idQuestion);
+
+    }else
+    {
+        get_Paragraph_From_id($idQuestion);
+    }
 }
 
