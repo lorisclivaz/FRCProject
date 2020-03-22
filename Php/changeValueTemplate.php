@@ -4,6 +4,7 @@
 
     if (isset($_POST['enregistrement']))
     {
+
         $nom = $_POST['lname'];
         $prenom = $_POST['fname'];
         $adresse = $_POST['adresse'];

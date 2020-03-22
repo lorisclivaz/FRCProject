@@ -1,6 +1,8 @@
 <?php
+
 $conn = null;
 
+//Doing sql connection
 function connection(){
     $servername = "krmg.myd.infomaniak.com";
     $username = "krmg_lm2020";
@@ -16,6 +18,7 @@ function connection(){
     }
     return $conn;
 }
+
 
 function categorieList(){
     $conn = connection();
@@ -41,8 +44,9 @@ function modelList($idCategorie){
 
     if ($result->num_rows > 0) {
         // output data of each row
+        echo "<option> Selectionnez un champ</option>";
         while($row = $result->fetch_assoc()) {
-            echo "<option value=".$row["idModel"].">".$row["name"]."</option>";
+            echo "<option value=".$row["idmodels"].">".$row["name"]."</option>";
         }
         echo "</select>";
     } else {
@@ -51,45 +55,52 @@ function modelList($idCategorie){
     $conn->close();
 }
 
-function getAnswerandQuestionsFromModel($modelName){
+function getFirstAnswerAndQuestion($idModel){
+
     $conn = connection();
-    $sqlQuestions = "SELECT question FROM question as q, models as m WHERE q.models_idmodels = m.idmodels AND m.name='$modelName'";
+    $sqlQuestions = "SELECT * FROM question WHERE models_idmodels ='$idModel' AND priority = 1";
     $result = $conn->query($sqlQuestions);
 
     if ($result->num_rows > 0) {
-        if($result->num_rows == 1){
-            $row = $result->fetch_assoc();
-            $question = $row["question"];
-            echo "<p>".$question."</p>";
-            $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
-            $result = $conn->query($sqlAnswers);
-            if($result->num_rows > 0){
-                echo "<select name='answers[]'>";
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    echo "<option vlaue=".$row["answer"].">".$row["answer"]."</option>";
-                }
-                echo "</select><br>";
-            }
+        $row = $result->fetch_assoc();
+        $idQuestion = $row["idquestion"];
+        echo "<p>".$row["question"]."</p>";
+        $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
+        $result = $conn->query($sqlAnswers);
+
+        echo "<select name='answers[]' onChange='get_next_question(this.value, this);'>";
+        echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["next_question"].">".$row["answer"]."</option>";
         }
-        else{
-            while($row = $result->fetch_assoc()) {
-                $question = $row["question"];
-                echo "<p>".$question."</p>";
-                $sqlAnswers = "SELECT answer FROM answers as a, question as q WHERE q.idquestion = a.question_idquestion and q.question='$question'";
-                $result = $conn->query($sqlAnswers);
-                if($result->num_rows > 0){
-                    echo "<select name='answers[]'>";
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<option vlaue=".$row["answer"].">".$row["answer"]."</option>";
-                    }
-                    echo "</select><br>";
-                }
-            }
-        }
+        echo "</select><br>";
     } else {
         echo "0 results";
+    }
+    $conn->close();
+}
+
+function get_next_question_2($id)
+{
+    $conn = connection();
+    $sql = "SELECT * FROM question WHERE idquestion ='$id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $idQuestion = $row["idquestion"];
+        echo "<p>".$row["question"]."</p>";
+        $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion'";
+        $result = $conn->query($sqlAnswers);
+
+        echo "<select name='answers[]' onChange='get_next_question(this.value, this);'>";
+        echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["next_question"].">".$row["answer"]."</option>";
+        }
+        echo "</select><br>";
     }
     $conn->close();
 }
@@ -103,7 +114,7 @@ function getTemplatePathFromCategorie($categorieName){
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "<p>".$row['path']."</p>";
+        return $row['path'];
     } else {
         echo "0 results";
     }
@@ -111,22 +122,14 @@ function getTemplatePathFromCategorie($categorieName){
     $conn->close();
 }
 
-function getParagraphFromAnswer($answerName){
+function get_Paragraph_From_id($id){
     $conn = connection();
-    $number = "SELECT number FROM answers WHERE answer = '$answerName'";
-    $result = $conn->query($number);
-
-    $rowNumber = $result->fetch_assoc();
-    $num = $rowNumber['number'];
-
-    $paragraph = "SELECT name FROM paragraphs WHERE number = '$num'";
+    $paragraph = "SELECT name FROM paragraphs WHERE number = '$id'";
     $result = $conn->query($paragraph);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         echo "<p>".$row['name']."</p>";
-    } else {
-        echo "0 results";
     }
     $conn->close();
 }
@@ -134,43 +137,38 @@ function getParagraphFromAnswer($answerName){
 function aviation()
 {
     include "../vendor/autoload.php";
+    include "index.php";
+
+
+    //Récupération des valaeurs pour le changement du template
 
     if (isset($_POST['enregistrement'])) {
         $nom = $_POST['lname'];
         $prenom = $_POST['fname'];
-        $adresse = $_POST['adresse'];
-        $codePostal = $_POST['codepostal'];
-        $nrAssure = $_POST['nrAssure'];
-        $nameCompanie = $_POST['nameCompany'];
-        $adresseCompagnie = $_POST['adresseCompany'];
-        $codePostalCompagnie = $_POST['codePostalCompany'];
-        $lieu = $_POST['lieu'];
+        $rue_n° = $_POST['rue_n°'];
+        $domicile_codePostal = $_POST['domicile_codepostal'];
+
+        $nom_societe = $_POST['nom_societe'];
+        $rue_n°_societe = $_POST['rue_n°_societe'];
+        $domicile_codePostal_societe = $_POST['domicile_codePostal_societe'];
+        $lieu_envoie = $_POST['lieu_envoie'];
 
 
-        print "mon nom : $nom";
-        print "mon prenom : $prenom";
-        print "mon adresse : $adresse";
-        print "mon code postal: $codePostal";
-        print "mon nrAssure : $nrAssure";
-        print "mon nom de companie : $nameCompanie";
-        print "mon adresse de companie : $adresseCompagnie";
-        print "mon code postal de companie : $codePostalCompagnie";
-        print "mon lieu  : $lieu";
 
-        //salutations
+        //récupération
+        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
 
-
-        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Aviation.docx');
-
+        //Set des valeurs dans le template champs de base
         $templateProcessor->setValue('nom', $nom);
         $templateProcessor->setValue('prenom', $prenom);
-        $templateProcessor->setValue('rue', $adresse);
-        $templateProcessor->setValue('codepostal', $codePostal);
-        $templateProcessor->setValue('nAssure', $nrAssure);
-        $templateProcessor->setValue('nomSociete', $nameCompanie);
-        $templateProcessor->setValue('adresseSociete', $adresseCompagnie);
-        $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
-        $templateProcessor->setValue('lieu', $lieu);
+        $templateProcessor->setValue('rue', $rue_n°);
+        $templateProcessor->setValue('codepostal', $domicile_codePostal);
+
+        $templateProcessor->setValue('nomSociete', $nom_societe);
+        $templateProcessor->setValue('adresseSociete', $rue_n°_societe);
+        $templateProcessor->setValue('codePostalSociete',  $domicile_codePostal_societe);
+        $templateProcessor->setValue('lieu', $lieu_envoie);
+
         $templateProcessor->saveAs('Aviation-Copie.docx');
     }
 }
