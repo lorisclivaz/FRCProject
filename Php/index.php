@@ -47,22 +47,16 @@
                     if (elem.innerText.length < 200)
                     {
                         document.getElementsByName('formular')[0].appendChild(elem);
-
                         console.log(elem.innerText.length);
                     }
-
                     if (elem.innerText.length > 200)
                     {
                         let paragraph = elem.innerText;
                         //a voir selon les différents cas, pas vraiment optimisé (david et loris)
                         document.getElementById("cache").style.display='block';
-
                         console.log(paragraph);
-
                         let paragraphFinal = paragraph.replace("$[date_vol]","19.19.2020");
-
                         console.log(paragraphFinal);
-
                         document.getElementById("paragraph").value=paragraphFinal;
                     }
 
