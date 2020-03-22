@@ -34,6 +34,8 @@
         }
         function get_next_question(val, obj) {
             deleteSibling(obj);
+            if(document.getElementById("cache").style.display == "block")
+                document.getElementById("cache").style.display = "none"
             $.ajax({
                 type: 'POST',
                 url: 'getInfosFromUser.php',
@@ -102,7 +104,6 @@
             <br/><br/>
             <div id="firstQuestion"></div>
         </form>
-
         <div id="cache" onload="cache(this)" style="display: none">
             <form enctype="multipart/form-data" action="changeValueTemplate.php" method="post">
                 <br>
@@ -145,12 +146,8 @@
                 <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
                 <br>
                 <input id="problematique" name="problematique" type="text" style="display: none"/>
-
                 <br>
                 <input name="Enregistrement" type="submit" value="Enregistrement" />
-
-
-
             </form>
         </div>
     </main>
