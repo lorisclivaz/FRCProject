@@ -25,6 +25,10 @@
                 success: function (data) {
 
                     $("#firstQuestion").html(data);
+
+                  let test =  document.getElementById("models").options[document.getElementById('models').selectedIndex].text;
+
+                  document.getElementById("problematique").value=test;
                 }
             });
         }
@@ -35,9 +39,31 @@
                 url: 'getInfosFromUser.php',
                 data: 'next_question=' + val,
                 success: function (data) {
+
                     let elem = document.createElement('div');
                     elem.innerHTML = data;
-                    document.getElementsByName('formular')[0].appendChild(elem);
+                    if (elem.innerText.length < 200)
+                    {
+                        document.getElementsByName('formular')[0].appendChild(elem);
+
+                        console.log(elem.innerText.length);
+                    }
+
+                    if (elem.innerText.length > 200)
+                    {
+                        let paragraph = elem.innerText;
+                        //a voir selon les différents cas, pas vraiment optimisé (david et loris)
+                        document.getElementById("cache").style.display='block';
+
+                        console.log(paragraph);
+
+                        let paragraphFinal = paragraph.replace("$[date_vol]","19.19.2020");
+
+                        console.log(paragraphFinal);
+
+                        document.getElementById("paragraph").value=paragraphFinal;
+                    }
+
                 }
             });
         }
@@ -49,6 +75,8 @@
             while(ns = dd.nextSibling)
                 dd.nextSibling.remove();
         }
+
+
     </script>
 </head>
 <body>
@@ -74,6 +102,57 @@
             <br/><br/>
             <div id="firstQuestion"></div>
         </form>
+
+        <div id="cache" onload="cache(this)" style="display: none">
+            <form enctype="multipart/form-data" action="changeValueTemplate.php" method="post">
+                <br>
+                <label>Entrez votre nom:</label>
+                <br>
+                <input name="nom" type="text"/>
+                <br>
+                <label>Entrez votre prénom:</label>
+                <br>
+                <input name="prenom" type="text"/>
+                <br>
+                <label>Entrez votre rue:</label>
+                <br>
+                <input name="rue" type="text"/>
+                <br>
+                <label>Entrez votre n° de rue:</label>
+                <br>
+                <input name="n°_rue" type="text"/>
+                <br>
+                <label>Entrez le lieu et le code postal:</label>
+                <br>
+                <input name="lieu_codepostal" type="text"/>
+                <br>
+                <label>Entrez le nom de la société:</label>
+                <br>
+                <input name="nom_societe" type="text"/>
+                <br>
+                <label>Entrez l'adresse et le n° de la société:</label>
+                <br>
+                <input name="adresse_societe_n°" type="text"/>
+                <br>
+                <label>Entrez le lieu et le code postal de la société:</label>
+                <br>
+                <input name="lieu_codepostal_societe" type="text"/>
+                <br>
+                <label>Entrez le lieu d'envoie de la lettre:</label>
+                <br>
+                <input name="lieu_envoie" type="text"/>
+                <br>
+                <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
+                <br>
+                <input id="problematique" name="problematique" type="text" style="display: none"/>
+
+                <br>
+                <input name="Enregistrement" type="submit" value="Enregistrement" />
+
+
+
+            </form>
+        </div>
     </main>
     <footer>
         <p>© 2020 by FRC-Lausanne</p>

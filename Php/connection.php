@@ -48,7 +48,7 @@ function modelList($idCategorie){
         while($row = $result->fetch_assoc()) {
             echo "<option value=".$row["idmodels"].">".$row["name"]."</option>";
         }
-        echo "</select>";
+
     } else {
         echo "<option>Aucun modèles</option>";
     }
@@ -134,41 +134,5 @@ function get_Paragraph_From_id($id){
     $conn->close();
 }
 
-function aviation()
-{
-    include "../vendor/autoload.php";
-    include "index.php";
 
 
-    //Récupération des valaeurs pour le changement du template
-
-    if (isset($_POST['enregistrement'])) {
-        $nom = $_POST['lname'];
-        $prenom = $_POST['fname'];
-        $rue_n° = $_POST['rue_n°'];
-        $domicile_codePostal = $_POST['domicile_codepostal'];
-
-        $nom_societe = $_POST['nom_societe'];
-        $rue_n°_societe = $_POST['rue_n°_societe'];
-        $domicile_codePostal_societe = $_POST['domicile_codePostal_societe'];
-        $lieu_envoie = $_POST['lieu_envoie'];
-
-
-
-        //récupération
-        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
-
-        //Set des valeurs dans le template champs de base
-        $templateProcessor->setValue('nom', $nom);
-        $templateProcessor->setValue('prenom', $prenom);
-        $templateProcessor->setValue('rue', $rue_n°);
-        $templateProcessor->setValue('codepostal', $domicile_codePostal);
-
-        $templateProcessor->setValue('nomSociete', $nom_societe);
-        $templateProcessor->setValue('adresseSociete', $rue_n°_societe);
-        $templateProcessor->setValue('codePostalSociete',  $domicile_codePostal_societe);
-        $templateProcessor->setValue('lieu', $lieu_envoie);
-
-        $templateProcessor->saveAs('Aviation-Copie.docx');
-    }
-}

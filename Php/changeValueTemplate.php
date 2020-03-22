@@ -1,48 +1,57 @@
 <?php
 
     include "../vendor/autoload.php";
-
-    if (isset($_POST['enregistrement']))
-    {
-
-        $nom = $_POST['lname'];
-        $prenom = $_POST['fname'];
-        $adresse = $_POST['adresse'];
-        $codePostal = $_POST['codepostal'];
-        $nrAssure = $_POST['nrAssure'];
-        $nameCompanie = $_POST['nameCompany'];
-        $adresseCompagnie = $_POST['adresseCompany'];
-        $codePostalCompagnie = $_POST['codePostalCompany'];
-        $lieu = $_POST['lieu'];
+    include "index.php";
 
 
+    //Récupération des valaeurs pour le changement du template
 
-        print "mon nom : $nom" ;
-        print "mon prenom : $prenom";
-        print "mon adresse : $adresse";
-        print "mon code postal: $codePostal";
-        print "mon nrAssure : $nrAssure";
-        print "mon nom de companie : $nameCompanie";
-        print "mon adresse de companie : $adresseCompagnie";
-        print "mon code postal de companie : $codePostalCompagnie";
-        print "mon lieu  : $lieu";
+    if (isset($_POST['Enregistrement'])) {
+
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $rue = $_POST['rue'];
+        $n_rue=$_POST['n°_rue'];
+        $lieu_codepostal = $_POST['lieu_codepostal'];
+
+        $nom_societe = $_POST['nom_societe'];
+        $adresse_societe_n = $_POST['adresse_societe_n°'];
+        $lieu_codepostal_societe = $_POST['lieu_codepostal_societe'];
+        $lieu_envoie = $_POST['lieu_envoie'];
+
+        $paragraph = $_POST['paragraphe_conditionnel'];
+        $problematique = $_POST['problematique'];
 
 
-        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor('../Template/Assurance.docx');
 
+        //récupération du path mais faire ca dynamiquement
+        $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
+
+        //Set des valeurs dans le template champs de base
         $templateProcessor->setValue('nom', $nom);
         $templateProcessor->setValue('prenom', $prenom);
-        $templateProcessor->setValue('rue', $adresse);
-        $templateProcessor->setValue('codepostal', $codePostal);
-        $templateProcessor->setValue('nAssure', $nrAssure);
-        $templateProcessor->setValue('nomSociete', $nameCompanie);
-        $templateProcessor->setValue('adresseSociete', $adresseCompagnie);
-        $templateProcessor->setValue('codePostalSociete', $codePostalCompagnie);
-        $templateProcessor->setValue('lieu', $lieu);
+        $templateProcessor->setValue('rue', $rue);
+        $templateProcessor->setValue('numero', $n_rue);
+        $templateProcessor->setValue('codepostal', $lieu_codepostal);
 
-        $templateProcessor->saveAs('loris.docx');
+
+        $templateProcessor->setValue('nomSociete', $nom_societe);
+        $templateProcessor->setValue('adresseSociete', $adresse_societe_n);
+        $templateProcessor->setValue('codePostalSociete', $lieu_codepostal_societe);
+        $templateProcessor->setValue('lieu', $lieu_envoie);
+
+        $templateProcessor->setValue('paragraphe_conditionnel', $paragraph);
+        $templateProcessor->setValue('problematique', $problematique);
+
+
+        $templateProcessor->saveAs(' Aviation-Copie.docx');
+
+
+
+
+
+
     }
-    ?>
 
 
 
