@@ -34,7 +34,7 @@
         }
         function get_next_question(val, obj) {
             deleteSibling(obj);
-            if(document.getElementById("cache").style.display == "block")
+            if(document.getElementById("cache").style.display === "block")
                 document.getElementById("cache").style.display = "none"
             $.ajax({
                 type: 'POST',
