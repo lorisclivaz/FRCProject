@@ -68,7 +68,7 @@ function getFirstAnswerAndQuestion($idModel){
         $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
         $result = $conn->query($sqlAnswers);
 
-        echo "<select name='answers[]' onChange='get_next_question(this.value);'>";
+        echo "<select name='answers[]' onChange='get_next_question(this.value, this);'>";
         echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
@@ -94,7 +94,7 @@ function get_next_question_2($id)
         $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion'";
         $result = $conn->query($sqlAnswers);
 
-        echo "<select name='answers[]' onChange='get_next_question(this.value);'>";
+        echo "<select name='answers[]' onChange='get_next_question(this.value, this);'>";
         echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
         // output data of each row
         while($row = $result->fetch_assoc()) {

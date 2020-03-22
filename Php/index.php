@@ -25,27 +25,29 @@
                 success: function (data) {
 
                     $("#firstQuestion").html(data);
-
                 }
             });
         }
-
-        function get_next_question(val){
-            console.log(val);
+        function get_next_question(val, obj) {
+            deleteSibling(obj);
             $.ajax({
                 type: 'POST',
                 url: 'getInfosFromUser.php',
-                data: 'next_question='+val,
+                data: 'next_question=' + val,
                 success: function (data) {
-                    console.log(data);
-
-                        let elem2 = document.createElement('label');
-                        elem2.innerHTML = data;
-                        document.getElementsByName('formular')[0].appendChild(elem2);
-
-
+                    let elem = document.createElement('div');
+                    elem.innerHTML = data;
+                    document.getElementsByName('formular')[0].appendChild(elem);
                 }
             });
+        }
+        function deleteSibling(obj){
+
+            let dd = obj.parentNode;
+            var ns;
+
+            while(ns = dd.nextSibling)
+                dd.nextSibling.remove();
         }
     </script>
 </head>
@@ -70,7 +72,7 @@
             <select  id="models" onchange="get_question(this.value);" ><option value="">Sélectionnez un modèle</option>
             </select>
             <br/><br/>
-            <label id="firstQuestion"></label>
+            <div id="firstQuestion"></div>
         </form>
     </main>
     <footer>
