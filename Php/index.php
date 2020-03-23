@@ -19,6 +19,7 @@
         }
     </style>
     <script>
+
         let para;
         function getCat(val) {
             $.ajax({
@@ -70,16 +71,54 @@
                 }
             });
         }
-        function getParagraph(val){
+        function getParagraph(val) {
             $.ajax({
                 type: 'POST',
                 url: 'getInfosFromUser.php',
                 data: 'paragraph_number=' + val,
                 success: function (data) {
-                    para = data;
+                    para=data;
+
+                    console.log(para);
                 }
             });
-            
+        }
+        function getInputValueforParagraph(){
+
+            // Selecting the input element and get its value
+
+
+            if (document.getElementsByName("date_vol").length == 1)
+            {
+                alert("salut");
+                let date_vol = document.getElementsByName("date_vol").value.text;
+
+                para = para.replace("$[date_vol]",date_vol);
+
+            }
+
+            if (document.getElementsByName("nbr_heures_retard").length == 1)
+            {
+                let nbr_heures_retard = document.getElementsByName("nbr_heures_retard").value;
+                para = para.replace("$[nbr_heures_retard]",nbr_heures_retard);
+
+            }
+
+            if (document.getElementsByName("montant").length == 1)
+            {
+
+                let montant = document.getElementsByName("montant").value;
+                para = para.replace("$[montant]",montant);
+
+            }
+
+
+
+
+            document.getElementById("paragraph").value=para;
+
+
+        }
         function getFieldsFromCat(val){
             $.ajax({
                 type: "POST",
@@ -174,7 +213,7 @@
                 <br>
                 <div id="cat_fields"></div>
                 <div id="para_fields"></div>
-                <button name="Enregistrement" type="submit">Créer la lettre</button>
+                <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre</button>
                 <input id="problematique" name="problematique" type="text" style="display: none"/>
                 <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
             </form>
@@ -203,6 +242,17 @@ if (isset($_POST['Enregistrement'])) {
     $lieu_envoie = $_POST['lieu_envoie'];
     $paragraph = $_POST['paragraphe_conditionnel'];
     $problematique = $_POST['problematique'];
+    $no_vol= $_POST["no_vol"];
+    $date_achat=$_POST["date_achat"];
+   $ville_destination=$_POST["ville_destination"];
+
+    $coor_banque=$_POST["coor_banque"];
+
+    $perte=$_POST["perte"];
+
+
+
+
 
     //récupération du path mais faire ca dynamiquement
     $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
@@ -223,7 +273,15 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('paragraphe_conditionnel', $paragraph);
     $templateProcessor->setValue('problematique', $problematique);
 
+    //Valeur selon la categorie
+    $templateProcessor->setValue('no_vol', $no_vol);
+   $templateProcessor->setValue('date_achat', $date_achat);
+   $templateProcessor->setValue('ville_destination', $ville_destination);
+     $templateProcessor->setValue('perte', $perte);
+    $templateProcessor->setValue('coor_banque', $coor_banque);
+
     $templateProcessor->saveAs('../final_template/template.docx');
+
 
     echo "<script type='text/javascript'>document.location.replace('download.html');</script>";
 

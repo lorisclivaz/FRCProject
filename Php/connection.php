@@ -133,7 +133,7 @@ function get_Paragraph_From_id($id){
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "<p id='paragraph'>".$row['name']."</p>";
+        echo $row['name'];
     }
     $conn->close();
 }
@@ -147,7 +147,8 @@ function getFieldFromCategorie($id){
         // output data of each row
         while($row = $result->fetch_assoc()) {
             echo "<label>".$row["name"].":</label><br/>";
-            echo "<input name=".$row["balise_name"]."type='text'><br/>";
+
+            echo "<input name=".$row["balise_name"]." type='text'/><br/>";
         }
     }
 
@@ -164,7 +165,7 @@ function getFieldFromParaNumber($number){
         // output data of each row
         while($row = $result->fetch_assoc()) {
             echo "<label>".$row["name"].":</label><br/>";
-            echo "<input name=".$row["balise_name"]."type='text'><br/>";
+            echo "<input name=".$row["balise_name"]." type='text'/><br/>";
         }
     }
 
