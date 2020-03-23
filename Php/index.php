@@ -19,6 +19,7 @@
         }
     </style>
     <script>
+        let para;
         function getCat(val) {
             $.ajax({
                 type: "POST",
@@ -28,6 +29,7 @@
                     $("#models").html(data);
                 }
             });
+            getFieldsFromCat(val);
         }
         function get_question(val){
             $.ajax({
@@ -53,58 +55,59 @@
                 url: 'getInfosFromUser.php',
                 data: 'next_question=' + val,
                 success: function (data) {
-
-                    let elem = document.createElement('div');
-                    elem.innerHTML = data;
-                    if (elem.innerText.length < 200)
+                    if (data === "null")
                     {
-                        document.getElementsByName('formular')[0].appendChild(elem);
-                        console.log(elem.innerText.length);
-                    }
-                    if (elem.innerText.length > 200)
-                    {
-                        let paragraph = elem.innerText;
-                        //a voir selon les différents cas, pas vraiment optimisé (david et loris)
                         document.getElementById("cache").style.display='block';
-                        console.log(paragraph);
-                        let paragraphFinal = paragraph.replace("$[date_vol]","19.19.2020");
-                        console.log(paragraphFinal);
-                        document.getElementById("paragraph").value=paragraphFinal;
+                        getParagraph(val);
+                        getFieldsFromParagraph(val);
                     }
+                    else
+                    {
+                        let elem = document.createElement('div');
+                        elem.innerHTML = data;
+                        document.getElementsByName('formular')[0].appendChild(elem);
+                    }
+                }
+            });
+        }
+        function getParagraph(val){
+            $.ajax({
+                type: 'POST',
+                url: 'getInfosFromUser.php',
+                data: 'paragraph_number=' + val,
+                success: function (data) {
+                    para = data;
+                }
+            });
 
+        }
+        function getFieldsFromCat(val){
+            $.ajax({
+                type: "POST",
+                url: "getInfosFromUser.php",
+                data:'categorie_field='+val,
+                success: function(data){
+
+                    $("#cat_fields").html(data);
+                }
+            });
+        }
+        function getFieldsFromParagraph(val){
+            $.ajax({
+                type: "POST",
+                url: "getInfosFromUser.php",
+                data:'paragraphe_number='+val,
+                success: function(data){
+                    $("#para_fields").html(data);
                 }
             });
         }
         function deleteSibling(obj){
-
             let dd = obj.parentNode;
             var ns;
-
             while(ns = dd.nextSibling)
                 dd.nextSibling.remove();
         }
-
-        // Function to download data to a file
-        function download(data, filename, type) {
-            var file = new Blob([data], {type: type});
-            if (window.navigator.msSaveOrOpenBlob) // IE10+
-                window.navigator.msSaveOrOpenBlob(file, filename);
-            else { // Others
-                var a = document.createElement("a"),
-                    url = URL.createObjectURL(file);
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                setTimeout(function() {
-                    document.body.removeChild(a);
-                    window.URL.revokeObjectURL(url);
-                }, 0);
-            }
-        }
-
-
-
     </script>
 </head>
 <body>
@@ -170,15 +173,11 @@
                 <br>
                 <input name="lieu_envoie" type="text"/>
                 <br>
-                <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
-                <br>
-                <input id="problematique" name="problematique" type="text" style="display: none"/>
-                <br>
-
+                <div id="cat_fields"></div>
+                <div id="para_fields"></div>
                 <button name="Enregistrement" type="submit">Créer la lettre</button>
-
-
-
+                <input id="problematique" name="problematique" type="text" style="display: none"/>
+                <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
             </form>
         </div>
     </main>
@@ -191,10 +190,7 @@
 
 include "../vendor/autoload.php";
 
-
-
 //Récupération des valaeurs pour le changement du template
-
 if (isset($_POST['Enregistrement'])) {
 
     $nom = $_POST['nom'];
@@ -202,16 +198,12 @@ if (isset($_POST['Enregistrement'])) {
     $rue = $_POST['rue'];
     $n_rue=$_POST['n°_rue'];
     $lieu_codepostal = $_POST['lieu_codepostal'];
-
     $nom_societe = $_POST['nom_societe'];
     $adresse_societe_n = $_POST['adresse_societe_n°'];
     $lieu_codepostal_societe = $_POST['lieu_codepostal_societe'];
     $lieu_envoie = $_POST['lieu_envoie'];
-
     $paragraph = $_POST['paragraphe_conditionnel'];
     $problematique = $_POST['problematique'];
-
-
 
     //récupération du path mais faire ca dynamiquement
     $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
@@ -237,9 +229,6 @@ if (isset($_POST['Enregistrement'])) {
     echo "<script type='text/javascript'>document.location.replace('download.html');</script>";
 
     return false;
-
-
-
 }
 ?>
 

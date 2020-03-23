@@ -11,16 +11,25 @@ if (! empty($_POST["model_id"])) {
     echo getFirstAnswerAndQuestion($idmodel);
 }
 
+if (! empty($_POST["categorie_field"])) {
+    $idCategorie = $_POST["categorie_field"];
+    echo getFieldFromCategorie($idCategorie);
+}
+
+if (! empty($_POST["paragraphe_number"])) {
+    $para_number = $_POST["paragraphe_number"];
+    echo getFieldFromParaNumber($para_number);
+}
+
 if (! empty($_POST["next_question"])) {
     $idQuestion = $_POST["next_question"];
 
-    if (strlen($idQuestion) == 1)
-    {
-        echo get_next_question_2($idQuestion);
+    echo get_next_question_2($idQuestion);
+}
 
-    }else
-    {
-        get_Paragraph_From_id($idQuestion);
-    }
+if (! empty($_POST["paragraph_number"])) {
+    $idPara = $_POST["paragraph_number"];
+
+    echo get_Paragraph_From_id($idPara);
 }
 

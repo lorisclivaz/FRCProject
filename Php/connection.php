@@ -48,7 +48,6 @@ function modelList($idCategorie){
         while($row = $result->fetch_assoc()) {
             echo "<option value=".$row["idmodels"].">".$row["name"]."</option>";
         }
-
     } else {
         echo "<option>Aucun modèles</option>";
     }
@@ -84,7 +83,8 @@ function getFirstAnswerAndQuestion($idModel){
 function get_next_question_2($id)
 {
     $conn = connection();
-    $sql = "SELECT * FROM question WHERE idquestion ='$id'";
+    $sql = "SELECT * FROM question WHERE question_number ='$id'";
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -102,6 +102,10 @@ function get_next_question_2($id)
         }
         echo "</select><br><br>";
     }
+    else{
+        echo "null";
+    }
+
     $conn->close();
 }
 
@@ -129,8 +133,41 @@ function get_Paragraph_From_id($id){
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "<p>".$row['name']."</p>";
+        echo "<p id='paragraph'>".$row['name']."</p>";
     }
+    $conn->close();
+}
+
+function getFieldFromCategorie($id){
+    $conn = connection();
+    $paragraph = "SELECT * FROM fields WHERE id_categorie = '$id'";
+    $result = $conn->query($paragraph);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<label>".$row["name"].":</label><br/>";
+            echo "<input name=".$row["balise_name"]."type='text'><br/>";
+        }
+    }
+
+    $conn->close();
+}
+
+function getFieldFromParaNumber($number){
+    $conn = connection();
+    $paragraph = "SELECT f.name, f.balise_name FROM fields f, paragraphs p, paragraphs_fields pf WHERE p.idparagraphs = pf.fk_paragraph AND f.idfield = pf.fk_field AND p.number = '$number'";
+
+    $result = $conn->query($paragraph);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<label>".$row["name"].":</label><br/>";
+            echo "<input name=".$row["balise_name"]."type='text'><br/>";
+        }
+    }
+
     $conn->close();
 }
 
