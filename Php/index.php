@@ -79,8 +79,7 @@
                     para = data;
                 }
             });
-
-        }
+            
         function getFieldsFromCat(val){
             $.ajax({
                 type: "POST",
