@@ -283,7 +283,7 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->saveAs('../final_template/template.docx');
 
 
-    echo "<script type='text/javascript'>document.location.replace('download.html');</script>";
+    echo "<script type='text/javascript'>document.location.replace('download.php');</script>";
 
     return false;
 }
