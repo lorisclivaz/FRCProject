@@ -36,6 +36,20 @@ function categorieList(){
     $conn->close();
 }
 
+function addCategorie($categoriename){
+    $conn = connection();
+    $sql = "INSERT INTO categories (categoriename) VALUES ('$categoriename')";
+    $result = $conn->query($sql);
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
 function modelList($idCategorie){
 
     $conn = connection();
@@ -51,6 +65,47 @@ function modelList($idCategorie){
     } else {
         echo "<option>Aucun modèles</option>";
     }
+    $conn->close();
+}
+
+function getCategorieIdByName($categorieName){
+    $conn = connection();
+    $sql = "SELECT id FROM categories WHERE categoriename = " .$categorieName;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["id"];
+    } else {
+        return null;
+    }
+}
+
+function addModel($modelname, $categoriename){
+    $conn = connection();
+    $id = getCategorieIdByName($categoriename);
+    $sql = "INSERT INTO models (name, categories_idcategories) VALUES ('$modelname', '$id')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
+function addTemplate($templatename, $path, $categoriename){
+    $conn = connection();
+    $id = getCategorieIdByName($categoriename);
+    $sql = "INSERT INTO template (name, path, categories_idcategories) VALUES ('$templatename', '$path', '$id')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
     $conn->close();
 }
 
