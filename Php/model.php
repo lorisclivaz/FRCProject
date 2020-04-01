@@ -73,8 +73,6 @@
                     if (isset($_POST['create'])) {
                         $selectedCategorie = $_POST["categories"];
                         $modelname = $_POST['modelname'];
-                        echo "<p>".$selectedCategorie."</p>";
-                        echo "<p>".$modelname."</p>";
                         $result = addModel($modelname, $selectedCategorie);
                         echo "<p>".$result."</p>";
                     }

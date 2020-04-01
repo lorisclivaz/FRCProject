@@ -59,13 +59,59 @@
                 <div class="card-body">
                     <h1>Ajouter un nouveau template</h1>
                     <br>
-                    <form enctype="multipart/form-data" action="__URL__" method="POST">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                        Upload the template: <input name="userfile" type="file" />
-                        <br>
-                        <br>
-                        <input type="submit" value="Send File" />
-                    </form>
+                    <!--<form enctype="multipart/form-data" action="__URL__" method="POST">-->
+                    <form action="template.php" method="post" enctype="multipart/form-data">
+                        <label>Choisissez la catégorie</label><br>
+                        <select name="categories">
+                            <?php include "connection.php";
+                            categorieListBO();
+                            ?>
+                        </select><br><br>
+                        Select template to upload:
+                        <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+                        <input type="submit" value="Upload Template" name="create">
+                    </>
+                    <?php
+                    // Check if image file is a actual image or fake image
+                    if(isset($_POST["create"])) {
+                        $selectedCategorie = $_POST["categories"];
+                        $target_dir = "../Template/";
+                        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                        $uploadOk = 1;
+                        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+                        // Check if file already exists
+                        if (file_exists($target_file)) {
+                            echo "Sorry, file already exists.";
+                            $uploadOk = 0;
+                        }
+                        // Check file size
+                        if ($_FILES["fileToUpload"]["size"] > 500000) {
+                            echo "Sorry, your file is too large.";
+                            $uploadOk = 0;
+                        }
+                        // Allow certain file formats
+                        if($imageFileType != "docx") {
+                            echo "Sorry, only docx files allowed.";
+                            $uploadOk = 0;
+                        }
+                        // Check if $uploadOk is set to 0 by an error
+                        if ($uploadOk == 0) {
+                            echo "Sorry, your file was not uploaded.";
+                            // if everything is ok, try to upload file
+                        }
+                        else {
+                            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                                $templateName = str_replace(".docx","", basename($_FILES["fileToUpload"]["name"]));
+                                $result = addTemplate($templateName, $target_file, $selectedCategorie);
+                                echo "<p>".$result."</p>";
+                            } else {
+                                echo "Sorry, there was an error uploading your file.";
+                            }
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>

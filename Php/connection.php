@@ -114,7 +114,7 @@ function addTemplate($templatename, $path, $categoriename){
     $sql = "INSERT INTO template (name, path, categories_idcategories) VALUES ('$templatename', '$path', '$id')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        echo "New Template uploaded successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
