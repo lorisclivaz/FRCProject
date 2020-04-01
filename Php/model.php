@@ -40,7 +40,28 @@
 </header>
 <main>
     <h1>Ajouter un nouveau model</h1>
-
+    <form action="model.php" method="post">
+        <!--<select id="categories" onchange="getCat(this.value);"><option value=" ">Choisisez la catégorie</option>-->
+        <label>Choisissez la catégorie</label><br>
+        <select name="categories">
+            <?php include "connection.php";
+            categorieListBO();
+            ?>
+        </select><br><br>
+        Nom du modèle<br>
+        <input type="text" name="modelname"><br><br>
+        <input type="submit" name="create" value="Ajouter">
+    </form>
+    <?php
+        if (isset($_POST['create'])) {
+            $selectedCategorie = $_POST["categories"];
+            $modelname = $_POST['modelname'];
+            echo "<p>".$selectedCategorie."</p>";
+            echo "<p>".$modelname."</p>";
+            $result = addModel($modelname, $selectedCategorie);
+            echo "<p>".$result."</p>";
+        }
+    ?>
 </main>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>

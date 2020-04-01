@@ -20,6 +20,22 @@ function connection(){
 }
 
 
+function categorieListBO(){
+    $conn = connection();
+    $sql = "SELECT idcategories, categoriename FROM categories";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["categoriename"].">".$row["categoriename"]."</option>";
+        }
+    } else {
+        echo "<option>Aucune catégories</option>";
+    }
+    $conn->close();
+}
+
 function categorieList(){
     $conn = connection();
     $sql = "SELECT idcategories, categoriename FROM categories";
@@ -39,14 +55,11 @@ function categorieList(){
 function addCategorie($categoriename){
     $conn = connection();
     $sql = "INSERT INTO categories (categoriename) VALUES ('$categoriename')";
-    $result = $conn->query($sql);
-
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        return "la nouvelle catégorie a été ajoutée correctement";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        return "Erreur: " . $sql . "<br>" . $conn->error;
     }
-
     $conn->close();
 }
 
@@ -70,12 +83,12 @@ function modelList($idCategorie){
 
 function getCategorieIdByName($categorieName){
     $conn = connection();
-    $sql = "SELECT id FROM categories WHERE categoriename = " .$categorieName;
+    $sql = "SELECT idcategories FROM categories WHERE categoriename = '".$categorieName."'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        return $row["id"];
+        return $row["idcategories"];
     } else {
         return null;
     }
@@ -87,7 +100,7 @@ function addModel($modelname, $categoriename){
     $sql = "INSERT INTO models (name, categories_idcategories) VALUES ('$modelname', '$id')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        echo "le nouveau modèle a été ajouté avec succès";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

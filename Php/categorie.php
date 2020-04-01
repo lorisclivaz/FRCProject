@@ -18,30 +18,29 @@
             cursor: pointer;
         }
     </style>
-    <script>
-
-        let para;
-        function getCat(val) {
-            $.ajax({
-                type: "POST",
-                url: "getInfosFromUser.php",
-                data:'categorie_id='+val,
-                success: function(data){
-                    $("#models").html(data);
-                }
-            });
-            getFieldsFromCat(val);
-        }
-    </script>
 </head>
 <body>
 <header>
     <img src="../images/logo.png" alt="logo">
 </header>
 <main>
-    <h1>Ajouter une catégorie</h1>
-
+    <h1>Ajouter une catégorie</h1><br>
+    <form action="categorie.php" method="post">
+        Nom de la catégorie<br>
+        <input type="text" name="categoriename"><br><br>
+        <input type="submit" name="create" value="Créer">
+    </form>
+    <?php
+    include "connection.php";
+    if (isset($_POST['create'])) {
+        $categroeiname = $_POST['categoriename'];
+        $result = addCategorie($categroeiname);
+        echo "<p>".$result."</p>";
+    }
+    ?>
 </main>
+
+
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>
