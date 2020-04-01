@@ -55,4 +55,11 @@ div.centre {
 
 }
 
+.list-group-item{
+    color: white;
+}
+.list-group li{
+    background: #e4032e;
+    margin: 0.2rem 0rem;
+}
 

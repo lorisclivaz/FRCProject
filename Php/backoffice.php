@@ -46,48 +46,18 @@
 
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-5 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="categorie.php">
-                                <span data-feather="home"></span>
-                                Ajouter une catégorie <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="template.php">
-                                <span data-feather="file"></span>
-                                Ajouter un nouveau template
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="model.php">
-                                <span data-feather="shopping-cart"></span>
-                                Ajouter un nouveau model
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="question.php">
-                                <span data-feather="users"></span>
-                                Ajouter une nouvelle question
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="paragraphe.php">
-                                <span data-feather="bar-chart-2"></span>
-                                Ajouter un nouveau paragraphe
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="champs.php">
-                                <span data-feather="layers"></span>
-                                Ajouter de nouveau champs
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <div class="card col-md-3">
+                <ul class="list-group list-group-flush">
+                    <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
+                    <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
+                    <a href="model.php"><li class="list-group-item">Ajouter un nouveau model</li></a>
+                    <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
+                    <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
+                    <a href="champs.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 </main>
 <p>© 2020 by FRC-Lausanne</p>
