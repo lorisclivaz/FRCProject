@@ -23,7 +23,7 @@
 </head>
 <body>
 <header>
-    <img src="../images/logo.png" alt="logo">
+    <a href="backoffice.php"><img src="../images/logo.png" alt="logo"></a>
 </header>
 <main>
 

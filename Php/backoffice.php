@@ -37,7 +37,7 @@
 </head>
 <body>
 <header>
-    <img src="../images/logo.png" alt="logo">
+    <a href="backoffice.php"><img src="../images/logo.png" alt="logo"></a>
 </header>
 <main>
     <h1>Back Office</h1>
@@ -46,13 +46,13 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="card col-md-3">
-                <ul class="list-group list-group-flush">
+            <div id="cardBackoffice" class="card col-md-3">
+                <ul class="list-group">
                     <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
                     <a href="model.php"><li class="list-group-item">Ajouter un nouveau model</li></a>
                     <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
-                    <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
+                    <a href="paragraphe.php"><li class="list-group-item"> Ajouter un nouveau paragraphe</li></a>
                     <a href="champs.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
                 </ul>
             </div>
