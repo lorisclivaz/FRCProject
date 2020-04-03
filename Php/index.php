@@ -19,7 +19,6 @@
         }
     </style>
     <script>
-
         let para;
         function getCat(val) {
             $.ajax({
@@ -112,12 +111,7 @@
 
             }
 
-
-
-
             document.getElementById("paragraph").value=para;
-
-
         }
         function getFieldsFromCat(val){
             $.ajax({
@@ -145,6 +139,10 @@
             var ns;
             while(ns = dd.nextSibling)
                 dd.nextSibling.remove();
+        }
+        function showInfos(obj) {
+            let ns = obj.nextSibling;
+            ns.style.visibility='visible';
         }
     </script>
 </head>

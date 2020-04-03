@@ -139,7 +139,6 @@ function addTemplate($templatename, $path, $categoriename){
 }
 
 function getFirstAnswerAndQuestion($idModel){
-
     $conn = connection();
     $sqlQuestions = "SELECT * FROM question WHERE models_idmodels ='$idModel' AND priority = 1";
     $result = $conn->query($sqlQuestions);
@@ -147,7 +146,8 @@ function getFirstAnswerAndQuestion($idModel){
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $idQuestion = $row["idquestion"];
-        echo "<p>".$row["question"]."</p>";
+        echo "<span>".$row["question"]." </span>";
+        getInfosQuestions($row["idquestion"]);
         $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
         $result = $conn->query($sqlAnswers);
 
@@ -164,6 +164,19 @@ function getFirstAnswerAndQuestion($idModel){
     $conn->close();
 }
 
+function getInfosQuestions($idquestion){
+    $conn = connection();
+    $sqlQuestions = "SELECT * FROM explanations WHERE question_idquestion ='$idquestion'";
+    $result = $conn->query($sqlQuestions);
+
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        echo "<img src='../images/info.png' width='15px' onmouseover='showInfos(this);'><div style='visibility: hidden; position: absolute; z-index: 1'>".$row["text"]."</div><br/>";
+    }
+    else
+        echo "<br/>";
+}
+
 function get_next_question_2($id)
 {
     $conn = connection();
@@ -174,10 +187,10 @@ function get_next_question_2($id)
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $idQuestion = $row["idquestion"];
-        echo "<p>".$row["question"]."</p>";
+        echo "<span>".$row["question"]." </span>";
+        getInfosQuestions($row["idquestion"]);
         $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion'";
         $result = $conn->query($sqlAnswers);
-
         echo "<select name='answers[]' onChange='get_next_question(this.value, this);'>";
         echo "<option value='Selectionnez un champ'>Selectionnez un champ</option>";
         // output data of each row
