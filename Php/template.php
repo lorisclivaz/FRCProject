@@ -20,28 +20,14 @@
             cursor: pointer;
         }
     </style>
-    <script>
-
-        let para;
-        function getCat(val) {
-            $.ajax({
-                type: "POST",
-                url: "getInfosFromUser.php",
-                data:'categorie_id='+val,
-                success: function(data){
-                    $("#models").html(data);
-                }
-            });
-            getFieldsFromCat(val);
-        }
-    </script>
 </head>
 <body>
 <header>
     <a href="backoffice.php"><img src="../images/logo.png" alt="logo"></a>
 </header>
 <main>
-
+    <h1>Back Office</h1>
+    <br/>
     <div class="container-fluid">
         <div class="row">
             <div class="card col-md-3">
@@ -116,10 +102,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </main>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>

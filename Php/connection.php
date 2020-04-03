@@ -63,6 +63,22 @@ function addCategorie($categoriename){
     $conn->close();
 }
 
+function modelListBO($idCategorie){
+    $conn = connection();
+    $sql = "SELECT * FROM models WHERE categories_idcategories = ".$idCategorie;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<option value=".$row["name"].">".$row["name"]."</option>";
+        }
+    } else {
+        echo "<option>Aucune models</option>";
+    }
+    $conn->close();
+}
+
 function modelList($idCategorie){
 
     $conn = connection();

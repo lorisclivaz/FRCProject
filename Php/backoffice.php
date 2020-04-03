@@ -41,9 +41,7 @@
 </header>
 <main>
     <h1>Back Office</h1>
-
     <br/>
-
     <div class="container-fluid">
         <div class="row">
             <div id="cardBackoffice" class="card col-md-3">

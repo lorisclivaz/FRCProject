@@ -26,9 +26,8 @@
     <a href="backoffice.php"><img src="../images/logo.png" alt="logo"></a>
 </header>
 <main>
-
-
-
+    <h1>Back Office</h1>
+    <br/>
     <div class="container-fluid">
         <div class="row">
             <div class="card col-md-3">
@@ -48,7 +47,7 @@
                     <form action="categorie.php" method="post">
                         Nom de la catégorie<br>
                         <input type="text" name="categoriename" /><br><br>
-                        <input type="submit" name="create" value="Créer" />
+                        <input type="submit" name="create" value="Ajouter" />
                     </form>
                 </div>
             </div>

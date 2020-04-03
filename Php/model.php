@@ -19,28 +19,14 @@
             cursor: pointer;
         }
     </style>
-    <script>
-
-        let para;
-        function getCat(val) {
-            $.ajax({
-                type: "POST",
-                url: "getInfosFromUser.php",
-                data:'categorie_id='+val,
-                success: function(data){
-                    $("#models").html(data);
-                }
-            });
-            getFieldsFromCat(val);
-        }
-    </script>
 </head>
 <body>
 <header>
     <a href="backoffice.php"><img src="../images/logo.png" alt="logo"></a>
 </header>
 <main>
-
+    <h1>Back Office</h1>
+    <br/>
     <div class="container-fluid">
         <div class="row">
             <div class="card col-md-3">
@@ -58,7 +44,6 @@
                 <div class="card-body">
                     <h1>Ajouter un nouveau model</h1>
                     <form action="model.php" method="post">
-                        <!--<select id="categories" onchange="getCat(this.value);"><option value=" ">Choisisez la catégorie</option>-->
                         <label>Choisissez la catégorie</label><br>
                         <select name="categories">
                             <?php include "connection.php";
