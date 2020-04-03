@@ -153,7 +153,7 @@
         <img src="../images/logo.png" alt="logo">
     </header>
     <main>
-        <h1>Lettres modèles</h1>
+        <h1>Lettres modèles</h1><a href="backoffice.php">Back Office</a>
 
         <br/>
         <form method="post" name="formular">
