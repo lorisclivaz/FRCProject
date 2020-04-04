@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
     <title>Lettres modèles</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <style>
         button
         {
@@ -18,6 +17,8 @@
             cursor: pointer;
         }
     </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         let para;
         function getCat(val) {
@@ -141,8 +142,7 @@
                 dd.nextSibling.remove();
         }
         function showInfos(obj) {
-            let ns = obj.nextSibling;
-            ns.style.visibility='visible';
+            obj.tooltip();
         }
     </script>
 </head>

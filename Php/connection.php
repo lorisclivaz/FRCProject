@@ -171,7 +171,8 @@ function getInfosQuestions($idquestion){
 
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
-        echo "<img src='../images/info.png' width='15px' onmouseover='showInfos(this);'><div style='visibility: hidden; position: absolute; z-index: 1'>".$row["text"]."</div><br/>";
+        $title = $row["text"];
+        echo "<img src='../images/info.png' width='15px' title="."'$title'"." onmouseover='showInfos(this);'><br/>";
     }
     else
         echo "<br/>";
