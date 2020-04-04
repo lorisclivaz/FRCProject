@@ -39,7 +39,7 @@
             $.ajax({
                 type: 'POST',
                 url: 'getInfosFromUser.php',
-                data: 'model_id='+val,
+                data: 'model_id='+val,  
                 success: function (data) {
 
                     $("#firstQuestion").html(data);
