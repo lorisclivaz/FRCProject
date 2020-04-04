@@ -9,6 +9,8 @@
     ],
     "require": {
         "phpoffice/phpword": "^0.17.0",
-        "automattic/woocommerce": "^3.0"
+        "automattic/woocommerce": "^3.0",
+        "tooltipster/tooltipster": "^4.2",
+        "thumbsniper/tooltip": "^1.0"
     }
 }

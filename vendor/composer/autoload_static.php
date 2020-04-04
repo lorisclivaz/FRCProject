@@ -11,6 +11,10 @@ class ComposerStaticInit7aed070635f42e61a0f2dd1835863c53
         array (
             'Zend\\Escaper\\' => 13,
         ),
+        'T' => 
+        array (
+            'ThumbSniper\\' => 12,
+        ),
         'P' => 
         array (
             'PhpOffice\\PhpWord\\' => 18,
@@ -26,6 +30,10 @@ class ComposerStaticInit7aed070635f42e61a0f2dd1835863c53
         'Zend\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
+        ),
+        'ThumbSniper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/thumbsniper/tooltip/lib/thumbsniper',
         ),
         'PhpOffice\\PhpWord\\' => 
         array (

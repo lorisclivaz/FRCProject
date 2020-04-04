@@ -257,6 +257,88 @@
         ]
     },
     {
+        "name": "thumbsniper/tooltip",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thumbsniper/tooltip.git",
+            "reference": "4d5a34388684006aceb8ea1129fa2ec839fe1f24"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thumbsniper/tooltip/zipball/4d5a34388684006aceb8ea1129fa2ec839fe1f24",
+            "reference": "4d5a34388684006aceb8ea1129fa2ec839fe1f24",
+            "shasum": ""
+        },
+        "time": "2016-01-22T22:51:13+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ThumbSniper\\": "lib/thumbsniper"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "Thomas Schulte",
+                "email": "thomas@cupracer.de",
+                "homepage": "https://www.mynakedgirlfriend.de",
+                "role": "Project founder"
+            }
+        ],
+        "description": "ThumbSniper Tooltip",
+        "homepage": "https://thumbsniper.com"
+    },
+    {
+        "name": "tooltipster/tooltipster",
+        "version": "4.2.7",
+        "version_normalized": "4.2.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/iamceege/tooltipster.git",
+            "reference": "b3b72ce3a9b4e0dff6882f9f57bcda608d664e82"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/iamceege/tooltipster/zipball/b3b72ce3a9b4e0dff6882f9f57bcda608d664e82",
+            "reference": "b3b72ce3a9b4e0dff6882f9f57bcda608d664e82",
+            "shasum": ""
+        },
+        "suggest": {
+            "components/jquery": ">=1.10"
+        },
+        "time": "2019-08-19T13:16:43+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Caleb Jacob",
+                "homepage": "https://plus.google.com/+CalebJacob?rel=author"
+            },
+            {
+                "name": "Louis Ameline",
+                "homepage": "https://github.com/louisameline"
+            }
+        ],
+        "description": "Tooltipster is a flexible and extensible jQuery plugin for modern tooltips.",
+        "homepage": "http://iamceege.github.io/tooltipster/",
+        "keywords": [
+            "jquery",
+            "plugin",
+            "replacement",
+            "tooltip"
+        ]
+    },
+    {
         "name": "zendframework/zend-escaper",
         "version": "2.6.1",
         "version_normalized": "2.6.1.0",
