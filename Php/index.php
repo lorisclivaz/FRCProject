@@ -19,6 +19,7 @@
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script>
         let para;
         function getCat(val) {
@@ -31,6 +32,8 @@
                 }
             });
             getFieldsFromCat(val);
+
+            document.getElementById("iframeApercu").style.visibility = "visible";
         }
         function get_question(val){
             $.ajax({
@@ -154,68 +157,88 @@
         <h1>Lettres modèles</h1><a href="backoffice.php">Back Office</a>
 
         <br/>
-        <form method="post" name="formular">
-            <label>Sélectionnez une catégorie</label>
-            <br/>
-            <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
-            <?php include "connection.php";
-            categorieList();
-            ?>
-            </select>
-            <br/><br/>
-            <label>Sélectionnez un modèle</label>
-            <br/>
-            <select  id="models" onchange="get_question(this.value);" ><option value="">Sélectionnez un modèle</option>
-            </select>
-            <br/><br/>
-            <div id="firstQuestion"></div>
-        </form>
-        <div id="cache" onload="cache(this)" style="display: none">
-            <form enctype="multipart/form-data"  method="post">
-                <br>
-                <label>Entrez votre nom:</label>
-                <br>
-                <input name="nom" type="text"/>
-                <br>
-                <label>Entrez votre prénom:</label>
-                <br>
-                <input name="prenom" type="text"/>
-                <br>
-                <label>Entrez votre rue:</label>
-                <br>
-                <input name="rue" type="text"/>
-                <br>
-                <label>Entrez votre n° de rue:</label>
-                <br>
-                <input name="n°_rue" type="text"/>
-                <br>
-                <label>Entrez le lieu et le code postal:</label>
-                <br>
-                <input name="lieu_codepostal" type="text"/>
-                <br>
-                <label>Entrez le nom de la société:</label>
-                <br>
-                <input name="nom_societe" type="text"/>
-                <br>
-                <label>Entrez l'adresse et le n° de la société:</label>
-                <br>
-                <input name="adresse_societe_n°" type="text"/>
-                <br>
-                <label>Entrez le lieu et le code postal de la société:</label>
-                <br>
-                <input name="lieu_codepostal_societe" type="text"/>
-                <br>
-                <label>Entrez le lieu d'envoie de la lettre:</label>
-                <br>
-                <input name="lieu_envoie" type="text"/>
-                <br>
-                <div id="cat_fields"></div>
-                <div id="para_fields"></div>
-                <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre</button>
-                <input id="problematique" name="problematique" type="text" style="display: none"/>
-                <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
-            </form>
-        </div>
+
+        <table>
+            <tr>
+                <td width="1000px" height="10px">
+                    <form method="post" name="formular">
+                        <label>Sélectionnez une catégorie</label>
+                        <br/>
+                        <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
+                            <?php include "connection.php";
+                            categorieList();
+                            ?>
+                        </select>
+                        <br/><br/>
+                        <label>Sélectionnez un modèle</label>
+                        <br/>
+                        <select  id="models" onchange="get_question(this.value);" ><option value="">Sélectionnez un modèle</option>
+                        </select>
+                        <br/><br/>
+                        <div id="firstQuestion"></div>
+                    </form>
+                    <div id="cache" onload="cache(this)" style="display: none">
+                        <form enctype="multipart/form-data"  method="post">
+                            <br>
+                            <label>Entrez votre nom:</label>
+                            <br>
+                            <input name="nom" type="text"/>
+                            <br>
+                            <label>Entrez votre prénom:</label>
+                            <br>
+                            <input name="prenom" type="text"/>
+                            <br>
+                            <label>Entrez votre rue:</label>
+                            <br>
+                            <input name="rue" type="text"/>
+                            <br>
+                            <label>Entrez votre n° de rue:</label>
+                            <br>
+                            <input name="n°_rue" type="text"/>
+                            <br>
+                            <label>Entrez le lieu et le code postal:</label>
+                            <br>
+                            <input name="lieu_codepostal" type="text"/>
+                            <br>
+                            <label>Entrez le nom de la société:</label>
+                            <br>
+                            <input name="nom_societe" type="text"/>
+                            <br>
+                            <label>Entrez l'adresse et le n° de la société:</label>
+                            <br>
+                            <input name="adresse_societe_n°" type="text"/>
+                            <br>
+                            <label>Entrez le lieu et le code postal de la société:</label>
+                            <br>
+                            <input name="lieu_codepostal_societe" type="text"/>
+                            <br>
+                            <label>Entrez le lieu d'envoie de la lettre:</label>
+                            <br>
+                            <input name="lieu_envoie" type="text"/>
+                            <br>
+                            <div id="cat_fields"></div>
+                            <div id="para_fields"></div>
+                            <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre</button>
+                            <input id="problematique" name="problematique" type="text" style="display: none"/>
+                            <textarea id="paragraph" name="paragraphe_conditionnel" type="text"  rows="25" cols="30" style="display: none"></textarea>
+                        </form>
+                    </div>
+                </td>
+
+                <td style="width: 10px">
+
+                    <div id="iframeApercu" style="visibility: hidden">
+                        <iframe src="../Apercu/AviationApercu.htm"
+                                width='600px' height='600px' frameborder='0'>
+
+                        </iframe>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+
     </main>
         <p>© 2020 by FRC-Lausanne</p>
     </footer>
@@ -279,6 +302,8 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('coor_banque', $coor_banque);
 
     $templateProcessor->saveAs('../final_template/template.docx');
+    $templateProcessor->saveAs('../final_template/template.html');
+
 
 
     echo "<script type='text/javascript'>document.location.replace('download.php');</script>";
