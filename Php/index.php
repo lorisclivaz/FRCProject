@@ -301,7 +301,6 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('coor_banque', $coor_banque);
 
     $templateProcessor->saveAs('../final_template/template.docx');
-    $templateProcessor->saveAs('../final_template/template.html');
 
 
     echo "<script type='text/javascript'>document.location.replace('download.php');</script>";
