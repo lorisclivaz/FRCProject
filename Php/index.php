@@ -101,7 +101,9 @@
                 success: function (data) {
                     para = data;
 
-                    console.log(para);
+                    document.getElementById("paragraph").value = para;
+                    document.getElementById("paragraph").style.visibility = "visible"
+
                 }
             });
         }
@@ -125,6 +127,7 @@
             }
 
             document.getElementById("paragraph").value = para;
+
 
         }
 
@@ -216,13 +219,13 @@
                 <br/>
                 <input name="nom_societe" type="text"/>
                 <br/>
-                <label>Entrez l'adresse et le n° de la société:</label>
-                <br/>
                 <input name="adresse_societe_n°" type="text"/>
                 <br/>
                 <label>Entrez le lieu et le code postal de la société:</label>
                 <br/>
                 <input name="lieu_codepostal_societe" type="text"/>
+                <label>Entrez l'adresse et le n° de la société:</label>
+                <br/>
                 <br/>
                 <label>Entrez le lieu d'envoie de la lettre:</label>
                 <br/>
@@ -230,10 +233,15 @@
                 <br/>
                 <div id="cat_fields"></div>
                 <div id="para_fields"></div>
+                <br/>
+                <label>Voici le paragraphe qui sera inséré dans votre lettre remplaçant la variable $[paragraphe_conditionel] :</label>
+                <br/>
+                <textarea id="paragraph" name="paragraphe_conditionnel" type="text" rows="18" cols="60"
+                          style="visibility: hidden"></textarea>
+                <br/>
                 <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre</button>
                 <input id="problematique" name="problematique" type="text" style="display: none"/>
-                <textarea id="paragraph" name="paragraphe_conditionnel" type="text" rows="25" cols="30"
-                          style="display: none"></textarea>
+
             </form>
         </div>
     </div>
