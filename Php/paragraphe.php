@@ -50,6 +50,7 @@
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
                     <a href="model.php"><li class="list-group-item">Ajouter un nouveau model</li></a>
                     <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
+                    <a href="answer.php"><li class="list-group-item">Ajouter une nouvelle réponse</li></a>
                     <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
                     <a href="champs.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
                 </ul>
@@ -70,25 +71,22 @@
                         <label>Choisissez le modèle</label><br>
                         <select  id="models"><option value="">Sélectionnez un modèle</option>
                         </select><br><br>
-                        <label>Paragraphe</label><br>
-                        <textarea id="paragraph" rows="4" cols="50"></textarea><br><br>
-                        <label>Champs</label><br>
-                        <input type="text" name="champs"><input type="submit" name="newchamp" value="+"><br><br>
                         <label>Résponse précédente</label><br>
                         <select id="rp">
                             <option>Je confirme avoir subisont</option>
                         </select><br><br>
+                        <label>Paragraphe</label><br>
+                        <textarea id="paragraph" rows="4" cols="50"></textarea><br><br>
+                        <label>Number</label><br>
+                        <input type="text" id="number" name="number"><br><br>
+                        <label>Fields</label><br>
+                        <input type="text" name="champs"><input type="submit" name="newchamp" value="add"><br><br>
                         <input type="submit" name="create" value="Ajouter">
                     </>
                 </div>
             </div>
         </div>
     </div>
-    <?php
-        if(isset($_POST["newchamp"])){
-            header('Location: champs.php');
-        }
-    ?>
 </main>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>

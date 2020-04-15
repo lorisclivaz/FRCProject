@@ -50,6 +50,7 @@
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
                     <a href="model.php"><li class="list-group-item">Ajouter un nouveau model</li></a>
                     <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
+                    <a href="answer.php"><li class="list-group-item">Ajouter une nouvelle réponse</li></a>
                     <a href="paragraphe.php"><li class="list-group-item"> Ajouter un nouveau paragraphe</li></a>
                     <a href="champs.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
                 </ul>

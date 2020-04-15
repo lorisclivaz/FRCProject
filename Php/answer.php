@@ -23,43 +23,60 @@
     <script>
         let para;
         var catid;
-        var modelname;
-        var rp = 1;
+        var modelid;
+        var questionid = "1";
+        var nextid = "0";
 
         function getCat(val) {
             catid = val;
             $.ajax({
                 type: "POST",
                 url: "getInfosFromUser.php",
-                data:'categorie_id_bo='+val,
+                data:'categorie_id_2='+val,
                 success: function(data){
                     $("#models").html(data);
                 }
             });
         }
 
-        function getModel(val){
-            modelname = val;
-        }
-
-        function getPR(val){
-            rp = val;
-        }
-
-        function createQuestion(){
-            var question = $("#question").val();
-            var explication = $("#explication").val();
-            console.log(typeof rp);
+        function getModel(val) {
+            modelid = val;
             $.ajax({
                 type: "POST",
-                url: "getInfosFromUserCreateQuestion.php",
-                dataType: "json",
-                data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
-                success: function(data) {
-                    alert("OK");
-                    $("#message").html(data);
+                url: "getInfosFromUser.php",
+                data:'model_id_bo='+val,
+                success: function(data){
+                    $("#question").html(data);
+                    $("#next").html("<option value='0'>No</option>"+data);
                 }
             });
+        }
+
+        function getQuestion(val){
+            questionid = val;
+        }
+
+        function getNext(val){
+            nextid = val;
+        }
+
+        function createAnswer(){
+            var answer = $("#answer").val();
+            if($('#answer').val() == '') {
+                $("#message").html("Please give an answer");
+            }
+            else{
+                $.ajax({
+                    type: "POST",
+                    url: "getInfosFromUserCreateAnswer.php",
+                    dataType: "json",
+                    data:{question:questionid, next:nextid, answer:answer},
+                    success: function(data) {
+                        alert("OK");
+                        $("#message").html(data);
+                    }
+                });
+            }
         }
     </script>
 </head>
@@ -86,35 +103,33 @@
 
             <div class="card col-md-9">
                 <div class="card-body">
-                    <h1>Ajouter une question</h1>
+                    <h1>Ajouter une résponse</h1>
                     <br>
-                    <form action="question.php" method="post">
+                    <form action="answer.php" method="post" enctype="multipart/form-data">
                         <label>Choisissez la catégorie</label><br>
-                        <select name="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>>
+                        <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
                             <?php include "connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
                         <label>Choisissez le modèle</label><br>
-                        <select id="models" onchange="getModel(this.value);"><option value=" ">Sélectionnez un modèle</option>
+                        <select  id="models" onchange="getModel(this.value);"><option value="">Sélectionnez un modèle</option>
                         </select><br><br>
-                        Réponse précédente (facultatif)<br>
-                        <select name="rp" onchange="getPR(this.value);">
-                            <option value="1">Qui</option>
-                            <option value="2">Non</option>
+                        <label>Choisissez le question</label><br>
+                        <select id="question" onchange="getQuestion(this.value);"><option value="">Sélectionnez une question</option>
                         </select><br><br>
-                        Question<br>
-                        <input type="text" id="question" name="question"><br><br>
-                        Explications (facultatif)<br>
-                        <input type="text" id="explication" name="explication"><br><br>
-                        <input type="submit" onclick="createQuestion()" name="create" value="Ajouter"><br>
+                        Next Question<br>
+                        <select id="next" onchange="getNext(this.value);"><option value="">Sélectionnez une question</option>
+                        </select><br><br>
+                        Réponse<br>
+                        <input type="text" id="answer" name="answer"><br><br>
+                        <input type="submit" onclick="createAnswer();" name="create" value="Ajouter">
                         <p id="message"></p>
-                    </form>
+                    </>
                 </div>
             </div>
         </div>
     </div>
-
 </main>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>

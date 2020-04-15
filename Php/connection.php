@@ -38,6 +38,23 @@ function categorieListBO()
     $conn->close();
 }
 
+function questionListBO($idModel)
+{
+    $conn = connection();
+    $sql = "SELECT * FROM question WHERE models_idmodels = " . $idModel;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row["idquestion"] . ">" . $row["question"] . "</option>";
+        }
+    } else {
+        echo "<option>Aucune questions</option>";
+    }
+    $conn->close();
+}
+
 function categorieList()
 {
     $conn = connection();
@@ -77,6 +94,40 @@ function modelListBO($idCategorie)
         // output data of each row
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["name"] . ">" . $row["name"] . "</option>";
+        }
+    } else {
+        echo "<option>Aucune models</option>";
+    }
+    $conn->close();
+}
+
+function modelList2($idCategorie)
+{
+    $conn = connection();
+    $sql = "SELECT * FROM models WHERE categories_idcategories = " . $idCategorie;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row["idmodels"] . ">" . $row["name"] . "</option>";
+        }
+    } else {
+        echo "<option>Aucune models</option>";
+    }
+    $conn->close();
+}
+
+function fieldList()
+{
+    $conn = connection();
+    $sql = "SELECT * FROM fields";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row["idfield"] . ">" . $row["balise_name"] . "</option>";
         }
     } else {
         echo "<option>Aucune models</option>";
@@ -132,6 +183,20 @@ function addModel($modelname, $categoriename)
     $conn->close();
 }
 
+function getModelIdByName($modelName)
+{
+    $conn = connection();
+    $sql = "SELECT idmodels FROM models WHERE name = '" . $modelName . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idmodels"];
+    } else {
+        return null;
+    }
+}
+
 function addTemplate($templatename, $path, $categoriename)
 {
     $conn = connection();
@@ -140,6 +205,79 @@ function addTemplate($templatename, $path, $categoriename)
 
     if ($conn->query($sql) === TRUE) {
         echo "New Template uploaded successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
+function getQuestionIdByName($question)
+{
+    $conn = connection();
+    $sql = "SELECT idquestion FROM question WHERE question = '" . $question . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idquestion"];
+    } else {
+        return null;
+    }
+}
+
+//Add a new Question
+function addQuestion($question, $modelname, $prio, $explanations)
+{
+    $conn = connection();
+    $id = getModelIdByName($modelname);
+    if($prio == "2"){
+        $sql = "INSERT INTO question (question, models_idmodels, Priority) VALUES ('$question', '$id', '1')";
+    }
+    else{
+        $sql = "INSERT INTO question (question, models_idmodels) VALUES ('$question', '$id')";
+    }
+
+    if ($conn->query($sql) === TRUE) {
+        $questionid = getQuestionIdByName($question);
+        $sql = "UPDATE question SET question_number= '$questionid' WHERE idquestion= '$questionid'";
+        if ($conn->query($sql) === TRUE) {
+            if(empty($explanations)){
+                echo "<p>New Question added successfully</p>";
+            }
+            else{
+                $sql = "INSERT INTO explanations (text, question_idquestion) VALUES ('$explanations', '$questionid')";
+                if ($conn->query($sql) === TRUE) {
+                    echo "<p>New Question added successfully</p>";
+                }
+                else{
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
+        }
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
+//Add a new Question
+function addAnswer($answer, $next, $qustionid)
+{
+    $conn = connection();
+    if($next == "0"){
+        $sql = "INSERT INTO answers (answer, next_question, question_idquestion) VALUES ('$answer', 'x', '$qustionid')";
+    }
+    else{
+        $sql = "INSERT INTO answers (answer, next_question, question_idquestion) VALUES ('$answer', '$next', '$qustionid')";
+    }
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<p>New Answer added successfully</p>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

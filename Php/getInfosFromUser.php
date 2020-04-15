@@ -6,9 +6,19 @@ if (! empty($_POST["categorie_id"])) {
     echo modelList($idCategorie);
 }
 
+if (! empty($_POST["categorie_id_2"])) {
+    $idCategorie = $_POST["categorie_id_2"];
+    echo modelList2($idCategorie);
+}
+
 if (! empty($_POST["categorie_id_bo"])) {
     $idCategorie = $_POST["categorie_id_bo"];
     echo modelListBO($idCategorie);
+}
+
+if (! empty($_POST["model_id_bo"])) {
+    $idModel = $_POST["model_id_bo"];
+    echo questionListBO($idModel);
 }
 
 if (! empty($_POST["model_id"])) {
