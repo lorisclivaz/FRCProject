@@ -37,7 +37,7 @@
                     <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
                     <a href="answer.php"><li class="list-group-item">Ajouter une nouvelle réponse</li></a>
                     <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
-                    <a href="champs.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
+                    <a href="fields.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
                 </ul>
             </div>
 

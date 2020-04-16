@@ -37,27 +37,40 @@
                     <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
                     <a href="answer.php"><li class="list-group-item">Ajouter une nouvelle réponse</li></a>
                     <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
-                    <a href="champs.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
+                    <a href="fields.php"><li class="list-group-item">Ajouter de nouveau filed</li></a>
                 </ul>
             </div>
 
             <div class="card col-md-9">
                 <div class="card-body">
                     <h1>Ajouter un champs</h1>
-                    <form action="model.php" method="post">
+                    <form action="fields.php" method="post">
                         <label>Choisissez la catégorie</label><br>
                         <select name="categories">
+                            <option value="0">-</option>
                             <?php include "connection.php";
-                            categorieListBO();
+                            categorieList();
                             ?>
                         </select><br><br>
-                        <label>Champs</label><br>
-                        <input type="text" name="champs"><br><br>
-                        <input type="submit" name="create" value="Ajouter">
+                        <label>Filed Name</label><br>
+                        <input type="text" name="fields"><br><br>
+                        <label>Balise Name</label><br>
+                        <input type="text" name="bname"><br><br>
+                        <input type="submit" name="create" value="Ajouter"><br>
                     </form>
                     <?php
                     if (isset($_POST['create'])) {
+                        $categorie = $_POST["categories"];
+                        $field = $_POST["fields"];
+                        $bname = $_POST["bname"];
 
+                        if(!empty($field) || !empty($bname))
+                        {
+                            addField($field, $categorie, $bname);
+                        }
+                        else{
+                            echo "<p>Fill out all Fields</p>";
+                        }
                     }
                     ?>
                 </div>

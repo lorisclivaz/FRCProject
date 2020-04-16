@@ -285,6 +285,26 @@ function addAnswer($answer, $next, $qustionid)
     $conn->close();
 }
 
+//Add a new Field
+function addField($fieldname, $idcategorie, $bname)
+{
+    $conn = connection();
+    if($idcategorie == "0"){
+        $sql = "INSERT INTO fields (name, balise_name) VALUES ('$fieldname', '$bname')";
+    }
+    else{
+        $sql = "INSERT INTO fields (name, id_categorie, balise_name) VALUES ('$fieldname', '$idcategorie', '$bname')";
+    }
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<p>New Field added successfully</p>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
 function getFirstAnswerAndQuestion($idModel)
 {
     $conn = connection();
