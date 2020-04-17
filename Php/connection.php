@@ -154,6 +154,25 @@ function modelList($idCategorie)
     $conn->close();
 }
 
+function answerList()
+{
+
+    $conn = connection();
+    $sql = "SELECT * FROM answers WHERE next_question='x'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        echo "<option> Selectionnez une réponse</option>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value=" . $row["idanswer"] . ">" . $row["answer"] . "</option>";
+        }
+    } else {
+        echo "<option>Aucun réponse</option>";
+    }
+    $conn->close();
+}
+
 function getCategorieIdByName($categorieName)
 {
     $conn = connection();
@@ -283,6 +302,98 @@ function addAnswer($answer, $next, $qustionid)
     }
 
     $conn->close();
+}
+
+function getTemplateIdByCategorie($catid)
+{
+    $conn = connection();
+    $sql = "SELECT idtemplate FROM template WHERE categories_idcategories = '" . $catid . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idtemplate"];
+    } else {
+        return null;
+    }
+}
+
+function UpdateAnswerNextQuestion($answerid, $nextQuestion)
+{
+    $conn = connection();
+    $sql = "UPDATE answers SET next_question= '$nextQuestion' WHERE idanswer= '$answerid'";
+
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+
+    $conn->close();
+}
+
+function checkEveryFieldExist($data){
+    echo "alert('TEST')";
+    $conn = connection();
+    $idfield = [];
+    $counter = 0;
+    foreach($data as $field){
+        $sql = "SELECT idfield FROM fields WHERE balise_name = '" . $field . "'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $idfield[$counter] = $row["idfield"];
+            $counter++;
+        } else {
+            $idfield = null;
+            return;
+        }
+    }
+    return $idfield;
+}
+
+function getParagraphIdByNumber($number){
+    $conn = connection();
+    $sql = "SELECT idparagraphs FROM paragraphs WHERE number = '" . $number . "'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idparagraphs"];
+    } else {
+        return null;
+    }
+}
+
+//Add new Paragraph
+function addParagraph($catid, $answer, $paragraph, $number, $data)
+{
+    $conn = connection();
+    $tempid = getTemplateIdByCategorie($catid);
+    $fieldsId = checkEveryFieldExist($data);
+
+    if($fieldsId){
+        if(UpdateAnswerNextQuestion($answer, $number)){
+            $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
+            if ($conn->query($sql) === TRUE) {
+                $paraid = getParagraphIdByNumber($number);
+                foreach($fieldsId as $id){
+                    $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
+                    if ($conn->query($sql) === TRUE) {
+                        echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+                    }
+                    else{
+                        echo "Error";
+                    }
+                }
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            $conn->close();
+        }
+    }
+    else{
+        echo "<p>All fields dosent exist please add firstly the field of the paragraphs</p>";
+    }
 }
 
 //Add a new Field

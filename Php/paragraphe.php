@@ -23,16 +23,68 @@
     </style>
     <script>
         let para;
+        var catid;
+        var modelid;
+        var answerid;
+
         function getCat(val) {
+            catid = val;
             $.ajax({
                 type: "POST",
                 url: "getInfosFromUser.php",
-                data:'categorie_id_bo='+val,
+                data:'categorie_id_2='+val,
                 success: function(data){
                     $("#models").html(data);
                 }
             });
         }
+
+        function getAnswer(val){
+            answerid = val;
+        }
+
+        function createParagraphe(){
+            var paragraph = $("#paragraph").val();
+            var number = $("#number").val();
+            var fieldsname = [];
+            var p = "";
+            var anfang = false;
+            var dollar = false;
+            alert("CAT " + catid + " ANSWER " + answerid + " PARAGRAPH " + paragraph);
+            for(var i=0; i<paragraph.length; i++){
+                if(anfang && dollar){
+                    if(paragraph.charAt(i)==']'){}else{
+                        p += paragraph.charAt(i);
+                    }
+                }
+                if(paragraph.charAt(i)=='[')
+                    anfang = true;
+                if(paragraph.charAt(i)=='$')
+                    dollar = true;
+                if(paragraph.charAt(i)==']'){
+                    anfang = false;
+                    dollar = false;
+                    fieldsname.push(p);
+                    p = "";
+                }
+            }
+            if($('#paragraph').val() == '') {
+                $("#message").html("Please enter a paragraph");
+            }
+            else{
+                var jsonString = JSON.stringify(fieldsname);
+                $.ajax({
+                    type: "POST",
+                    url: "getInfosFromUserCreateParagraph.php",
+                    dataType: "json",
+                    data:{answer:answerid, categorie:catid, paragraph:paragraph, number:number, data : jsonString},
+                    success: function(data) {
+                        $("#message").html(data);
+                    }
+                });
+            }
+        }
+
     </script>
 </head>
 <body>
@@ -68,21 +120,17 @@
                             categorieList();
                             ?>
                         </select><br><br>
-                        <label>Choisissez le modèle</label><br>
-                        <select  id="models"><option value="">Sélectionnez un modèle</option>
-                        </select><br><br>
                         <label>Résponse précédente</label><br>
-                        <select id="rp">
-                            <option>Je confirme avoir subisont</option>
+                        <select id="answer" onchange="getAnswer(this.value);">
+                            <?php answerList() ?>
                         </select><br><br>
-                        <label>Paragraphe</label><br>
-                        <textarea id="paragraph" rows="4" cols="50"></textarea><br><br>
                         <label>Number</label><br>
                         <input type="text" id="number" name="number"><br><br>
-                        <label>Fields</label><br>
-                        <input type="text" name="champs"><input type="submit" name="newchamp" value="add"><br><br>
-                        <input type="submit" name="create" value="Ajouter">
-                    </>
+                        <label>Paragraphe</label><br>
+                        <textarea id="paragraph" rows="10" cols="100"></textarea><br><br>
+                        <input type="submit" onclick="createParagraphe()" name="create" value="Ajouter"><br>
+                        <p id="message"></p>
+                    </form>
                 </div>
             </div>
         </div>
