@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/backoffice.css" media="screen" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Back Office</title>
@@ -30,7 +31,7 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <div class="card col-md-3">
+            <div class="card col-md-12 col-xl-3">
                 <ul class="list-group list-group-flush">
                     <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
@@ -42,7 +43,7 @@
                 </ul>
             </div>
 
-            <div class="card col-md-9">
+            <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
                     <h1>Ajouter un nouveau template</h1>
                     <br>
