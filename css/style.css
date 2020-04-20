@@ -37,6 +37,16 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+input{
+    padding: 0.2rem;
+}
+select{
+    padding: 0.2rem;
+}
+.textinput{
+    width: 100%;
+}
 /* ----------------------------------------------------------------
                             FOOTER
 ---------------------------------------------------------------- */
@@ -79,6 +89,17 @@ div.centre {
 
 #cardBackoffice{
     border: none;
+}
+
+@media only screen and (max-width: 769px){
+
+    .list-group li{
+        padding: 0.5rem 1.5rem;
+        width: 100%;
+    }
+    .textinput{
+        width: 100%;
+    }
 }
 
 

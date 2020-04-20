@@ -114,20 +114,25 @@
                     <br>
                     <!--<form enctype="multipart/form-data" action="__URL__" method="POST">-->
                     <form action="paragraphe.php" method="post" enctype="multipart/form-data">
-                        <label>Choisissez la catégorie</label><br>
-                        <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
+                        <label for="categories">Choisissez la catégorie:</label><br>
+                        <select id="categories" onchange="getCat(this.value);" required>
+                            <option value=" " disabled selected>Sélectionnez une catégorie</option>
                             <?php include "connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
-                        <label>Résponse précédente</label><br>
-                        <select id="answer" onchange="getAnswer(this.value);">
+
+                        <label for="answer">Résponse précédente:</label><br>
+                        <select id="answer" onchange="getAnswer(this.value);" required>
                             <?php answerList() ?>
                         </select><br><br>
-                        <label>Number</label><br>
-                        <input type="text" id="number" name="number"><br><br>
-                        <label>Paragraphe</label><br>
-                        <textarea id="paragraph" rows="10" cols="100"></textarea><br><br>
+
+                        <label for="number">Number:</label><br>
+                        <input type="text" id="number" name="number" required><br><br>
+
+                        <label for="paragraph">Paragraphe:</label><br>
+                        <textarea class="textinput" id="paragraph" rows="10" cols="100" required></textarea><br><br>
+
                         <input type="submit" onclick="createParagraphe()" name="create" value="Ajouter"><br>
                         <p id="message"></p>
                     </form>
@@ -136,6 +141,7 @@
         </div>
     </div>
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

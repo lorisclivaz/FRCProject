@@ -163,7 +163,7 @@ function answerList()
 
     if ($result->num_rows > 0) {
         // output data of each row
-        echo "<option> Selectionnez une réponse</option>";
+        echo "<option value=' ' disabled selected>Selectionnez une réponse</option>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["idanswer"] . ">" . $row["answer"] . "</option>";
         }

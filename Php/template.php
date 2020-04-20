@@ -49,13 +49,13 @@
                     <!--<form enctype="multipart/form-data" action="__URL__" method="POST">-->
                     <form action="template.php" method="post" enctype="multipart/form-data">
                         <label>Choisissez la catégorie</label><br>
-                        <select name="categories">
+                        <select name="categories" required>
                             <?php include "connection.php";
                             categorieListBO();
                             ?>
                         </select><br><br>
                         Select template to upload:
-                        <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+                        <input type="file" name="fileToUpload" id="fileToUpload" required><br><br>
                         <input type="submit" value="Upload Template" name="create">
                     </>
                     <?php
@@ -104,6 +104,7 @@
         </div>
     </div>
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

@@ -45,17 +45,20 @@
                 <div class="card-body">
                     <h1>Ajouter un champs</h1>
                     <form action="fields.php" method="post">
-                        <label>Choisissez la catégorie</label><br>
-                        <select name="categories">
-                            <option value="0">-</option>
+                        <label for="categories">Choisissez la catégorie:</label><br>
+                        <select name="categories" required>
+                            <option value="0"></option>
                             <?php include "connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
-                        <label>Filed Name</label><br>
-                        <input type="text" name="fields"><br><br>
-                        <label>Balise Name</label><br>
-                        <input type="text" name="bname"><br><br>
+
+                        <label for="fields">File Name:</label><br>
+                        <input type="text" name="fields" required><br><br>
+
+                        <label for="bname">Balise Name:</label><br>
+                        <input type="text" name="bname" required><br><br>
+
                         <input type="submit" name="create" value="Ajouter"><br>
                     </form>
                     <?php
@@ -79,6 +82,7 @@
     </div>
 
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

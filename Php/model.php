@@ -45,14 +45,15 @@
                 <div class="card-body">
                     <h1>Ajouter un nouveau model</h1>
                     <form action="model.php" method="post">
-                        <label>Choisissez la catégorie</label><br>
+                        <label>Choisissez la catégorie:</label><br>
                         <select name="categories">
+                            <option value="" disabled selected> Choisissez la catégorie</option>
                             <?php include "connection.php";
                             categorieListBO();
                             ?>
                         </select><br><br>
-                        Nom du modèle<br>
-                        <input type="text" name="modelname"><br><br>
+                        <label for="modelname">Nom du modèle:</label><br>
+                        <input type="text" name="modelname" required><br><br>
                         <input type="submit" name="create" value="Ajouter">
                     </form>
                     <?php
@@ -69,6 +70,7 @@
     </div>
 
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

@@ -89,23 +89,25 @@
                     <h1>Ajouter une question</h1>
                     <br>
                     <form action="question.php" method="post">
-                        <label>Choisissez la catégorie</label><br>
-                        <select name="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>>
+                        <label>Choisissez la catégorie:</label><br>
+                        <select name="categories" onchange="getCat(this.value);" required>
+                            <option value=" " disabled selected>Sélectionnez une catégorie</option>
                             <?php include "connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
-                        <label>Choisissez le modèle</label><br>
-                        <select id="models" onchange="getModel(this.value);"><option value=" ">Sélectionnez un modèle</option>
+                        <label>Choisissez le modèle:</label><br>
+                        <select id="models" onchange="getModel(this.value);" required>
+                            <option value=" " disabled selected>Sélectionnez un modèle</option>
                         </select><br><br>
-                        Réponse précédente (facultatif)<br>
-                        <select name="rp" onchange="getPR(this.value);">
+                        <label for="rp">Réponse précédente (facultatif):</label><br>
+                        <select name="rp" onchange="getPR(this.value);" required>
                             <option value="1">Qui</option>
                             <option value="2">Non</option>
                         </select><br><br>
-                        Question<br>
-                        <input type="text" id="question" name="question"><br><br>
-                        Explications (facultatif)<br>
+                        <label for="question">Question:</label><br>
+                        <input type="text" id="question" name="question" required><br><br>
+                        Explications (facultatif):<br>
                         <input type="text" id="explication" name="explication"><br><br>
                         <input type="submit" onclick="createQuestion()" name="create" value="Ajouter"><br>
                         <p id="message"></p>
@@ -116,6 +118,7 @@
     </div>
 
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

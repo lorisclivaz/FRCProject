@@ -44,7 +44,7 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <div id="cardBackoffice" class="card col-md-3">
+            <div id="cardBackoffice" class="card col-md-4 col-sm-4">
                 <ul class="list-group">
                     <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
@@ -59,6 +59,7 @@
     </div>
 
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

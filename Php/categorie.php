@@ -46,8 +46,8 @@
                 <div class="card-body">
                     <h1>Ajouter une catégorie</h1><br>
                     <form action="categorie.php" method="post">
-                        Nom de la catégorie<br>
-                        <input type="text" name="categoriename" /><br><br>
+                        <label for="categorie">Nom de la catégorie</label><br>
+                        <input type="text" name="categorie" id="categorie" required><br><br>
                         <input type="submit" name="create" value="Ajouter" />
                     </form>
                 </div>
@@ -66,7 +66,7 @@
 
 </main>
 
-
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>
