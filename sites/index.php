@@ -38,7 +38,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
-        let para;
 
         function getCat(val) {
             $.ajax({
@@ -106,9 +105,15 @@
 
         function getInputValueforParagraph() {
 
+            let para;
+
+            para = document.getElementById("paragrapheLolo").value;
+
+            alert(para);
+
             // Selecting the input element and get its value
             if (document.getElementsByName("date_vol").length == 1) {
-                let date_vol = document.getElementsByName("date_vol").value.text;
+                let date_vol = document.getElementsByName("date_vol").value;
                 para = para.replace("$[date_vol]", date_vol);
             }
 
@@ -305,10 +310,11 @@ if (isset($_POST['Enregistrement'])) {
 
     $templateProcessor->saveAs('../final_template/template.docx');
 
-    echo "<script type='text/javascript'>document.location.replace('download.php');</script>";
 
 
-    return false;
+
+    return  "<script type='text/javascript'>document.location.replace('download.php');</script>";
+
 }
 ?>
 
