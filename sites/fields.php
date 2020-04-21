@@ -30,18 +30,7 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <div class="card col-md-12 col-xl-3">
-                <ul class="list-group list-group-flush">
-                    <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
-                    <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
-                    <a href="model.php"><li class="list-group-item">Ajouter un nouveau model</li></a>
-                    <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
-                    <a href="answer.php"><li class="list-group-item">Ajouter une nouvelle réponse</li></a>
-                    <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
-                    <a href="fields.php"><li class="list-group-item">Ajouter de nouveau filed</li></a>
-                </ul>
-            </div>
-
+            <?php include "navBackoffice.html";?>
             <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
                     <h1>Ajouter un champs</h1>
