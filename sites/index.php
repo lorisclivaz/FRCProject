@@ -234,12 +234,14 @@
                 <div id="cat_fields"></div>
                 <div id="para_fields"></div>
                 <br/>
-                <label>Voici le paragraphe qui sera inséré dans votre lettre remplaçant la variable $[paragraphe_conditionel] :</label>
+                <label>Voici le paragraphe qui sera inséré dans votre lettre remplaçant la variable
+                    $[paragraphe_conditionel] :</label>
                 <br/>
                 <textarea id="paragraph" name="paragraphe_conditionnel" type="text" rows="18" cols="60"
                           style="visibility: hidden"></textarea>
                 <br/>
-                <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre</button>
+                <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre
+                </button>
                 <input id="problematique" name="problematique" type="text" style="display: none"/>
 
             </form>

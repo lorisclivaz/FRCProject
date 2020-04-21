@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="../css/backoffice.css" media="screen" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../css/backoffice.css" media="screen"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Back Office</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <style>
-        button
-        {
+        button {
             background-color: #e4032e;
             border: none;
             color: white;
@@ -33,8 +33,8 @@
             $.ajax({
                 type: "POST",
                 url: "getInfosFromUser.php",
-                data:'categorie_id_2='+val,
-                success: function(data){
+                data: 'categorie_id_2=' + val,
+                success: function (data) {
                     $("#models").html(data);
                 }
             });
@@ -45,33 +45,32 @@
             $.ajax({
                 type: "POST",
                 url: "getInfosFromUser.php",
-                data:'model_id_bo='+val,
-                success: function(data){
+                data: 'model_id_bo=' + val,
+                success: function (data) {
                     $("#question").html(data);
                 }
             });
         }
 
-        function getQuestion(val){
+        function getQuestion(val) {
             questionid = val;
         }
 
-        function getNext(val){
+        function getNext(val) {
             nextid = val;
         }
 
-        function createAnswer(){
+        function createAnswer() {
             var answer = $("#answer").val();
-            if($('#answer').val() == '') {
+            if ($('#answer').val() == '') {
                 $("#message").html("Please give an answer");
-            }
-            else{
+            } else {
                 $.ajax({
                     type: "POST",
                     url: "getInfosFromUserBO.php",
                     dataType: "json",
-                    data:{question:questionid, next:nextid, answer:answer},
-                    success: function(data) {
+                    data: {question: questionid, next: nextid, answer: answer},
+                    success: function (data) {
                         alert("OK");
                         $("#message").html(data);
                     }
@@ -89,7 +88,7 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <?php include "navBackoffice.html";?>
+            <?php include "navBackoffice.html"; ?>
             <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
                     <h1>Ajouter une résponse</h1>
@@ -104,7 +103,7 @@
                         </select><br><br>
 
                         <label for="models">Choisissez le modèle:</label><br>
-                        <select  id="models" onchange="getModel(this.value);" required>
+                        <select id="models" onchange="getModel(this.value);" required>
                             <option value="" disabled selected>Sélectionnez un modèle</option>
                         </select><br><br>
 
@@ -131,7 +130,7 @@
     </div>
 </main>
 <footer>
-<p>© 2020 by FRC-Lausanne</p>
+    <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>
 </html>

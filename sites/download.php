@@ -15,13 +15,11 @@
             text-decoration: none;
             display: inline-block;
         }
-
         a:hover, a:active {
             background-color: red;
         }
         h1
         {
-
             text-decoration: underline;
             font-size: 29px;
             text-align: center;
@@ -39,7 +37,6 @@
 
 <div class="centre">
     <a id="download" href="../final_template/template.docx" class="boxed-btn3-line">Download </a>
-
 </div>
 
 
