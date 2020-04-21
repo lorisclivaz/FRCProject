@@ -67,7 +67,7 @@
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "getInfosFromUserBO.php",
+                    url: "getInfosFormUserBO.php",
                     dataType: "json",
                     data: {question: questionid, next: nextid, answer: answer},
                     success: function (data) {

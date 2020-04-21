@@ -46,4 +46,3 @@ if (! empty($_POST["paragraph_number"])) {
 
     echo get_Paragraph_From_id($idPara);
 }
-

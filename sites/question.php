@@ -52,7 +52,7 @@
             var explication = $("#explication").val();
             $.ajax({
                 type: "POST",
-                url: "getInfosFromUserBO.php",
+                url: "getInfosFormUserBO.php",
                 dataType: "json",
                 data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
                 success: function(data) {
