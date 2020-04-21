@@ -38,43 +38,31 @@
                     <a href="question.php"><li class="list-group-item">Ajouter une nouvelle question</li></a>
                     <a href="answer.php"><li class="list-group-item">Ajouter une nouvelle réponse</li></a>
                     <a href="paragraphe.php"><li class="list-group-item">Ajouter un nouveau paragraphe</li></a>
-                    <a href="fields.php"><li class="list-group-item">Ajouter de nouveau filed</li></a>
+                    <a href="fields.php"><li class="list-group-item">Ajouter de nouveau champs</li></a>
                 </ul>
             </div>
 
             <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
-                    <h1>Ajouter un champs</h1>
-                    <form action="fields.php" method="post">
-                        <label for="categories">Choisissez la catégorie:</label><br>
-                        <select name="categories" required>
-                            <option value="0"></option>
-                            <?php include "connection.php";
-                            categorieList();
+                    <h1>Ajouter un nouveau model</h1>
+                    <form action="model.php" method="post">
+                        <label>Choisissez la catégorie:</label><br>
+                        <select name="categories">
+                            <option value="" disabled selected> Choisissez la catégorie</option>
+                            <?php include "../db/connection.php";
+                            categorieListBO();
                             ?>
                         </select><br><br>
-
-                        <label for="fields">File Name:</label><br>
-                        <input type="text" name="fields" required><br><br>
-
-                        <label for="bname">Balise Name:</label><br>
-                        <input type="text" name="bname" required><br><br>
-
-                        <input type="submit" name="create" value="Ajouter"><br>
+                        <label for="modelname">Nom du modèle:</label><br>
+                        <input type="text" name="modelname" required><br><br>
+                        <input type="submit" name="create" value="Ajouter">
                     </form>
                     <?php
                     if (isset($_POST['create'])) {
-                        $categorie = $_POST["categories"];
-                        $field = $_POST["fields"];
-                        $bname = $_POST["bname"];
-
-                        if(!empty($field) || !empty($bname))
-                        {
-                            addField($field, $categorie, $bname);
-                        }
-                        else{
-                            echo "<p>Fill out all Fields</p>";
-                        }
+                        $selectedCategorie = $_POST["categories"];
+                        $modelname = $_POST['modelname'];
+                        $result = addModel($modelname, $selectedCategorie);
+                        echo "<p>".$result."</p>";
                     }
                     ?>
                 </div>

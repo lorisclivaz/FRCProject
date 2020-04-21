@@ -179,7 +179,7 @@
             <br/>
             <select id="categories" onchange="getCat(this.value);">
                 <option value=" ">Sélectionnez une catégorie</option>
-                <?php include "connection.php";
+                <?php include "../db/connection.php";
                 categorieList();
                 ?>
             </select>

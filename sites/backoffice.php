@@ -20,21 +20,6 @@
             cursor: pointer;
         }
     </style>
-    <script>
-
-        let para;
-        function getCat(val) {
-            $.ajax({
-                type: "POST",
-                url: "getInfosFromUser.php",
-                data:'categorie_id='+val,
-                success: function(data){
-                    $("#models").html(data);
-                }
-            });
-            getFieldsFromCat(val);
-        }
-    </script>
 </head>
 <body>
 <header>
@@ -47,7 +32,6 @@
     <br/>
     <div id="mainpage-nav">
         <nav>
-
         <ul>
             <a href="categorie.php"><li >Ajouter une catégorie</li></a>
             <a href="template.php"><li>Ajouter un nouveau template</li></a>
@@ -59,8 +43,6 @@
         </ul>
         </nav>
     </div>
-
-
 </main>
 <footer>
 <p>© 2020 by FRC-Lausanne</p>

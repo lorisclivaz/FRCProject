@@ -20,72 +20,46 @@
             margin: 4px 2px;
             cursor: pointer;
         }
-
     </style>
     <script>
         let para;
         var catid;
-        var modelid;
-        var answerid;
+        var modelname;
+        var rp = 1;
 
         function getCat(val) {
             catid = val;
             $.ajax({
                 type: "POST",
                 url: "getInfosFromUser.php",
-                data:'categorie_id_2='+val,
+                data:'categorie_id_bo='+val,
                 success: function(data){
                     $("#models").html(data);
                 }
             });
         }
 
-        function getAnswer(val){
-            answerid = val;
+        function getModel(val){
+            modelname = val;
         }
 
-        function createParagraphe(){
-            var paragraph = $("#paragraph").val();
-            var number = $("#number").val();
-            var fieldsname = [];
-            var p = "";
-            var anfang = false;
-            var dollar = false;
-            alert("CAT " + catid + " ANSWER " + answerid + " PARAGRAPH " + paragraph);
-            for(var i=0; i<paragraph.length; i++){
-                if(anfang && dollar){
-                    if(paragraph.charAt(i)==']'){}else{
-                        p += paragraph.charAt(i);
-                    }
-                }
-                if(paragraph.charAt(i)=='[')
-                    anfang = true;
-                if(paragraph.charAt(i)=='$')
-                    dollar = true;
-                if(paragraph.charAt(i)==']'){
-                    anfang = false;
-                    dollar = false;
-                    fieldsname.push(p);
-                    p = "";
-                }
-            }
-            if($('#paragraph').val() == '') {
-                $("#message").html("Please enter a paragraph");
-            }
-            else{
-                var jsonString = JSON.stringify(fieldsname);
-                $.ajax({
-                    type: "POST",
-                    url: "getInfosFromUserCreateParagraph.php",
-                    dataType: "json",
-                    data:{answer:answerid, categorie:catid, paragraph:paragraph, number:number, data : jsonString},
-                    success: function(data) {
-                        $("#message").html(data);
-                    }
-                });
-            }
+        function getPR(val){
+            rp = val;
         }
 
+        function createQuestion(){
+            var question = $("#question").val();
+            var explication = $("#explication").val();
+            $.ajax({
+                type: "POST",
+                url: "getInfosFromUser.php",
+                dataType: "json",
+                data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
+                success: function(data) {
+                    $("#message").html(data);
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -111,36 +85,37 @@
 
             <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
-                    <h1>Ajouter un paragraphe</h1>
+                    <h1>Ajouter une question</h1>
                     <br>
-                    <!--<form enctype="multipart/form-data" action="__URL__" method="POST">-->
-                    <form action="paragraphe.php" method="post" enctype="multipart/form-data">
-                        <label for="categories">Choisissez la catégorie:</label><br>
-                        <select id="categories" onchange="getCat(this.value);" required>
+                    <form action="question.php" method="post">
+                        <label>Choisissez la catégorie:</label><br>
+                        <select name="categories" onchange="getCat(this.value);" required>
                             <option value=" " disabled selected>Sélectionnez une catégorie</option>
-                            <?php include "connection.php";
+                            <?php include "../db/connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
-
-                        <label for="answer">Résponse précédente:</label><br>
-                        <select id="answer" onchange="getAnswer(this.value);" required>
-                            <?php answerList() ?>
+                        <label>Choisissez le modèle:</label><br>
+                        <select id="models" onchange="getModel(this.value);" required>
+                            <option value=" " disabled selected>Sélectionnez un modèle</option>
                         </select><br><br>
-
-                        <label for="number">Number:</label><br>
-                        <input type="text" id="number" name="number" required><br><br>
-
-                        <label for="paragraph">Paragraphe:</label><br>
-                        <textarea class="textinput" id="paragraph" rows="10" cols="100" required></textarea><br><br>
-
-                        <input type="submit" onclick="createParagraphe()" name="create" value="Ajouter"><br>
+                        <label for="rp">Réponse précédente (facultatif):</label><br>
+                        <select name="rp" onchange="getPR(this.value);" required>
+                            <option value="1">Qui</option>
+                            <option value="2">Non</option>
+                        </select><br><br>
+                        <label for="question">Question:</label><br>
+                        <input type="text" id="question" name="question" required><br><br>
+                        Explications (facultatif):<br>
+                        <input type="text" id="explication" name="explication"><br><br>
+                        <input type="submit" onclick="createQuestion()" name="create" value="Ajouter"><br>
                         <p id="message"></p>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </main>
 <footer>
 <p>© 2020 by FRC-Lausanne</p>

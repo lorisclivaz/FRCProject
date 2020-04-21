@@ -48,7 +48,6 @@
                 data:'model_id_bo='+val,
                 success: function(data){
                     $("#question").html(data);
-                    $("#next").html("<option value='0'>No</option>"+data);
                 }
             });
         }
@@ -69,7 +68,7 @@
             else{
                 $.ajax({
                     type: "POST",
-                    url: "getInfosFromUserCreateAnswer.php",
+                    url: "getInfosFromUser.php",
                     dataType: "json",
                     data:{question:questionid, next:nextid, answer:answer},
                     success: function(data) {
@@ -110,7 +109,7 @@
                         <label for="categories">Choisissez la catégorie:</label><br>
                         <select id="categories" onchange="getCat(this.value);" required>
                             <option value=" " disabled selected>Sélectionnez une catégorie</option>
-                            <?php include "connection.php";
+                            <?php include "../db/connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
@@ -128,6 +127,7 @@
                         <label for="nextQuestion">Next Question:</label><br>
                         <select id="nextQuestion" onchange="getNext(this.value);" required>
                             <option value="" disabled selected>Sélectionnez une question</option>
+                            <option value='0'>No</option>
                         </select><br><br>
 
                         <label for="answer">Réponse:</label><br>

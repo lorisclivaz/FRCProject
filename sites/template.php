@@ -51,7 +51,7 @@
                     <form action="template.php" method="post" enctype="multipart/form-data">
                         <label>Choisissez la catégorie</label><br>
                         <select name="categories" required>
-                            <?php include "connection.php";
+                            <?php include "../db/connection.php";
                             categorieListBO();
                             ?>
                         </select><br><br>
