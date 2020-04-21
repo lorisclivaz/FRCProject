@@ -109,25 +109,24 @@
 
             para = document.getElementById("paragrapheLolo").value;
 
-            alert(para);
 
             // Selecting the input element and get its value
             if (document.getElementsByName("date_vol").length == 1) {
-                let date_vol = document.getElementsByName("date_vol").value;
+                let date_vol = document.getElementsByName("date_vol")[0].value;
                 para = para.replace("$[date_vol]", date_vol);
             }
 
             if (document.getElementsByName("nbr_heures_retard").length == 1) {
-                let nbr_heures_retard = document.getElementsByName("nbr_heures_retard").value;
+                let nbr_heures_retard = document.getElementsByName("nbr_heures_retard")[0].value;
                 para = para.replace("$[nbr_heures_retard]", nbr_heures_retard);
             }
 
             if (document.getElementsByName("montant").length == 1) {
-                let montant = document.getElementsByName("montant").value;
+                let montant = document.getElementsByName("montant")[0].value;
                 para = para.replace("$[montant]", montant);
             }
 
-            document.getElementById("paragraph").value = para;
+            document.getElementById("paragrapheLolo").value = para;
 
 
         }
@@ -256,8 +255,10 @@
 </html>
 
 <?php
-
+require_once '../vendor/autoload.php';
+use PhpOffice\PhpWord\TemplateProcessor;
 include "../vendor/autoload.php";
+
 
 //Récupération des valaeurs pour le changement du template
 if (isset($_POST['Enregistrement'])) {
@@ -283,7 +284,7 @@ if (isset($_POST['Enregistrement'])) {
 
 
     //récupération du path mais faire ca dynamiquement
-    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
+    $templateProcessor = new TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
 
     //Set des valeurs dans le template champs de base
     $templateProcessor->setValue('nom', $nom);
@@ -292,16 +293,13 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('numero', $n_rue);
     $templateProcessor->setValue('codepostal', $lieu_codepostal);
 
-    alert("Et de 1");
     $templateProcessor->setValue('nomSociete', $nom_societe);
     $templateProcessor->setValue('adresseSociete', $adresse_societe_n);
     $templateProcessor->setValue('codePostalSociete', $lieu_codepostal_societe);
     $templateProcessor->setValue('lieu', $lieu_envoie);
-    alert("Et de 2");
 
-    $templateProcessor->setValue('paragraph_conditionnel', $paragraph);
+    $templateProcessor->setValue('paragraphe_conditionnel', $paragraph);
     $templateProcessor->setValue('problematique', $problematique);
-    alert("Et de 3");
 
     //Valeur selon la categorie
     $templateProcessor->setValue('no_vol', $no_vol);
@@ -309,15 +307,13 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('ville_destination', $ville_destination);
     $templateProcessor->setValue('perte', $perte);
     $templateProcessor->setValue('coor_banque', $coor_banque);
-    alert("Et de 4");
 
-    $templateProcessor->saveAs('../final_template/template.docx');
-    console.log("Et de 5");
+    $templateProcessor->saveAs('../final_template/Template.docx');
 
 
+    echo "<script type='text/javascript'>document.location.replace('download.php');</script>";
 
-
-    return  "<script type='text/javascript'>document.location.replace('download.php');</script>";
+    return false;
 
 }
 ?>

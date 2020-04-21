@@ -36,7 +36,7 @@
 <h1 style="alignment: center">Vous pouvez télécharger votre lettre en cliquant sur le bouton ci-dessous :</h1>
 
 <div class="centre">
-    <a id="download" href="../final_template/template.docx" class="boxed-btn3-line">Download </a>
+    <a id="download" href="../final_template/Template.docx" class="boxed-btn3-line">Download </a>
 </div>
 
 
