@@ -75,7 +75,7 @@
                 var jsonString = JSON.stringify(fieldsname);
                 $.ajax({
                     type: "POST",
-                    url: "getInfosFromUser.php",
+                    url: "getInfosFromUserBO.php",
                     dataType: "json",
                     data:{answer:answerid, categorie:catid, paragraph:paragraph, number:number, data : jsonString},
                     success: function(data) {
