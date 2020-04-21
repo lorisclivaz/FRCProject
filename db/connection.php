@@ -524,7 +524,7 @@ function get_Paragraph_From_id($id)
         echo "<label>Paragraphe qui remplacera la variable
                     $[paragraphe_conditionel] </label>";
         getInfosQuestions($row['id_info']);
-        echo "<textarea id='paragrapheLolo' type='text' rows='18' cols='60'>".$row['name']."</textarea>";
+        echo "<textarea name='paragraph_conditionnel' id='paragrapheLolo' type='text' rows='18' cols='60'>".$row['name']."</textarea>";
     }
     $conn->close();
 }

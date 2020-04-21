@@ -271,7 +271,7 @@ if (isset($_POST['Enregistrement'])) {
     $adresse_societe_n = $_POST['adresse_societe_n°'];
     $lieu_codepostal_societe = $_POST['lieu_codepostal_societe'];
     $lieu_envoie = $_POST['lieu_envoie'];
-    $paragraph = $_POST['paragraphe_conditionnel'];
+    $paragraph = $_POST['paragraph_conditionnel'];
     $problematique = $_POST['problematique'];
     $no_vol = $_POST["no_vol"];
     $date_achat = $_POST["date_achat"];
@@ -298,7 +298,7 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('codePostalSociete', $lieu_codepostal_societe);
     $templateProcessor->setValue('lieu', $lieu_envoie);
 
-    $templateProcessor->setValue('paragraphe_conditionnel', $paragraph);
+    $templateProcessor->setValue('paragraph_conditionnel', $paragraph);
     $templateProcessor->setValue('problematique', $problematique);
 
     //Valeur selon la categorie
