@@ -91,7 +91,7 @@
                 }
             });
         }
-
+//salut
         function getParagraph(val) {
             $.ajax({
                 type: 'POST',
