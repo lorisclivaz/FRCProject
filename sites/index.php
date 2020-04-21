@@ -215,13 +215,13 @@
                 <br/>
                 <input name="nom_societe" type="text"/>
                 <br/>
+                <label>Entrez l'adresse et le n° de la société:</label>
+                <br/>
                 <input name="adresse_societe_n°" type="text"/>
                 <br/>
                 <label>Entrez le lieu et le code postal de la société:</label>
                 <br/>
                 <input name="lieu_codepostal_societe" type="text"/>
-                <label>Entrez l'adresse et le n° de la société:</label>
-                <br/>
                 <br/>
                 <label>Entrez le lieu d'envoie de la lettre:</label>
                 <br/>
