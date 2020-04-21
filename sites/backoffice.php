@@ -39,7 +39,7 @@
             <a href="question.php"><li>Ajouter une nouvelle question</li></a>
             <a href="answer.php"><li >Ajouter une nouvelle réponse</li></a>
             <a href="paragraphe.php"><li> Ajouter un nouveau paragraphe</li></a>
-            <a href="fields.php"><li>Ajouter de nouveau champs</li></a>
+            <a href="fields.php"><li>Ajouter un nouveau field</li></a>
         </ul>
         </nav>
     </div>

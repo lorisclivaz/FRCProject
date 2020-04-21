@@ -1,7 +1,4 @@
 <?php
-
-$conn = null;
-
 //Doing sql connection
 function connection()
 {
@@ -231,7 +228,203 @@ function addTemplate($templatename, $path, $categoriename)
     $conn->close();
 }
 
+function getQuestionIdByName($question)
+{
+    $conn = connection();
+    $sql = "SELECT idquestion FROM question WHERE question = '" . $question . "'";
+    $result = $conn->query($sql);
 
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idquestion"];
+    } else {
+        return null;
+    }
+}
+
+//Add a new Question
+function addQuestion($question, $modelname, $prio, $explanations)
+{
+    $conn = connection();
+    $id = getModelIdByName($modelname);
+    if($prio == "2"){
+        $sql = "INSERT INTO question (question, models_idmodels, Priority) VALUES ('$question', '$id', '1')";
+    }
+    else{
+        $sql = "INSERT INTO question (question, models_idmodels) VALUES ('$question', '$id')";
+    }
+
+    if ($conn->query($sql) === TRUE) {
+        $questionid = getQuestionIdByName($question);
+        $sql = "UPDATE question SET question_number= '$questionid' WHERE idquestion= '$questionid'";
+        if ($conn->query($sql) === TRUE) {
+            if(empty($explanations)){
+                echo "<p>New Question added successfully</p>";
+            }
+            else{
+                $sql = "INSERT INTO explanations (text, question_idquestion) VALUES ('$explanations', '$questionid')";
+                if ($conn->query($sql) === TRUE) {
+                    echo "<p>New Question added successfully</p>";
+                }
+                else{
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
+        }
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
+//Add a new Question
+function addAnswer($answer, $next, $qustionid)
+{
+    $conn = connection();
+    if($next == "0"){
+        $sql = "INSERT INTO answers (answer, next_question, question_idquestion) VALUES ('$answer', 'x', '$qustionid')";
+    }
+    else{
+        $sql = "INSERT INTO answers (answer, next_question, question_idquestion) VALUES ('$answer', '$next', '$qustionid')";
+    }
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<p>New Answer added successfully</p>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+
+function getTemplateIdByCategorie($catid)
+{
+    $conn = connection();
+    $sql = "SELECT idtemplate FROM template WHERE categories_idcategories = '" . $catid . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idtemplate"];
+    } else {
+        return null;
+    }
+}
+
+function UpdateAnswerNextQuestion($answerid, $nextQuestion)
+{
+    $conn = connection();
+    $sql = "UPDATE answers SET next_question= '$nextQuestion' WHERE idanswer= '$answerid'";
+
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+
+    $conn->close();
+}
+
+function checkEveryFieldExist($data){
+    echo "alert('TEST')";
+    $conn = connection();
+    $idfield = [];
+    $counter = 0;
+    foreach($data as $field){
+        $sql = "SELECT idfield FROM fields WHERE balise_name = '" . $field . "'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $idfield[$counter] = $row["idfield"];
+            $counter++;
+        } else {
+            $idfield = null;
+            return;
+        }
+    }
+    return $idfield;
+}
+
+function getParagraphIdByNumber($number){
+    $conn = connection();
+    $sql = "SELECT idparagraphs FROM paragraphs WHERE number = '" . $number . "'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idparagraphs"];
+    } else {
+        return null;
+    }
+}
+
+//Add new Paragraph
+function addParagraph($catid, $answer, $paragraph, $number, $data)
+{
+    $conn = connection();
+    $tempid = getTemplateIdByCategorie($catid);
+
+    if(empty($data)){
+        if(UpdateAnswerNextQuestion($answer, $number)){
+            $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
+            if ($conn->query($sql) === TRUE) {
+                echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            $conn->close();
+        }
+    }
+    else{
+        $fieldsId = checkEveryFieldExist($data);
+        if($fieldsId){
+            if(UpdateAnswerNextQuestion($answer, $number)){
+                $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
+                if ($conn->query($sql) === TRUE) {
+                    $paraid = getParagraphIdByNumber($number);
+                    foreach($fieldsId as $id){
+                        $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
+                        if ($conn->query($sql) === TRUE) {
+                            echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+                        }
+                        else{
+                            echo "Error";
+                        }
+                    }
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+                $conn->close();
+            }
+        }
+        else{
+            echo "<p>All fields dosent exist please add firstly the field of the paragraphs</p>";
+        }
+    }
+}
+
+//Add a new Field
+function addField($fieldname, $idcategorie, $bname)
+{
+    $conn = connection();
+    if($idcategorie == "0"){
+        $sql = "INSERT INTO fields (name, balise_name) VALUES ('$fieldname', '$bname')";
+    }
+    else{
+        $sql = "INSERT INTO fields (name, id_categorie, balise_name) VALUES ('$fieldname', '$idcategorie', '$bname')";
+    }
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<p>New Field added successfully</p>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
 
 function getFirstAnswerAndQuestion($idModel)
 {
