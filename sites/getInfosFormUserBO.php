@@ -1,4 +1,5 @@
 <?php
+include "../db/connection.php";
 //BACKOFFICE PART
 //Add a new Answer
 if(!empty($_POST["next"]) || !empty($_POST["question"]) || !empty($_POST["answer"])){
@@ -26,5 +27,4 @@ if(!empty($_POST["cat"]) || !empty($_POST["model"]) || !empty($_POST["rp"]) || !
     $rp = $_POST["rp"];
     $question = $_POST["question"];
     $explication = $_POST["explication"];
-    echo addQuestion($question, $modelname, $rp, $explication);
-}
+    echo addQuestion($question, $modelname, $rp, $explication);}
