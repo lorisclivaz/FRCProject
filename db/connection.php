@@ -436,7 +436,7 @@ function getFirstAnswerAndQuestion($idModel)
         $row = $result->fetch_assoc();
         $idQuestion = $row["idquestion"];
         echo "<span>" . $row["question"] . " </span>";
-        getInfosQuestions($row["idquestion"]);
+        getInfosQuestions($row["id_info"]);
         $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion' AND next_question > 0";
         $result = $conn->query($sqlAnswers);
 
@@ -453,10 +453,10 @@ function getFirstAnswerAndQuestion($idModel)
     $conn->close();
 }
 
-function getInfosQuestions($idquestion)
+function getInfosQuestions($idexplanation)
 {
     $conn = connection();
-    $sqlQuestions = "SELECT * FROM explanations WHERE question_idquestion ='$idquestion'";
+    $sqlQuestions = "SELECT * FROM explanations WHERE idexplanations ='$idexplanation'";
     $result = $conn->query($sqlQuestions);
 
     if ($result->num_rows > 0) {
@@ -467,7 +467,7 @@ function getInfosQuestions($idquestion)
         echo "<br/>";
 }
 
-function get_next_question_2($id)
+function get_next_question_db($id)
 {
     $conn = connection();
     $sql = "SELECT * FROM question WHERE question_number ='$id'";
@@ -478,7 +478,7 @@ function get_next_question_2($id)
         $row = $result->fetch_assoc();
         $idQuestion = $row["idquestion"];
         echo "<span>" . $row["question"] . " </span>";
-        getInfosQuestions($row["idquestion"]);
+        getInfosQuestions($row["id_info"]);
         $sqlAnswers = "SELECT * FROM answers WHERE question_idquestion ='$idQuestion'";
         $result = $conn->query($sqlAnswers);
         echo "<select name='answers[]' onChange='get_next_question(this.value, this);'>";
@@ -516,12 +516,15 @@ function getTemplatePathFromCategorie($categorieName)
 function get_Paragraph_From_id($id)
 {
     $conn = connection();
-    $paragraph = "SELECT name FROM paragraphs WHERE number = '$id'";
+    $paragraph = "SELECT * FROM paragraphs WHERE number = '$id'";
     $result = $conn->query($paragraph);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo $row['name'];
+        echo "<label>Paragraphe qui remplacera la variable
+                    $[paragraphe_conditionel] </label>";
+        getInfosQuestions($row['id_info']);
+        echo "<textarea type='text' rows='18' cols='60'>".$row['name']."</textarea>";
     }
     $conn->close();
 }

@@ -38,7 +38,7 @@ if (! empty($_POST["paragraphe_number"])) {
 if (! empty($_POST["next_question"])) {
     $idQuestion = $_POST["next_question"];
 
-    echo get_next_question_2($idQuestion);
+    echo get_next_question_db($idQuestion);
 }
 
 if (! empty($_POST["paragraph_number"])) {

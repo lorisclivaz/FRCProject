@@ -99,11 +99,7 @@
                 url: 'getInfosFromUser.php',
                 data: 'paragraph_number=' + val,
                 success: function (data) {
-                    para = data;
-
-                    document.getElementById("paragraph").value = para;
-                    document.getElementById("paragraph").style.visibility = "visible"
-
+                    $("#paragraph").html(data);
                 }
             });
         }
@@ -234,11 +230,7 @@
                 <div id="cat_fields"></div>
                 <div id="para_fields"></div>
                 <br/>
-                <label>Voici le paragraphe qui sera inséré dans votre lettre remplaçant la variable
-                    $[paragraphe_conditionel] :</label>
-                <br/>
-                <textarea id="paragraph" name="paragraphe_conditionnel" type="text" rows="18" cols="60"
-                          style="visibility: hidden"></textarea>
+                <div id="paragraph"></div>
                 <br/>
                 <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre
                 </button>
@@ -249,8 +241,7 @@
     </div>
     <div id="apercu" style="visibility: hidden">
         <h1>Aperçu de votre lettre</h1>
-        <br/
-        //ici Loris
+        <br/>
         <iframe id="iframeApercu" src="../Apercu/AviationApercu.htm" frameborder='0'></iframe>
     </div>
 </main>
