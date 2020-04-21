@@ -49,14 +49,12 @@
         function createQuestion(){
             var question = $("#question").val();
             var explication = $("#explication").val();
-            console.log(typeof rp);
             $.ajax({
                 type: "POST",
                 url: "getInfosFromUserCreateQuestion.php",
                 dataType: "json",
                 data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
                 success: function(data) {
-                    alert("OK");
                     $("#message").html(data);
                 }
             });
