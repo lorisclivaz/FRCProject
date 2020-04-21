@@ -283,7 +283,7 @@ if (isset($_POST['Enregistrement'])) {
 
 
     //récupération du path mais faire ca dynamiquement
-    $templateProcessor = new PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
+    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
 
     //Set des valeurs dans le template champs de base
     $templateProcessor->setValue('nom', $nom);
@@ -292,14 +292,16 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('numero', $n_rue);
     $templateProcessor->setValue('codepostal', $lieu_codepostal);
 
-
+    alert("Et de 1");
     $templateProcessor->setValue('nomSociete', $nom_societe);
     $templateProcessor->setValue('adresseSociete', $adresse_societe_n);
     $templateProcessor->setValue('codePostalSociete', $lieu_codepostal_societe);
     $templateProcessor->setValue('lieu', $lieu_envoie);
+    alert("Et de 2");
 
     $templateProcessor->setValue('paragraph_conditionnel', $paragraph);
     $templateProcessor->setValue('problematique', $problematique);
+    alert("Et de 3");
 
     //Valeur selon la categorie
     $templateProcessor->setValue('no_vol', $no_vol);
@@ -307,8 +309,10 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('ville_destination', $ville_destination);
     $templateProcessor->setValue('perte', $perte);
     $templateProcessor->setValue('coor_banque', $coor_banque);
+    alert("Et de 4");
 
     $templateProcessor->saveAs('../final_template/template.docx');
+    console.log("Et de 5");
 
 
 
