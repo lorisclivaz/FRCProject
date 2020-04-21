@@ -247,10 +247,9 @@ function addQuestion($question, $modelname, $prio, $explanations)
 {
     $conn = connection();
     $id = getModelIdByName($modelname);
-    if($prio == "2"){
+    if ($prio == "2") {
         $sql = "INSERT INTO question (question, models_idmodels, Priority) VALUES ('$question', '$id', '1')";
-    }
-    else{
+    } else {
         $sql = "INSERT INTO question (question, models_idmodels) VALUES ('$question', '$id')";
     }
 
@@ -258,20 +257,17 @@ function addQuestion($question, $modelname, $prio, $explanations)
         $questionid = getQuestionIdByName($question);
         $sql = "UPDATE question SET question_number= '$questionid' WHERE idquestion= '$questionid'";
         if ($conn->query($sql) === TRUE) {
-            if(empty($explanations)){
+            if (empty($explanations)) {
                 echo "<p>New Question added successfully</p>";
-            }
-            else{
+            } else {
                 $sql = "INSERT INTO explanations (text, question_idquestion) VALUES ('$explanations', '$questionid')";
                 if ($conn->query($sql) === TRUE) {
                     echo "<p>New Question added successfully</p>";
-                }
-                else{
+                } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
             }
-        }
-        else {
+        } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     } else {
@@ -285,10 +281,9 @@ function addQuestion($question, $modelname, $prio, $explanations)
 function addAnswer($answer, $next, $qustionid)
 {
     $conn = connection();
-    if($next == "0"){
+    if ($next == "0") {
         $sql = "INSERT INTO answers (answer, next_question, question_idquestion) VALUES ('$answer', 'x', '$qustionid')";
-    }
-    else{
+    } else {
         $sql = "INSERT INTO answers (answer, next_question, question_idquestion) VALUES ('$answer', '$next', '$qustionid')";
     }
 
@@ -329,12 +324,13 @@ function UpdateAnswerNextQuestion($answerid, $nextQuestion)
     $conn->close();
 }
 
-function checkEveryFieldExist($data){
+function checkEveryFieldExist($data)
+{
     echo "alert('TEST')";
     $conn = connection();
     $idfield = [];
     $counter = 0;
-    foreach($data as $field){
+    foreach ($data as $field) {
         $sql = "SELECT idfield FROM fields WHERE balise_name = '" . $field . "'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -349,7 +345,8 @@ function checkEveryFieldExist($data){
     return $idfield;
 }
 
-function getParagraphIdByNumber($number){
+function getParagraphIdByNumber($number)
+{
     $conn = connection();
     $sql = "SELECT idparagraphs FROM paragraphs WHERE number = '" . $number . "'";
     $result = $conn->query($sql);
@@ -367,8 +364,8 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
     $conn = connection();
     $tempid = getTemplateIdByCategorie($catid);
 
-    if(empty($data)){
-        if(UpdateAnswerNextQuestion($answer, $number)){
+    if (empty($data)) {
+        if (UpdateAnswerNextQuestion($answer, $number)) {
             $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
             if ($conn->query($sql) === TRUE) {
                 echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
@@ -377,20 +374,18 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
             }
             $conn->close();
         }
-    }
-    else{
+    } else {
         $fieldsId = checkEveryFieldExist($data);
-        if($fieldsId){
-            if(UpdateAnswerNextQuestion($answer, $number)){
+        if ($fieldsId) {
+            if (UpdateAnswerNextQuestion($answer, $number)) {
                 $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
                 if ($conn->query($sql) === TRUE) {
                     $paraid = getParagraphIdByNumber($number);
-                    foreach($fieldsId as $id){
+                    foreach ($fieldsId as $id) {
                         $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
                         if ($conn->query($sql) === TRUE) {
                             echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
-                        }
-                        else{
+                        } else {
                             echo "Error";
                         }
                     }
@@ -399,8 +394,7 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
                 }
                 $conn->close();
             }
-        }
-        else{
+        } else {
             echo "<p>All fields dosent exist please add firstly the field of the paragraphs</p>";
         }
     }
@@ -410,10 +404,9 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
 function addField($fieldname, $idcategorie, $bname)
 {
     $conn = connection();
-    if($idcategorie == "0"){
+    if ($idcategorie == "0") {
         $sql = "INSERT INTO fields (name, balise_name) VALUES ('$fieldname', '$bname')";
-    }
-    else{
+    } else {
         $sql = "INSERT INTO fields (name, id_categorie, balise_name) VALUES ('$fieldname', '$idcategorie', '$bname')";
     }
 
@@ -524,7 +517,7 @@ function get_Paragraph_From_id($id)
         echo "<label>Paragraphe qui remplacera la variable
                     $[paragraphe_conditionel] </label>";
         getInfosQuestions($row['id_info']);
-        echo "<textarea name='paragraph_conditionnel' id='paragrapheLolo' type='text' rows='18' cols='60'>".$row['name']."</textarea>";
+        echo "<textarea name='paragraph_conditionnel' id='paragrapheLolo' type='text' rows='18' cols='60'>" . $row['name'] . "</textarea>";
 
     }
     $conn->close();
@@ -540,7 +533,6 @@ function getFieldFromCategorie($id)
         // output data of each row
         while ($row = $result->fetch_assoc()) {
             echo "<label>" . $row["name"] . ":</label><br/>";
-
             echo "<input name=" . $row["balise_name"] . " type='text'/><br/>";
         }
     }
