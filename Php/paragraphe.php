@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/backoffice.css" media="screen" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Back Office</title>
@@ -96,7 +97,7 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <div class="card col-md-3">
+            <div class="card col-md-12 col-xl-3">
                 <ul class="list-group list-group-flush">
                     <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
@@ -108,26 +109,31 @@
                 </ul>
             </div>
 
-            <div class="card col-md-9">
+            <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
                     <h1>Ajouter un paragraphe</h1>
                     <br>
                     <!--<form enctype="multipart/form-data" action="__URL__" method="POST">-->
                     <form action="paragraphe.php" method="post" enctype="multipart/form-data">
-                        <label>Choisissez la catégorie</label><br>
-                        <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
+                        <label for="categories">Choisissez la catégorie:</label><br>
+                        <select id="categories" onchange="getCat(this.value);" required>
+                            <option value=" " disabled selected>Sélectionnez une catégorie</option>
                             <?php include "connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
-                        <label>Résponse précédente</label><br>
-                        <select id="answer" onchange="getAnswer(this.value);">
+
+                        <label for="answer">Résponse précédente:</label><br>
+                        <select id="answer" onchange="getAnswer(this.value);" required>
                             <?php answerList() ?>
                         </select><br><br>
-                        <label>Number</label><br>
-                        <input type="text" id="number" name="number"><br><br>
-                        <label>Paragraphe</label><br>
-                        <textarea id="paragraph" rows="10" cols="100"></textarea><br><br>
+
+                        <label for="number">Number:</label><br>
+                        <input type="text" id="number" name="number" required><br><br>
+
+                        <label for="paragraph">Paragraphe:</label><br>
+                        <textarea class="textinput" id="paragraph" rows="10" cols="100" required></textarea><br><br>
+
                         <input type="submit" onclick="createParagraphe()" name="create" value="Ajouter"><br>
                         <p id="message"></p>
                     </form>
@@ -136,6 +142,7 @@
         </div>
     </div>
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>

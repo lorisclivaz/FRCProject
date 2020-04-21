@@ -37,6 +37,8 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+
 /* ----------------------------------------------------------------
                             FOOTER
 ---------------------------------------------------------------- */
@@ -55,31 +57,9 @@ div.centre {
 
 }
 
-/* ----------------------------------------------------------------
-                            Sidenav
----------------------------------------------------------------- */
 
 
-.list-group li{
-    background: #e4032e;
-    margin: 0.2rem 0rem;
-    padding: 1rem 3rem;
-}
 
-.list-group li:hover{
-    background: #b80328;
-}
-
-.list-group a{
-    color: white;
-}
-.list-group a:hover{
-    color:white;
-}
-
-#cardBackoffice{
-    border: none;
-}
 
 
 

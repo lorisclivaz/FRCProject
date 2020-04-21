@@ -1,0 +1,105 @@
+#logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+
+/* Sidenav Backoffice */
+#mainpage-nav{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+#mainpage-nav li{
+    padding: 1rem;
+    margin: 0.5rem;
+    list-style: none;
+    color: white;
+    background: #e4032e;
+}
+
+#mainpage-nav a{
+    text-decoration: none;
+}
+
+textarea{
+    width: 100%;
+}
+
+/* ----------------------------------------------------------------
+                            Sidenav
+---------------------------------------------------------------- */
+
+
+.list-group li{
+    background: #e4032e;
+    margin: 0.2rem 0rem;
+    padding: 1rem 3rem;
+}
+
+.list-group li:hover{
+     background: #b80328;
+ }
+
+.list-group a{
+    color: white;
+}
+.list-group a:hover{
+    color:white;
+}
+
+#cardBackoffice{
+    border: none;
+}
+
+@media screen and (max-width: 972px){
+
+    main h1{
+        font-size: 2rem;
+    }
+    #mainpage-nav{
+        width: 50%;
+    }
+
+    textarea{
+        width: 100%;
+    }
+}
+
+/* IPAD */
+@media screen and (max-width: 768px){
+
+    main h1{
+        font-size: 2rem;
+    }
+    #mainpage-nav{
+        width: 100%;
+    }
+
+    textarea{
+        width: 100%;
+    }
+
+}
+
+/* Iphone */
+@media screen and (max-width: 414px){
+
+    main h1{
+        font-size: 1.5rem;
+    }
+    #mainpage-nav{
+        width: 100%;
+    }
+    textarea{
+        width: 100%;
+    }
+
+    .list-group li{
+        margin: 0.2rem 0rem;
+        padding: 0.5rem 1.5rem;
+    }
+}

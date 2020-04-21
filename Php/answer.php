@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/backoffice.css" media="screen" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Back Office</title>
@@ -89,7 +90,7 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <div class="card col-md-3">
+            <div class="card col-md-12 col-xl-3">
                 <ul class="list-group list-group-flush">
                     <a href="categorie.php"><li class="list-group-item">Ajouter une catégorie</li></a>
                     <a href="template.php"><li class="list-group-item">Ajouter un nouveau template</li></a>
@@ -101,36 +102,46 @@
                 </ul>
             </div>
 
-            <div class="card col-md-9">
+            <div class="card col-md-12 col-xl-9">
                 <div class="card-body">
                     <h1>Ajouter une résponse</h1>
                     <br>
                     <form action="answer.php" method="post" enctype="multipart/form-data">
-                        <label>Choisissez la catégorie</label><br>
-                        <select id="categories" onchange="getCat(this.value);"><option value=" ">Sélectionnez une catégorie</option>
+                        <label for="categories">Choisissez la catégorie:</label><br>
+                        <select id="categories" onchange="getCat(this.value);" required>
+                            <option value=" " disabled selected>Sélectionnez une catégorie</option>
                             <?php include "connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
-                        <label>Choisissez le modèle</label><br>
-                        <select  id="models" onchange="getModel(this.value);"><option value="">Sélectionnez un modèle</option>
+
+                        <label for="models">Choisissez le modèle:</label><br>
+                        <select  id="models" onchange="getModel(this.value);" required>
+                            <option value="" disabled selected>Sélectionnez un modèle</option>
                         </select><br><br>
-                        <label>Choisissez le question</label><br>
-                        <select id="question" onchange="getQuestion(this.value);"><option value="">Sélectionnez une question</option>
+
+                        <label for="question">Choisissez le question:</label><br>
+                        <select id="question" onchange="getQuestion(this.value);" required>
+                            <option value="" disabled selected>Sélectionnez une question</option>
                         </select><br><br>
-                        Next Question<br>
-                        <select id="next" onchange="getNext(this.value);"><option value="">Sélectionnez une question</option>
+
+                        <label for="nextQuestion">Next Question:</label><br>
+                        <select id="nextQuestion" onchange="getNext(this.value);" required>
+                            <option value="" disabled selected>Sélectionnez une question</option>
                         </select><br><br>
-                        Réponse<br>
-                        <input type="text" id="answer" name="answer"><br><br>
+
+                        <label for="answer">Réponse:</label><br>
+                        <input type="text" id="answer" name="answer" required><br><br>
                         <input type="submit" onclick="createAnswer();" name="create" value="Ajouter">
+
                         <p id="message"></p>
-                    </>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<footer>
 <p>© 2020 by FRC-Lausanne</p>
 </footer>
 </body>
