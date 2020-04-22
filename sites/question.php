@@ -23,8 +23,8 @@
     </style>
     <script>
         let para;
-        var catid;
-        var modelname;
+        var catid = 0;
+        var modelname = 0;
         var rp = 1;
 
         function getCat(val) {
@@ -35,12 +35,22 @@
                 data:'categorie_id_bo='+val,
                 success: function(data){
                     $("#models").html(data);
+                    $("#question").prop( "disabled", true );
+                    $("#explication").prop( "disabled", true );
                 }
             });
         }
 
         function getModel(val){
             modelname = val;
+            if(val==0){
+                $("#question").prop( "disabled", true );
+                $("#explication").prop( "disabled", true );
+            }
+            else{
+                $("#question").prop( "disabled", false );
+                $("#explication").prop( "disabled", false );
+            }
         }
 
         function getPR(val){
@@ -50,15 +60,20 @@
         function createQuestion(){
             var question = $("#question").val();
             var explication = $("#explication").val();
-            $.ajax({
-                type: "POST",
-                url: "getInfosFormUserBO.php",
-                dataType: "json",
-                data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
-                success: function(data) {
-                    $("#message").html(data);
-                }
-            });
+            if(question.length===0){
+                alert("Veuillez remplir tous les champs !");
+            }
+            else{
+                $.ajax({
+                    type: "POST",
+                    url: "getInfosFormUserBO.php",
+                    dataType: "json",
+                    data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
+                    success: function(data) {
+                        $("#message").html(data);
+                    }
+                });
+            }
         }
     </script>
 </head>
@@ -79,14 +94,14 @@
                     <form action="question.php" method="post">
                         <label>Choisissez la catégorie:</label><br>
                         <select name="categories" onchange="getCat(this.value);" required>
-                            <option value=" " disabled selected>Sélectionnez une catégorie</option>
+                            <option value="0" disabled selected>Sélectionnez une catégorie</option>
                             <?php include "../db/connection.php";
                             categorieList();
                             ?>
                         </select><br><br>
                         <label>Choisissez le modèle:</label><br>
                         <select id="models" onchange="getModel(this.value);" required>
-                            <option value=" " disabled selected>Sélectionnez un modèle</option>
+                            <option value="0" disabled selected>Sélectionnez une catégorie</option>
                         </select><br><br>
                         <label for="rp">Réponse précédente (facultatif):</label><br>
                         <select name="rp" onchange="getPR(this.value);" required>
@@ -94,9 +109,9 @@
                             <option value="2">Non</option>
                         </select><br><br>
                         <label for="question">Question:</label><br>
-                        <input type="text" id="question" name="question" required><br><br>
+                        <input type="text" id="question" disabled name="question" required><br><br>
                         Explications (facultatif):<br>
-                        <input type="text" id="explication" name="explication"><br><br>
+                        <input type="text" id="explication" disabled name="explication"><br><br>
                         <input type="submit" onclick="createQuestion()" name="create" value="Ajouter"><br>
                         <p id="message"></p>
                     </form>

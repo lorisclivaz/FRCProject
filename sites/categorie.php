@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../css/backoffice.css" media="screen" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Back Office</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <style>
@@ -20,6 +20,12 @@
             text-decoration: none;
             margin: 4px 2px;
             cursor: pointer;
+        }
+
+        #warning{
+            margin-left: 5px;
+            font-size: 20px;
+            color:red;
         }
     </style>
 </head>

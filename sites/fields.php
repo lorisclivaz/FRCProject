@@ -37,7 +37,7 @@
                     <form action="fields.php" method="post">
                         <label for="categories">Choisissez la catégorie:</label><br>
                         <select name="categories" required>
-                            <option value="0"></option>
+                            <option value="0" disabled>Choisissez la catégorie:</option>
                             <?php include "../db/connection.php";
                             categorieList();
                             ?>
@@ -56,14 +56,7 @@
                         $categorie = $_POST["categories"];
                         $field = $_POST["fields"];
                         $bname = $_POST["bname"];
-
-                        if(!empty($field) || !empty($bname))
-                        {
-                            addField($field, $categorie, $bname);
-                        }
-                        else{
-                            echo "<p>Fill out all Fields</p>";
-                        }
+                        addField($field, $categorie, $bname);
                     }
                     ?>
                 </div>

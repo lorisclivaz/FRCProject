@@ -89,11 +89,12 @@ function modelListBO($idCategorie)
 
     if ($result->num_rows > 0) {
         // output data of each row
+        echo "<option value='0'>Sélectionez un modèl</option>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["name"] . ">" . $row["name"] . "</option>";
         }
     } else {
-        echo "<option>Aucune models</option>";
+        echo "<option value='0'>Aucune models</option>";
     }
     $conn->close();
 }
