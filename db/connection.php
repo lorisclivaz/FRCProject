@@ -44,6 +44,7 @@ function questionListBO($idModel)
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
+            echo "<option value='0'>Sélectionez une question</option>";
             echo "<option value=" . $row["idquestion"] . ">" . $row["question"] . "</option>";
         }
     } else {
@@ -244,7 +245,7 @@ function getQuestionIdByName($question)
 }
 
 //Add a new Question
-function addQuestion($question, $modelname, $prio, $explanations)
+function addQuestion($question, $modelname, $prio, $text)
 {
     $conn = connection();
     $id = getModelIdByName($modelname);
@@ -258,12 +259,13 @@ function addQuestion($question, $modelname, $prio, $explanations)
         $questionid = getQuestionIdByName($question);
         $sql = "UPDATE question SET question_number= '$questionid' WHERE idquestion= '$questionid'";
         if ($conn->query($sql) === TRUE) {
-            if (empty($explanations)) {
+            if (empty($text)) {
                 echo "<p>New Question added successfully</p>";
             } else {
-                $sql = "INSERT INTO explanations (text, question_idquestion) VALUES ('$explanations', '$questionid')";
+                $sql = "INSERT INTO explanations (text) VALUES ('$text')";
                 if ($conn->query($sql) === TRUE) {
-                    echo "<p>New Question added successfully</p>";
+                    $explanationsid = getExplanationIdByName($text);
+                    updateQuestionIdInfo($questionid, $explanationsid);
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
@@ -276,6 +278,30 @@ function addQuestion($question, $modelname, $prio, $explanations)
     }
 
     $conn->close();
+}
+
+function getExplanationIdByName($text){
+    $conn = connection();
+    $sql = "SELECT idexplanations FROM explanations WHERE text = '" . $text . "'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["idexplanations"];
+    } else {
+        return null;
+    }
+}
+
+function updateQuestionIdInfo($questionid, $explanationid){
+    $conn = connection();
+    $sql = "UPDATE question SET id_info= '$explanationid' WHERE idquestion= '$questionid'";
+    if ($conn->query($sql) === TRUE) {
+        return "<p>New Question added successfully</p>";
+    }
+    else{
+        return "<p> ERROR</p>";
+    }
 }
 
 //Add a new Question
@@ -359,6 +385,43 @@ function getParagraphIdByNumber($number)
     }
 }
 
+function getQuestionIdFromAnswerId($answerid){
+    $conn = connection();
+    $sql = "SELECT question_idquestion FROM answers WHERE idanswer = '" . $answerid . "'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["question_idquestion"];
+    } else {
+        return null;
+    }
+}
+
+function getInfodFromQuestionId($questionid){
+    $conn = connection();
+    $sql = "SELECT id_info FROM question WHERE idquestion = '" . $questionid . "'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["id_info"];
+    } else {
+        return null;
+    }
+}
+
+function updateParagraphInfoId($answerid, $idpara){
+    $questionid = getQuestionIdFromAnswerId($answerid);
+    $infoid = getInfodFromQuestionId($questionid);
+    $conn = connection();
+    $sql = "UPDATE paragraphs SET id_info= '$infoid' WHERE idparagraphs= '$idpara'";
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 //Add new Paragraph
 function addParagraph($catid, $answer, $paragraph, $number, $data)
 {
@@ -369,7 +432,13 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
         if (UpdateAnswerNextQuestion($answer, $number)) {
             $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
             if ($conn->query($sql) === TRUE) {
-                echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+                $paraid = getParagraphIdByNumber($number);
+                if(updateParagraphInfoId($answer, $paraid)){
+                    echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+                }
+                else{
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
@@ -382,13 +451,18 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
                 $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
                 if ($conn->query($sql) === TRUE) {
                     $paraid = getParagraphIdByNumber($number);
-                    foreach ($fieldsId as $id) {
-                        $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
-                        if ($conn->query($sql) === TRUE) {
-                            echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
-                        } else {
-                            echo "Error";
+                    if(updateParagraphInfoId($answer, $paraid)){
+                        foreach ($fieldsId as $id) {
+                            $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
+                            if ($conn->query($sql) === TRUE) {
+                                echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+                            } else {
+                                echo "Error";
+                            }
                         }
+                    }
+                    else{
+                        echo "Error: " . $sql . "<br>" . $conn->error;
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;

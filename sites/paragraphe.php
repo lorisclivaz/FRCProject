@@ -32,7 +32,7 @@
             catid = val;
             $.ajax({
                 type: "POST",
-                url: "getInfosFromUser.php",
+                url: "createParagraph.php",
                 data:'categorie_id_2='+val,
                 success: function(data){
                     $("#models").html(data);
@@ -75,7 +75,7 @@
                 var jsonString = JSON.stringify(fieldsname);
                 $.ajax({
                     type: "POST",
-                    url: "getInfosFormUserBO.php",
+                    url: "createParagraph.php",
                     dataType: "json",
                     data:{answer:answerid, categorie:catid, paragraph:paragraph, number:number, data : jsonString},
                     success: function(data) {
@@ -117,7 +117,7 @@
                         </select><br><br>
 
                         <label for="number">Number:</label><br>
-                        <input type="number" id="number" name="number" required><br><br>
+                        <input type="number" step="any" id="number" name="number" required><br><br>
 
                         <label for="paragraph">Paragraphe:</label><br>
                         <textarea class="textinput" id="paragraph" rows="10" cols="100" required></textarea><br><br>
