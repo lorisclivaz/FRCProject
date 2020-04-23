@@ -230,7 +230,6 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 include "../vendor/autoload.php";
 
-
 //Récupération des valaeurs pour le changement du template
 if (isset($_POST['Enregistrement'])) {
 
@@ -248,12 +247,9 @@ if (isset($_POST['Enregistrement'])) {
     $no_vol = $_POST["no_vol"];
     $date_achat = $_POST["date_achat"];
     $ville_destination = $_POST["ville_destination"];
-
     $coor_banque = $_POST["coor_banque"];
-
     $perte = $_POST["perte"];
-
-
+    
     //récupération du path mais faire ca dynamiquement
     $templateProcessor = new TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
 
