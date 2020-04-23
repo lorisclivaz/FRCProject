@@ -185,11 +185,13 @@
                 ?>
             </select>
             <br/><br/>
+            <br/><br/>
             <label>Sélectionnez un modèle</label>
             <br/>
             <select id="models" onchange="get_question(this.value);">
                 <option value="">Sélectionnez un modèle</option>
             </select>
+            <br/><br/>
             <br/><br/>
             <div id="firstQuestion">
             </div>
@@ -202,42 +204,67 @@
     </form>
     <div id="cache" onload="cache(this)" style="display: none">
         <form enctype="multipart/form-data" method="post" style="margin-bottom: 50px">
-            <br/>
-            <label>Entrez votre nom:</label>
-            <br/>
-            <input name="nom" type="text"/>
-            <br/>
-            <label>Entrez votre prénom:</label>
-            <br/>
-            <input name="prenom" type="text"/>
-            <br/>
-            <label>Entrez votre rue:</label>
-            <br/>
-            <input name="rue" type="text"/>
-            <br/>
-            <label>Entrez votre n° de rue:</label>
-            <br/>
-            <input name="n°_rue" type="text"/>
-            <br/>
-            <label>Entrez le lieu et le code postal:</label>
-            <br/>
-            <input name="lieu_codepostal" type="text"/>
-            <br/>
-            <label>Entrez le nom de la société:</label>
-            <br/>
-            <input name="nom_societe" type="text"/>
-            <br/>
-            <label>Entrez l'adresse et le n° de la société:</label>
-            <br/>
-            <input name="adresse_societe_n°" type="text"/>
-            <br/>
-            <label>Entrez le lieu et le code postal de la société:</label>
-            <br/>
-            <input name="lieu_codepostal_societe" type="text"/>
-            <br/>
-            <label>Entrez le lieu d'envoie de la lettre:</label>
-            <br/>
-            <input name="lieu_envoie" type="text"/>
+
+            <ul>
+                <li style="list-style: none">
+                    <label class="field-style field-split align-left">Nom:</label>
+
+                    <input name="nom" type="text" class="field-style field-split align-left"/>
+
+                    <label class="field-style field-split align-right">Prénom:</label>
+
+                    <input name="prenom" type="text" class="field-style field-split align-right"/>
+
+
+                </li>
+                <br/>
+                <li style="list-style: none">
+                    <label class="field-style field-split align-left">Rue:</label>
+
+                    <input name="rue" type="text" class="field-style field-split align-left"/>
+
+                    <label class="field-style field-split align-right">N° de rue:</label>
+
+                    <input name="n°_rue" type="text" class="field-style field-split align-right"/>
+
+
+                </li>
+                <br/>
+                <li style="list-style: none">
+
+                    <label class="field-style field-split align-left">Entrez le lieu et le code postal:</label>
+
+                    <input name="lieu_codepostal" type="text" class="field-style field-split align-left"/>
+
+                    <label class="field-style field-split align-right">Entrez le nom de la société:</label>
+
+                    <input name="nom_societe" type="text" class="field-style field-split align-right"/>
+
+                </li>
+                <br/>
+                <li style="list-style: none">
+                    <label  class="field-style field-split align-left">Adresse et N° de la société:</label>
+
+                    <input name="adresse_societe_n°" type="text"  class="field-style field-split align-left"/>
+
+                    <label class="field-style field-split align-right">Lieu et code postal de la société:</label>
+
+                    <input name="lieu_codepostal_societe" type="text" class="field-style field-split align-right"/>
+
+                </li>
+                <br/>
+                <li style="list-style: none">
+                    <label class="field-style field-split align-left">Entrez le lieu d'envoie de la lettre:</label>
+
+                    <input name="lieu_envoie" type="text" class="field-style field-split align-left"/>
+
+
+
+                </li>
+                <br/>
+
+            </ul>
+
             <br/>
             <div id="cat_fields"></div>
             <div id="para_fields"></div>

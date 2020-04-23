@@ -511,7 +511,9 @@ function getFirstAnswerAndQuestion($idModel)
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["next_question"] . ">" . $row["answer"] . "</option>";
         }
-        echo "</select><br><br>";
+        echo "</select>
+            <br><br>
+            <br><br>";
     } else {
         echo "0 results";
     }
@@ -552,7 +554,9 @@ function get_next_question_db($id)
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["next_question"] . ">" . $row["answer"] . "</option>";
         }
-        echo "</select><br><br>";
+        echo "</select>
+                <br><br>
+                 <br><br>";
     } else {
         echo "null";
     }
