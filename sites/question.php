@@ -66,7 +66,7 @@
             else{
                 $.ajax({
                     type: "POST",
-                    url: "getInfosFormUserBO.php",
+                    url: "createQuestion.php",
                     dataType: "json",
                     data:{cat:catid, model:modelname, rp:rp, question:question, explication:explication},
                     success: function(data) {

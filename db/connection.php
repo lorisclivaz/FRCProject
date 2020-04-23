@@ -451,18 +451,14 @@ function addParagraph($catid, $answer, $paragraph, $number, $data)
                 $sql = "INSERT INTO paragraphs (name, number, template_idtemplate) VALUES ('$paragraph', '$number', '$tempid')";
                 if ($conn->query($sql) === TRUE) {
                     $paraid = getParagraphIdByNumber($number);
-                    if(updateParagraphInfoId($answer, $paraid)){
-                        foreach ($fieldsId as $id) {
-                            $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
-                            if ($conn->query($sql) === TRUE) {
-                                echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
-                            } else {
-                                echo "Error";
-                            }
+                    updateParagraphInfoId($answer, $paraid);
+                    foreach ($fieldsId as $id) {
+                        $sql = "INSERT INTO paragraphs_fields (fk_field, fk_paragraph) VALUES ('$id', '$paraid')";
+                        if ($conn->query($sql) === TRUE) {
+                            echo "<p>le nouveau paragraph a été ajouté avec succès</p>";
+                        } else {
+                            echo "Error";
                         }
-                    }
-                    else{
-                        echo "Error: " . $sql . "<br>" . $conn->error;
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
