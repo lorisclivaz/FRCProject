@@ -206,7 +206,7 @@
         <form enctype="multipart/form-data" method="post" style="margin-bottom: 50px">
 
             <ul>
-                <li>
+                <li style="list-style: none">
                     <label class="field-style field-split align-left">Nom:</label>
 
                     <input name="nom" type="text" class="field-style field-split align-left"/>
@@ -218,7 +218,7 @@
 
                 </li>
                 <br/>
-                <li>
+                <li style="list-style: none">
                     <label class="field-style field-split align-left">Rue:</label>
 
                     <input name="rue" type="text" class="field-style field-split align-left"/>
@@ -230,7 +230,7 @@
 
                 </li>
                 <br/>
-                <li>
+                <li style="list-style: none">
 
                     <label class="field-style field-split align-left">Entrez le lieu et le code postal:</label>
 
@@ -242,7 +242,7 @@
 
                 </li>
                 <br/>
-                <li>
+                <li style="list-style: none">
                     <label  class="field-style field-split align-left">Adresse et N° de la société:</label>
 
                     <input name="adresse_societe_n°" type="text"  class="field-style field-split align-left"/>
@@ -253,7 +253,7 @@
 
                 </li>
                 <br/>
-                <li>
+                <li style="list-style: none">
                     <label class="field-style field-split align-left">Entrez le lieu d'envoie de la lettre:</label>
 
                     <input name="lieu_envoie" type="text" class="field-style field-split align-left"/>
