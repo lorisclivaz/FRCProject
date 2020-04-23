@@ -231,6 +231,7 @@
                 </li>
                 <br/>
                 <li>
+
                     <label class="field-style field-split align-left">Entrez le lieu et le code postal:</label>
 
                     <input name="lieu_codepostal" type="text" class="field-style field-split align-left"/>
