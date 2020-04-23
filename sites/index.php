@@ -5,35 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
     <title>Lettres modèles</title>
-    <style>
-        button {
-            background-color: #e4032e;
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-decoration: none;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        #splitScreen {
-            width: 40%;
-            float: left;
-            margin-right: 10%;
-        }
-
-        #iframeApercu {
-            width: 40%;
-            height: 600px;
-        }
-
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -175,6 +146,7 @@
     <div id="splitScreen">
         <h1>Lettres modèles</h1><a href="backoffice.php">Back Office</a>
         <br/>
+        <br/>
         <form method="post" name="formular">
             <label>Sélectionnez une catégorie</label>
             <br/>
@@ -185,13 +157,11 @@
                 ?>
             </select>
             <br/><br/>
-            <br/><br/>
             <label>Sélectionnez un modèle</label>
             <br/>
             <select id="models" onchange="get_question(this.value);">
                 <option value="">Sélectionnez un modèle</option>
             </select>
-            <br/><br/>
             <br/><br/>
             <div id="firstQuestion">
             </div>
@@ -203,75 +173,47 @@
     </div>
     </form>
     <div id="cache" onload="cache(this)" style="display: none">
-        <form enctype="multipart/form-data" method="post" style="margin-bottom: 50px">
-
-            <ul>
-                <li style="list-style: none">
-                    <label class="field-style field-split align-left">Nom:</label>
-
-                    <input name="nom" type="text" class="field-style field-split align-left"/>
-
-                    <label class="field-style field-split align-right">Prénom:</label>
-
-                    <input name="prenom" type="text" class="field-style field-split align-right"/>
-
-
-                </li>
-                <br/>
-                <li style="list-style: none">
-                    <label class="field-style field-split align-left">Rue:</label>
-
-                    <input name="rue" type="text" class="field-style field-split align-left"/>
-
-                    <label class="field-style field-split align-right">N° de rue:</label>
-
-                    <input name="n°_rue" type="text" class="field-style field-split align-right"/>
-
-
-                </li>
-                <br/>
-                <li style="list-style: none">
-
-                    <label class="field-style field-split align-left">Entrez le lieu et le code postal:</label>
-
-                    <input name="lieu_codepostal" type="text" class="field-style field-split align-left"/>
-
-                    <label class="field-style field-split align-right">Entrez le nom de la société:</label>
-
-                    <input name="nom_societe" type="text" class="field-style field-split align-right"/>
-
-                </li>
-                <br/>
-                <li style="list-style: none">
-                    <label  class="field-style field-split align-left">Adresse et N° de la société:</label>
-
-                    <input name="adresse_societe_n°" type="text"  class="field-style field-split align-left"/>
-
-                    <label class="field-style field-split align-right">Lieu et code postal de la société:</label>
-
-                    <input name="lieu_codepostal_societe" type="text" class="field-style field-split align-right"/>
-
-                </li>
-                <br/>
-                <li style="list-style: none">
-                    <label class="field-style field-split align-left">Entrez le lieu d'envoie de la lettre:</label>
-
-                    <input name="lieu_envoie" type="text" class="field-style field-split align-left"/>
-
-
-
-                </li>
-                <br/>
-
-            </ul>
-
+        <form id="ClientForm" enctype="multipart/form-data" method="post" style="margin-bottom: 50px">
+            <h1>Formulaire</h1><br/>
             <br/>
-            <div id="cat_fields"></div>
-            <div id="para_fields"></div>
+            <div id="infoClient">
+                <h2>Informations personnelles</h2>
+                <br/>
+                <input required class="formFields" name="nom" type="text" placeholder="Nom"/>
+                <input required class="formFields" name="prenom" type="text" placeholder="Prénom"/>
+                <br/><br/>
+                <input required class="formFields" name="rue" type="text" placeholder="Rue"/>
+                <input required class="formFields" name="n°_rue" type="text" placeholder="N°"/>
+                <br/><br/>
+                <input required class="formFields" id="cp" name="lieu_codepostal" type="text"
+                       placeholder="Lieu & Code Postal"/>
+            </div>
+            <div id="infoSoc">
+                <h2>Informations de la société</h2>
+                <br/>
+                <input required class="formFields" name="nom_societe" type="text" placeholder="Nom de la société"/>
+                <br/><br/>
+                <input required class="formFields" name="adresse_societe_n°" type="text"
+                       placeholder="Adresse & n° de la société"/>
+                <br/><br/>
+                <input required class="formFields" name="lieu_codepostal_societe" type="text"
+                       placeholder="Lieu & Code Postal de la société"/>
+                <br/><br/>
+                <input required class="formFields" name="lieu_envoie" type="text"
+                       placeholder="Lieu d'envoi de la lettre"/>
+                <br/><br/>
+            </div>
+            <div id="infoSup">
+                <h2>Informations complémentaires</h2>
+                <br/>
+                <div id="cat_fields"></div>
+                <div id="para_fields"></div>
+            </div>
             <br/>
             <div id="paragraph"></div>
             <br/>
-            <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre</button>
+            <button name="Enregistrement" type="submit" onclick="getInputValueforParagraph()">Créer la lettre
+            </button>
             <input id="problematique" name="problematique" type="text" style="display: none"/>
         </form>
     </div>

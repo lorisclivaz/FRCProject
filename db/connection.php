@@ -510,9 +510,7 @@ function getFirstAnswerAndQuestion($idModel)
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["next_question"] . ">" . $row["answer"] . "</option>";
         }
-        echo "</select>
-            <br><br>
-            <br><br>";
+        echo "</select><br/><br/>";
     } else {
         echo "0 results";
     }
@@ -553,9 +551,7 @@ function get_next_question_db($id)
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["next_question"] . ">" . $row["answer"] . "</option>";
         }
-        echo "</select>
-                <br><br>
-                 <br><br>";
+        echo "</select><br/><br/>";
     } else {
         echo "null";
     }
@@ -607,8 +603,8 @@ function getFieldFromCategorie($id)
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            echo "<label>" . $row["name"] . ":</label><br/>";
-            echo "<input name=" . $row["balise_name"] . " type='text'/><br/>";
+            $name = $row["name"];
+            echo "<input required class=\"formFields\" name=" . $row["balise_name"] . " type='text' placeholder="."'$name'"."/><br/><br/>";
         }
     }
 
@@ -625,8 +621,8 @@ function getFieldFromParaNumber($number)
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            echo "<label>" . $row["name"] . ":</label><br/>";
-            echo "<input name=" . $row["balise_name"] . " type='text'/><br/>";
+            $name = $row["name"];
+            echo "<input required class=\"formFields\" name=" . $row["balise_name"] . " type='text' placeholder="."'$name'"."/><br/><br/>";
         }
     }
 
