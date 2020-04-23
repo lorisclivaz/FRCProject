@@ -242,36 +242,13 @@
                 </li>
                 <br/>
                 <li>
-                    <label  class="field-style field-split align-left">Entrez le lieu et le code postal:</label>
+                    <label  class="field-style field-split align-left">Adresse et N° de la société:</label>
 
-                    <input name="lieu_codepostal" type="text"  class="field-style field-split align-left"/>
+                    <input name="adresse_societe_n°" type="text"  class="field-style field-split align-left"/>
 
-                    <label class="field-style field-split align-right">Entrez le nom de la société:</label>
-
-                    <input name="nom_societe" type="text" class="field-style field-split align-right"/>
-
-                </li>
-                <br/>
-                <li>
-                    <label class="field-style field-split align-left">Entrez le lieu et le code postal:</label>
-
-                    <input name="lieu_codepostal" type="text" class="field-style field-split align-left"/>
-
-                    <label class="field-style field-split align-right">Entrez le nom de la société:</label>
-
-                    <input name="nom_societe" type="text" class="field-style field-split align-right"/>
-
-                </li>
-                <br/>
-                <li>
-                    <label class="field-style field-split align-left">Entrez l'adresse et le n° de la société:</label>
-
-                    <input name="adresse_societe_n°" type="text" class="field-style field-split align-left"/>
-
-                    <label class="field-style field-split align-right">Entrez le lieu et le code postal de la société:</label>
+                    <label class="field-style field-split align-right">Lieu et code postal de la société:</label>
 
                     <input name="lieu_codepostal_societe" type="text" class="field-style field-split align-right"/>
-
 
                 </li>
                 <br/>
@@ -279,7 +256,12 @@
                     <label class="field-style field-split align-left">Entrez le lieu d'envoie de la lettre:</label>
 
                     <input name="lieu_envoie" type="text" class="field-style field-split align-left"/>
+
+
+
                 </li>
+                <br/>
+
             </ul>
 
             <br/>
