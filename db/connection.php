@@ -90,7 +90,7 @@ function modelListBO($idCategorie)
 
     if ($result->num_rows > 0) {
         // output data of each row
-        echo "<option value='0'>Sélectionez un modèl</option>";
+        echo "<option value='0'>Sélectionez un modèle</option>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["name"] . ">" . $row["name"] . "</option>";
         }
@@ -108,6 +108,7 @@ function modelList2($idCategorie)
 
     if ($result->num_rows > 0) {
         // output data of each row
+        echo "<option value='0'>Sélectionez un modèl</option>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value=" . $row["idmodels"] . ">" . $row["name"] . "</option>";
         }
