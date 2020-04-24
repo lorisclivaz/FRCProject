@@ -48,7 +48,7 @@
                 data: 'model_id_bo=' + val,
                 success: function (data) {
                     $("#question").html(data);
-                    $("#nextQuestion").html(data + "<option value='0'>No</option>");
+                    $("#nextQuestion").html("<option value='0'>No</option>" + data);
                 }
             });
         }
