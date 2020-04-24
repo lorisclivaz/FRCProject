@@ -48,6 +48,7 @@
                 data: 'model_id_bo=' + val,
                 success: function (data) {
                     $("#question").html(data);
+                    $("#nextQuestion").html(data);
                 }
             });
         }
