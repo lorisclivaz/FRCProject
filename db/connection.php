@@ -43,8 +43,8 @@ function questionListBO($idModel)
 
     if ($result->num_rows > 0) {
         // output data of each row
+        echo "<option value='0'>Sélectionez une question</option>";
         while ($row = $result->fetch_assoc()) {
-            echo "<option value='0'>Sélectionez une question</option>";
             echo "<option value=" . $row["idquestion"] . ">" . $row["question"] . "</option>";
         }
     } else {
