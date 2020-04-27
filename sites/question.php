@@ -105,7 +105,7 @@
                         </select><br><br>
                         <label for="rp">Réponse précédente (facultatif):</label><br>
                         <select name="rp" onchange="getPR(this.value);" required>
-                            <option value="1">Qui</option>
+                            <option value="1">Oui</option>
                             <option value="2">Non</option>
                         </select><br><br>
                         <label for="question">Question:</label><br>

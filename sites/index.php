@@ -249,7 +249,7 @@ if (isset($_POST['Enregistrement'])) {
     $ville_destination = $_POST["ville_destination"];
     $coor_banque = $_POST["coor_banque"];
     $perte = $_POST["perte"];
-    
+
     //récupération du path mais faire ca dynamiquement
     $templateProcessor = new TemplateProcessor(getTemplatePathFromCategorie('Aviation'));
 
@@ -276,7 +276,6 @@ if (isset($_POST['Enregistrement'])) {
     $templateProcessor->setValue('coor_banque', $coor_banque);
 
     $templateProcessor->saveAs('../final_template/Template.docx');
-
 
     echo "<script type='text/javascript'>document.location.replace('download.php');</script>";
 

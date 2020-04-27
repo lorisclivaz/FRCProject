@@ -35,11 +35,11 @@
         <ul>
             <a href="categorie.php"><li >Ajouter une catégorie</li></a>
             <a href="template.php"><li>Ajouter un nouveau template</li></a>
-            <a href="model.php"><li>Ajouter un nouveau model</li></a>
+            <a href="model.php"><li>Ajouter un nouveau modèle</li></a>
             <a href="question.php"><li>Ajouter une nouvelle question</li></a>
             <a href="answer.php"><li >Ajouter une nouvelle réponse</li></a>
             <a href="paragraphe.php"><li> Ajouter un nouveau paragraphe</li></a>
-            <a href="fields.php"><li>Ajouter un nouveau field</li></a>
+            <a href="fields.php"><li>Ajouter un nouveau champs</li></a>
         </ul>
         </nav>
     </div>

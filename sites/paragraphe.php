@@ -111,12 +111,12 @@
                             ?>
                         </select><br><br>
 
-                        <label for="answer">Résponse précédente:</label><br>
+                        <label for="answer">Réponse précédente:</label><br>
                         <select id="answer" onchange="getAnswer(this.value);" required>
                             <?php answerList() ?>
                         </select><br><br>
 
-                        <label for="number">Number:</label><br>
+                        <label for="number">Numéro:</label><br>
                         <input type="number" step="any" id="number" name="number" required><br><br>
 
                         <label for="paragraph">Paragraphe:</label><br>
